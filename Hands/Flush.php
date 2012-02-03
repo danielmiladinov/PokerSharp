@@ -1,5 +1,5 @@
 <?php
 
-class Flush extends Hand{
+class Flush extends Hand {
 
 }

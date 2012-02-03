@@ -70,7 +70,7 @@ class BestHandIdentifier
 
     /**
      * @param Card[][] $CardsGroupedByValues
-     * @param itn $faceValueOfKind
+     * @param int $faceValueOfKind
      * @return FourOfAKind
      */
     private function _makeFourOfAKind($CardsGroupedByValues, $faceValueOfKind)
