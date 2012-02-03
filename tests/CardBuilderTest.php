@@ -16,7 +16,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
     {
         $invalidString = 'aa';
 
-        $this->setExpectedException('Exception', 'Invalid card string');
+        $this->setExpectedException('CardBuilderException', 'Invalid card string');
         
         $this->_CardBuilder->fromString($invalidString);
     }
@@ -25,7 +25,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
     {
         $invalidString = '15-C';
 
-        $this->setExpectedException('Exception', 'Invalid face value');
+        $this->setExpectedException('CardBuilderException', 'Invalid face value');
 
         $this->_CardBuilder->fromString($invalidString);
     }
@@ -34,7 +34,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
     {
         $invalidString = '1-C';
 
-        $this->setExpectedException('Exception', 'Invalid face value');
+        $this->setExpectedException('CardBuilderException', 'Invalid face value');
 
         $this->_CardBuilder->fromString($invalidString);
     }
@@ -43,7 +43,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
     {
         $invalidString = '2-Z';
 
-        $this->setExpectedException('Exception', 'Invalid suit');
+        $this->setExpectedException('CardBuilderException', 'Invalid suit');
 
         $this->_CardBuilder->fromString($invalidString);
     }

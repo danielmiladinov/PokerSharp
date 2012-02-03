@@ -8,7 +8,7 @@ class CardBuilder
         $cardStringAsArray = explode('-', $cardString);
 
         if (count($cardStringAsArray) != 2) {
-            throw new Exception('Invalid card string');
+            throw new CardBuilderException('Invalid card string');
         }
         
         list($faceValue, $suit) = $cardStringAsArray;
@@ -16,7 +16,7 @@ class CardBuilder
         $faceValue = $this->_convertValueFromLetterToNumber($faceValue);
 
         if ($faceValue > Card::ACE || $faceValue < 2) {
-            throw new Exception('Invalid face value');
+            throw new CardBuilderException('Invalid face value');
         }
 
         switch ($suit) {
@@ -37,7 +37,7 @@ class CardBuilder
                 break;
 
             default:
-                throw new Exception('Invalid suit');
+                throw new CardBuilderException('Invalid suit');
         }
 
         return $Card;
