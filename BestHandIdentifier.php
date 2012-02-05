@@ -1,13 +1,15 @@
 <?php
 class BestHandIdentifier
 {
-    public function identify(Hole $Hole, Community $Community)
+    /**
+     * @param Hand $Hand
+     * @return Hand
+     */
+    public function identify(Hand $Hand)
     {
-        $AllCards[] = $Hole->getFirstCard();
-        $AllCards[] = $Hole->getSecondCard();
-        $AllCards = array_merge($AllCards, $Community->getAllCards());
+        $AllCards = $Hand->getCards();
+        $CardsGroupedByValues = array();
 
-        /** @var Card[] $AllCards */
         foreach ($AllCards as $Card) {
             $CardsGroupedByValues[$Card->getFaceValue()][] = $Card;
         }
