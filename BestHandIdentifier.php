@@ -66,7 +66,12 @@ class BestHandIdentifier
      */
     private function _sortCards(array $CardsNotOfValue)
     {
-        usort($CardsNotOfValue, 'Card::compareCards');
+        usort(
+            $CardsNotOfValue,
+            function (Card $Card1, Card $Card2) {
+                return $Card1->compareTo($Card2);
+            }
+        );
         return $CardsNotOfValue;
     }
 

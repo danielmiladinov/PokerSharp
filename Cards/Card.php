@@ -31,17 +31,6 @@ abstract class Card
     }
 
     /**
-     * @static
-     * @param Card $Card1
-     * @param Card $Card2
-     * @return int
-     */
-    public static function compareCards(Card $Card1, Card $Card2)
-    {
-        return $Card1->compareTo($Card2);
-    }
-
-    /**
      * @return int
      */
     public function getFaceValue()
