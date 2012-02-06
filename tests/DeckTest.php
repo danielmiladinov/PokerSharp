@@ -25,7 +25,7 @@ class DeckTest extends PHPUnit_Framework_TestCase
      */
     public function addingACardShouldIncreaseTheSizeByOne()
     {
-        $this->_Deck->add(Card::aceOf(Suit::Spades()));
+        $this->_Deck->add(Cards::aceOf(Suit::Spades()));
         $this->assertEquals(1, $this->_Deck->size());
     }
 
@@ -34,10 +34,10 @@ class DeckTest extends PHPUnit_Framework_TestCase
      */
     public function addingACardTwiceShouldCauseADeckExceptionToBeThrown()
     {
-        $this->_Deck->add(Card::twoOf(Suit::Hearts()));
+        $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
 
         $this->setExpectedException('DeckIntegrityException', 'Cannot contain the same card twice!');
-        $this->_Deck->add(Card::twoOf(Suit::Hearts()));
+        $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
     }
 
     /**
@@ -55,19 +55,19 @@ class DeckTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($Suits as $Suit) {
-            $ExpectedCards[] = Card::aceOf($Suit);
-            $ExpectedCards[] = Card::twoOf($Suit);
-            $ExpectedCards[] = Card::threeOf($Suit);
-            $ExpectedCards[] = Card::fourOf($Suit);
-            $ExpectedCards[] = Card::fiveOf($Suit);
-            $ExpectedCards[] = Card::sixOf($Suit);
-            $ExpectedCards[] = Card::sevenOf($Suit);
-            $ExpectedCards[] = Card::eightOf($Suit);
-            $ExpectedCards[] = Card::nineOf($Suit);
-            $ExpectedCards[] = Card::tenOf($Suit);
-            $ExpectedCards[] = Card::jackOf($Suit);
-            $ExpectedCards[] = Card::queenOf($Suit);
-            $ExpectedCards[] = Card::kingOf($Suit);
+            $ExpectedCards[] = Cards::aceOf($Suit);
+            $ExpectedCards[] = Cards::twoOf($Suit);
+            $ExpectedCards[] = Cards::threeOf($Suit);
+            $ExpectedCards[] = Cards::fourOf($Suit);
+            $ExpectedCards[] = Cards::fiveOf($Suit);
+            $ExpectedCards[] = Cards::sixOf($Suit);
+            $ExpectedCards[] = Cards::sevenOf($Suit);
+            $ExpectedCards[] = Cards::eightOf($Suit);
+            $ExpectedCards[] = Cards::nineOf($Suit);
+            $ExpectedCards[] = Cards::tenOf($Suit);
+            $ExpectedCards[] = Cards::jackOf($Suit);
+            $ExpectedCards[] = Cards::queenOf($Suit);
+            $ExpectedCards[] = Cards::kingOf($Suit);
         }
 
         $this->_Deck->populate();

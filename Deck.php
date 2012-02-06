@@ -46,19 +46,19 @@ class Deck
         );
 
         foreach ($Suits as $Suit) {
-            $this->_Cards[] = Card::aceOf($Suit);
-            $this->_Cards[] = Card::twoOf($Suit);
-            $this->_Cards[] = Card::threeOf($Suit);
-            $this->_Cards[] = Card::fourOf($Suit);
-            $this->_Cards[] = Card::fiveOf($Suit);
-            $this->_Cards[] = Card::sixOf($Suit);
-            $this->_Cards[] = Card::sevenOf($Suit);
-            $this->_Cards[] = Card::eightOf($Suit);
-            $this->_Cards[] = Card::nineOf($Suit);
-            $this->_Cards[] = Card::tenOf($Suit);
-            $this->_Cards[] = Card::jackOf($Suit);
-            $this->_Cards[] = Card::queenOf($Suit);
-            $this->_Cards[] = Card::kingOf($Suit);
+            $this->_Cards[] = Cards::aceOf($Suit);
+            $this->_Cards[] = Cards::twoOf($Suit);
+            $this->_Cards[] = Cards::threeOf($Suit);
+            $this->_Cards[] = Cards::fourOf($Suit);
+            $this->_Cards[] = Cards::fiveOf($Suit);
+            $this->_Cards[] = Cards::sixOf($Suit);
+            $this->_Cards[] = Cards::sevenOf($Suit);
+            $this->_Cards[] = Cards::eightOf($Suit);
+            $this->_Cards[] = Cards::nineOf($Suit);
+            $this->_Cards[] = Cards::tenOf($Suit);
+            $this->_Cards[] = Cards::jackOf($Suit);
+            $this->_Cards[] = Cards::queenOf($Suit);
+            $this->_Cards[] = Cards::kingOf($Suit);
         }
     }
 
