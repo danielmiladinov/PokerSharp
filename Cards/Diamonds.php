@@ -8,6 +8,6 @@ class Diamonds extends Card
     public function __construct($faceValue = 0)
     {
         parent::__construct($faceValue);
-        $this->_suit = self::DIAMONDS;
+        $this->_Suit = Suit::Diamonds();
     }
 }

@@ -8,6 +8,6 @@ class Spades extends Card
     public function __construct($faceValue = 0)
     {
         parent::__construct($faceValue);
-        $this->_suit = Card::SPADES;
+        $this->_Suit = Suit::Spades();
     }
 }

@@ -8,6 +8,6 @@ class Hearts extends Card
     public function __construct($faceValue = 0)
     {
         parent::__construct($faceValue);
-        $this->_suit = Card::HEARTS;
+        $this->_Suit = Suit::Hearts();
     }
 }

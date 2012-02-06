@@ -8,6 +8,6 @@ class Clubs extends Card
     public function __construct($faceValue = 0)
     {
         parent::__construct($faceValue);
-        $this->_suit = self::CLUBS;
+        $this->_Suit = Suit::Clubs();
     }
 }

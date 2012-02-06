@@ -7,20 +7,15 @@ abstract class Card
     const KING = 13;
     const ACE = 14;
 
-    const CLUBS = 'Clubs';
-    const HEARTS = 'Hearts';
-    const SPADES = 'Spades';
-    const DIAMONDS = 'Diamonds';
-
     /**
      * @var int
      */
     protected $_faceValue;
 
     /**
-     * @var string
+     * @var Suit
      */
-    protected $_suit;
+    protected $_Suit;
 
     /**
      * @param int $faceValue
@@ -43,7 +38,7 @@ abstract class Card
      */
     public function getSuit()
     {
-        return $this->_suit;
+        return $this->_Suit->getName();
     }
 
     /**
@@ -51,16 +46,7 @@ abstract class Card
      */
     public function getSuitValue()
     {
-        switch ($this->_suit) {
-            case self::SPADES:
-                return 4;
-            case self::HEARTS:
-                return 3;
-            case self::CLUBS:
-                return 2;
-            case self::DIAMONDS:
-                return 1;
-        }
+        return $this->_Suit->getValue();
     }
 
     /**
