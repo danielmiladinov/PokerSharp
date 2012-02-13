@@ -37,6 +37,41 @@ class BestHandIdentifierTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('TwoOfAKind', $this->_IdentifiedHand);
     }
 
+    /**
+     * @test
+     * @param string $card1
+     * @param string $card2
+     * @param string $card3
+     * @param string $card4
+     * @param string $card5
+     * @dataProvider getSomeCandidatesForAStraight
+     */
+    public function willGetAStraight($card1, $card2, $card3, $card4, $card5)
+    {
+        $this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5);
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('Straight', $this->_IdentifiedHand);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSomeCandidatesForAStraight()
+    {
+        return array(
+            array( 'A-D',  '2-S',  '3-H',  '4-C',  '5-D',),
+            array( '2-S',  '3-H',  '4-C',  '5-D',  '6-S',),
+            array( '3-H',  '4-C',  '5-D',  '6-S',  '7-H',),
+            array( '4-C',  '5-D',  '6-S',  '7-H',  '8-C',),
+            array( '5-D',  '6-S',  '7-H',  '8-C',  '9-D',),
+            array( '6-S',  '7-H',  '8-C',  '9-D', '10-S',),
+            array( '7-H',  '8-C',  '9-D', '10-S',  'J-H',),
+            array( '8-C',  '9-D', '10-S',  'J-H',  'Q-C',),
+            array( '9-D', '10-S',  'J-H',  'Q-C',  'K-D',),
+            array('10-S',  'J-H',  'Q-C',  'K-D',  'A-S',),
+        );
+    }
+
     public function testWillGetThreeOfAKind()
     {
         $this->_theFiveCardsAre('7-S', '7-H', '7-C', 'J-C', '5-D');

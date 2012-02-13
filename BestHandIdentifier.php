@@ -37,6 +37,9 @@ class BestHandIdentifier
         } else if ($highestCount == 2) {
             return $this->_makeTwoOfAKind($CardsGroupedByValues, $highestFaceValue);
         } else {
+            if ($this->_canMakeAStraight($CardsGroupedByValues)) {
+                return new Straight($this->_sortCards($AllCards));
+            }
             return new HighCard(array_slice($this->_sortCards($AllCards), 0, 5));
         }
     }
@@ -123,5 +126,31 @@ class BestHandIdentifier
         $CardsNotOfValue = $this->_getCardsNotOfFaceValue($faceValueOfKind, $CardsGroupedByValues);
         list($Kicker1, $Kicker2, $Kicker3) = $this->_sortCards($CardsNotOfValue);
         return new TwoOfAKind(array_merge($SortedCards, array($Kicker1, $Kicker2, $Kicker3)));
+    }
+
+    /**
+     * @param Card[] $CardsGroupedByValue
+     * @return boolean
+     */
+    private function _canMakeAStraight($CardsGroupedByValue)
+    {
+        ksort($CardsGroupedByValue);
+
+        list($lowestFaceValue) = each($CardsGroupedByValue);
+        list($nextHighestFaceValue) = each($CardsGroupedByValue);
+
+        $highestFaceValue = $nextHighestFaceValue;
+
+        while (list($theNextFaceValue) = each($CardsGroupedByValue)) {
+            $nextHighestFaceValue = $highestFaceValue;
+            $highestFaceValue = $theNextFaceValue;
+        }
+
+        return (
+            // The high and low value are either 4 values apart, or
+            ($highestFaceValue - $lowestFaceValue == 4)
+            // Treat the ace as the low value, the next highest and next lowest should be 3 apart
+            || (($highestFaceValue == Card::ACE) && ($nextHighestFaceValue - $lowestFaceValue == 3))
+        );
     }
 }
