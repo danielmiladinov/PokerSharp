@@ -37,6 +37,13 @@ class BestHandIdentifierTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('TwoOfAKind', $this->_IdentifiedHand);
     }
 
+    public function testWillGetThreeOfAKind()
+    {
+        $this->_theFiveCardsAre('7-S', '7-H', '7-C', 'J-C', '5-D');
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('ThreeOfAKind', $this->_IdentifiedHand);
+    }
+
     /**
      * @test
      * @param string $card1
@@ -70,13 +77,6 @@ class BestHandIdentifierTest extends PHPUnit_Framework_TestCase
             array( '9-D', '10-S',  'J-H',  'Q-C',  'K-D',),
             array('10-S',  'J-H',  'Q-C',  'K-D',  'A-S',),
         );
-    }
-
-    public function testWillGetThreeOfAKind()
-    {
-        $this->_theFiveCardsAre('7-S', '7-H', '7-C', 'J-C', '5-D');
-        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
-        $this->assertInstanceOf('ThreeOfAKind', $this->_IdentifiedHand);
     }
 
     public function testWillGetFourOfAKind()
