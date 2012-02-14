@@ -39,6 +39,8 @@ class BestHandIdentifier
         } else {
             if ($this->_canMakeAStraight($CardsGroupedByValues)) {
                 return new Straight($this->_sortCards($AllCards));
+            } else if ($this->_canMakeAFlush($AllCards)) {
+                return new Flush($this->_sortCards($AllCards));
             }
             return new HighCard(array_slice($this->_sortCards($AllCards), 0, 5));
         }
@@ -152,5 +154,20 @@ class BestHandIdentifier
             // Treat the ace as the low value, the next highest and next lowest should be 3 apart
             || (($highestFaceValue == Card::ACE) && ($nextHighestFaceValue - $lowestFaceValue == 3))
         );
+    }
+
+    /**
+     * @param Card[] $AllCards
+     * @return boolean
+     */
+    private function _canMakeAFlush($AllCards)
+    {
+        $Suits = array();
+        foreach ($AllCards as $Card) {
+            $suit = $Card->getSuit();
+            $Suits[$suit] = $suit;
+        }
+        $cardsAreAllOneSuit = (count($Suits) == 1);
+        return $cardsAreAllOneSuit;
     }
 }
