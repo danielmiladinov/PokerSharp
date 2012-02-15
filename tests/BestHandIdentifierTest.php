@@ -108,18 +108,18 @@ class BestHandIdentifierTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testWillGetFourOfAKind()
-    {
-        $this->_theFiveCardsAre('7-D', '7-S', '7-C', '7-H', 'J-C');
-        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
-        $this->assertInstanceOf('FourOfAKind', $this->_IdentifiedHand);
-    }
-
     public function testWillGetFullHouse()
     {
         $this->_theFiveCardsAre('10-H', '10-C', '10-D', '7-C', '7-D');
         $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
         $this->assertInstanceOf('FullHouse', $this->_IdentifiedHand);
+    }
+
+    public function testWillGetFourOfAKind()
+    {
+        $this->_theFiveCardsAre('7-D', '7-S', '7-C', '7-H', 'J-C');
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('FourOfAKind', $this->_IdentifiedHand);
     }
 
     private function _theFiveCardsAre()
