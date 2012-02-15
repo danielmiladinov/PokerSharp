@@ -122,6 +122,35 @@ class BestHandIdentifierTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('FourOfAKind', $this->_IdentifiedHand);
     }
 
+    /**
+     * @test
+     * @param string $card1
+     * @param string $card2
+     * @param string $card3
+     * @param string $card4
+     * @param string $card5
+     * @dataProvider getSomeCandidatesForAStraightFlush
+     */
+    public function willGetAStraightFlush($card1, $card2, $card3, $card4, $card5)
+    {
+        $this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5);
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('StraightFlush', $this->_IdentifiedHand);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSomeCandidatesForAStraightFlush()
+    {
+        return array(
+            array('7-H', '6-H', '5-H', '4-H', '3-H',),
+            array('5-S', '4-S', '3-S', '2-S', 'A-S',),
+            array('J-C', '10-C', '9-C', '8-C', '7-C',),
+            array('K-D', 'Q-D', 'J-D', '10-D', '9-D',),
+        );
+    }
+
     private function _theFiveCardsAre()
     {
         $cards = func_get_args();

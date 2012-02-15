@@ -37,9 +37,13 @@ class BestHandIdentifier
         } else if ($highestCount == 2) {
             return $this->_makeTwoOfAKind($CardsGroupedByValues, $highestFaceValue);
         } else {
-            if ($this->_canMakeAStraight($CardsGroupedByValues)) {
+            $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
+            $canMakeAFlush = $this->_canMakeAFlush($AllCards);
+            if ($canMakeAStraight && $canMakeAFlush) {
+                return new StraightFlush($this->_sortCards($AllCards));
+            } else if ($canMakeAStraight) {
                 return new Straight($this->_sortCards($AllCards));
-            } else if ($this->_canMakeAFlush($AllCards)) {
+            } else if ($canMakeAFlush) {
                 return new Flush($this->_sortCards($AllCards));
             }
             return new HighCard(array_slice($this->_sortCards($AllCards), 0, 5));
