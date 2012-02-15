@@ -22,6 +22,20 @@ class Hand {
     }
 
     /**
+     * @return Card
+     */
+    public function getHighCard()
+    {
+        $HighCard = null;
+        foreach ($this->_Cards as $Card) {
+            if (is_null($HighCard) || ($Card->compareTo($HighCard) < 0)) {
+                $HighCard = $Card;
+            }
+        }
+        return $HighCard;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
