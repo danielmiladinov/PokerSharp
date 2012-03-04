@@ -1,6 +1,7 @@
 <?php
 
-class Hand {
+class Hand
+{
     /** @var Card[] */
     private $_Cards;
 
