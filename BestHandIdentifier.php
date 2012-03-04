@@ -40,7 +40,9 @@ class BestHandIdentifier
             $TestHand = new Hand($SortedCards);
 
             if ($canMakeAStraight && $canMakeAFlush) {
-                if ($TestHand->isWheel()) {
+                if ($TestHand->getHighCard()->getFaceValue() == Card::ACE) {
+                    return new RoyalFlush($SortedCards);
+                } else if ($TestHand->isWheel()) {
                     return new SteelWheel($SortedCards);
                 } else {
                     return new StraightFlush($SortedCards);
