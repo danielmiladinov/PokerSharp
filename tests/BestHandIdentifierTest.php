@@ -179,4 +179,33 @@ class BestHandIdentifierTest extends PokerTestCase
             array('5-D', '4-D', '3-D', '2-D', 'A-D',),
         );
     }
+
+    /**
+     * @test
+     * @param string $card1
+     * @param string $card2
+     * @param string $card3
+     * @param string $card4
+     * @param string $card5
+     * @dataProvider getSomeCandidatesForAWheel
+     */
+    public function willGetARegularWheel($card1, $card2, $card3, $card4, $card5)
+    {
+        $this->_DealtHand = $this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5);
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('Wheel', $this->_IdentifiedHand);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSomeCandidatesForAWheel()
+    {
+        return array(
+            array('5-S', '4-H', '3-C', '2-D', 'A-S',),
+            array('5-H', '4-C', '3-D', '2-S', 'A-H',),
+            array('5-C', '4-D', '3-S', '2-H', 'A-C',),
+            array('5-D', '4-S', '3-H', '2-C', 'A-D',),
+        );
+    }
 }

@@ -36,14 +36,19 @@ class BestHandIdentifier
             $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
             $canMakeAFlush = $this->_canMakeAFlush($AllCards);
             if ($canMakeAStraight && $canMakeAFlush) {
-                $TestWheel = new Hand($AllCards);
-                if ($TestWheel->isWheel()) {
+                $TestHand = new Hand($AllCards);
+                if ($TestHand->isWheel()) {
                     return new SteelWheel($this->_sortCards($AllCards));
                 } else {
                     return new StraightFlush($this->_sortCards($AllCards));
                 }
             } else if ($canMakeAStraight) {
-                return new Straight($this->_sortCards($AllCards));
+                $TestHand = new Hand($AllCards);
+                if ($TestHand->isWheel()) {
+                    return new Wheel($this->_sortCards($AllCards));
+                } else {
+                    return new Straight($this->_sortCards($AllCards));
+                }
             } else if ($canMakeAFlush) {
                 return new Flush($this->_sortCards($AllCards));
             }
