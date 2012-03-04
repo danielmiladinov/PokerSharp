@@ -35,24 +35,27 @@ class BestHandIdentifier
         } else {
             $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
             $canMakeAFlush = $this->_canMakeAFlush($AllCards);
+
+            $SortedCards = $this->_sortCards($AllCards);
+            $TestHand = new Hand($SortedCards);
+
             if ($canMakeAStraight && $canMakeAFlush) {
-                $TestHand = new Hand($AllCards);
                 if ($TestHand->isWheel()) {
-                    return new SteelWheel($this->_sortCards($AllCards));
+                    return new SteelWheel($SortedCards);
                 } else {
-                    return new StraightFlush($this->_sortCards($AllCards));
+                    return new StraightFlush($SortedCards);
                 }
             } else if ($canMakeAStraight) {
-                $TestHand = new Hand($AllCards);
                 if ($TestHand->isWheel()) {
-                    return new Wheel($this->_sortCards($AllCards));
+                    return new Wheel($SortedCards);
                 } else {
-                    return new Straight($this->_sortCards($AllCards));
+                    return new Straight($SortedCards);
                 }
             } else if ($canMakeAFlush) {
-                return new Flush($this->_sortCards($AllCards));
+                return new Flush($SortedCards);
             }
-            return new HighCard(array_slice($this->_sortCards($AllCards), 0, 5));
+
+            return new HighCard(array_slice($SortedCards, 0, 5));
         }
     }
 
@@ -76,18 +79,18 @@ class BestHandIdentifier
     }
 
     /**
-     * @param Card[] $CardsNotOfValue
-     * @return array
+     * @param Card[] $Cards
+     * @return Card[]
      */
-    private function _sortCards(array $CardsNotOfValue)
+    private function _sortCards(array $Cards)
     {
         usort(
-            $CardsNotOfValue,
+            $Cards,
             function (Card $Card1, Card $Card2) {
                 return $Card1->compareTo($Card2);
             }
         );
-        return $CardsNotOfValue;
+        return $Cards;
     }
 
     /**
@@ -120,8 +123,8 @@ class BestHandIdentifier
     }
 
     /**
-     * @param  $CardsGroupedByValues
-     * @param  $faceValueOfKind
+     * @param Card[][] $CardsGroupedByValues
+     * @param int $faceValueOfKind
      * @return ThreeOfAKind
      */
     private function _makeThreeOfAKind($CardsGroupedByValues, $faceValueOfKind)
@@ -132,6 +135,11 @@ class BestHandIdentifier
         return new ThreeOfAKind(array_merge($SortedCards, array($Kicker1, $Kicker2)));
     }
 
+    /**
+     * @param Card[][] $CardsGroupedByValues
+     * @param int $faceValueOfKind
+     * @return TwoOfAKind
+     */
     private function _makeTwoOfAKind($CardsGroupedByValues, $faceValueOfKind)
     {
         $SortedCards = $this->_sortCards($CardsGroupedByValues[$faceValueOfKind]);
