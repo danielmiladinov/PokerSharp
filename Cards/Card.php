@@ -2,6 +2,10 @@
 
 abstract class Card
 {
+    const TWO = 2;
+    const THREE = 3;
+    const FOUR = 4;
+    const FIVE = 5;
     const JACK = 11;
     const QUEEN = 12;
     const KING = 13;
@@ -81,11 +85,29 @@ abstract class Card
     public function compareTo(Card $OtherCard)
     {
         if ($this->getFaceValue() == $OtherCard->getFaceValue()) {
-            $comparison = $OtherCard->getSuitValue() - $this->getSuitValue();
+            $comparison = $this->compareSuit($OtherCard);
         } else {
-            $comparison = $OtherCard->getFaceValue() - $this->getFaceValue();
+            $comparison = $this->compareFaceValue($OtherCard);
         }
 
         return $comparison;
+    }
+
+    /**
+     * @param Card $OtherCard
+     * @return int
+     */
+    public function compareSuit(Card $OtherCard)
+    {
+        return $OtherCard->getSuitValue() - $this->getSuitValue();
+    }
+
+    /**
+     * @param Card $OtherCard
+     * @return int
+     */
+    public function compareFaceValue(Card $OtherCard)
+    {
+        return $OtherCard->getFaceValue() - $this->getFaceValue();
     }
 }

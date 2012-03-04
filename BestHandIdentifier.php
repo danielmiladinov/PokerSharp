@@ -8,11 +8,7 @@ class BestHandIdentifier
     public function identify(Hand $Hand)
     {
         $AllCards = $Hand->getCards();
-        $CardsGroupedByValues = array();
-
-        foreach ($AllCards as $Card) {
-            $CardsGroupedByValues[$Card->getFaceValue()][] = $Card;
-        }
+        $CardsGroupedByValues = $Hand->getCardsGroupedByValues();
 
         $faceValueCounts = array();
 
@@ -40,7 +36,12 @@ class BestHandIdentifier
             $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
             $canMakeAFlush = $this->_canMakeAFlush($AllCards);
             if ($canMakeAStraight && $canMakeAFlush) {
-                return new StraightFlush($this->_sortCards($AllCards));
+                $TestWheel = new Hand($AllCards);
+                if ($TestWheel->isWheel()) {
+                    return new SteelWheel($this->_sortCards($AllCards));
+                } else {
+                    return new StraightFlush($this->_sortCards($AllCards));
+                }
             } else if ($canMakeAStraight) {
                 return new Straight($this->_sortCards($AllCards));
             } else if ($canMakeAFlush) {

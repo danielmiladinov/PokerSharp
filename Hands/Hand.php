@@ -27,12 +27,53 @@ class Hand {
     public function getHighCard()
     {
         $HighCard = null;
-        foreach ($this->_Cards as $Card) {
-            if (is_null($HighCard) || ($Card->compareTo($HighCard) < 0)) {
-                $HighCard = $Card;
+
+        if ($this->isWheel()) {
+            $HighCard = array_pop(
+                array_filter(
+                    array_values($this->_Cards),
+                    function (Card $Card) {
+                        return $Card->getFaceValue() == Card::FIVE;
+                    }
+                )
+            );
+        } else {
+            foreach ($this->_Cards as $Card) {
+                if (is_null($HighCard) || ($Card->compareFaceValue($HighCard) < 0)) {
+                    $HighCard = $Card;
+                }
             }
         }
+
         return $HighCard;
+    }
+
+    /**
+     * @return Card[]
+     */
+    public function getCardsGroupedByValues()
+    {
+        $CardsGroupedByValues = array();
+
+        foreach ($this->_Cards as $Card) {
+            $CardsGroupedByValues[$Card->getFaceValue()][] = $Card;
+        }
+
+        return $CardsGroupedByValues;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWheel()
+    {
+        return (
+            $this->hasCardOfFaceValue(Card::FIVE) &&
+            $this->hasCardOfFaceValue(Card::FOUR) &&
+            $this->hasCardOfFaceValue(Card::THREE) &&
+            $this->hasCardOfFaceValue(Card::TWO) &&
+            $this->hasCardOfFaceValue(Card::ACE)
+        );
     }
 
     /**
@@ -67,5 +108,15 @@ class Hand {
         }
 
         return trim($handTypeString);
+    }
+
+    private function hasCardOfFaceValue($faceValue)
+    {
+        foreach ($this->_Cards as $Card) {
+            if ($Card->getFaceValue() == $faceValue) {
+                return true;
+            }
+        }
+        return false;
     }
 }

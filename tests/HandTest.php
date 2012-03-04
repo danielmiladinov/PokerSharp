@@ -30,4 +30,28 @@ class HandTest extends PokerTestCase
             array('J-H', '3-C', 'Q-D', 'K-D', '7-S', 'K-D',),
         );
     }
+
+    /**
+     * @test
+     * @param string $card1
+     * @param string $card2
+     * @param string $card3
+     * @param string $card4
+     * @param string $card5
+     * @dataProvider getSomeCardsAndTheirExpectedHighCards
+     */
+    public function isWheelShouldReturnFalseWhenTheHandIsNotAWheel($card1, $card2, $card3, $card4, $card5)
+    {
+        $Hand = $this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5);
+        $this->assertFalse($Hand->isWheel());
+    }
+
+    /**
+     * @test
+     */
+    public function willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow()
+    {
+        $Hand = $this->_theFiveCardsAre('5-C', '4-C', '3-C', '2-C', 'A-C');
+        $this->assertEquals(Cards::fiveOf(Suit::Clubs()), $Hand->getHighCard());
+    }
 }
