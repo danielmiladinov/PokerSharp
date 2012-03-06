@@ -37,6 +37,35 @@ class BestHandIdentifierTest extends PokerTestCase
         $this->assertInstanceOf('TwoOfAKind', $this->_IdentifiedHand);
     }
 
+    /**
+     * @test
+     * @param string $card1
+     * @param string $card2
+     * @param string $card3
+     * @param string $card4
+     * @param string $card5
+     * @dataProvider getSomeCandidatesForATwoPair
+     */
+    public function willGetTwoPair($card1, $card2, $card3, $card4, $card5)
+    {
+        $this->_DealtHand = $this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5);
+        $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
+        $this->assertInstanceOf('TwoPair', $this->_IdentifiedHand);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSomeCandidatesForATwoPair()
+    {
+        return array(
+            array('A-H', 'A-C', '7-C', '3-D', '7-S'),
+            array('K-D', 'J-S', 'K-H', 'A-S', 'J-C'),
+            array('2-C', '5-D', '6-H', '2-D', '5-H'),
+            array('10-C', '10-S', '9-D', '8-H', '9-S'),
+        );
+    }
+
     public function testWillGetThreeOfAKind()
     {
         $this->_DealtHand = $this->_theFiveCardsAre('7-S', '7-H', '7-C', 'J-C', '5-D');

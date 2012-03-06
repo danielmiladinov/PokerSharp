@@ -31,7 +31,11 @@ class BestHandIdentifier
             }
 
         } else if ($highestCount == 2) {
-            return $this->_makeTwoOfAKind($CardsGroupedByValues, $highestFaceValue);
+            if ($this->_canMakeTwoPair($CardsGroupedByValues)) {
+                return $this->_makeTowPair($AllCards);
+            } else {
+                return $this->_makeTwoOfAKind($CardsGroupedByValues, $highestFaceValue);
+            }
         } else {
             $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
             $canMakeAFlush = $this->_canMakeAFlush($AllCards);
@@ -189,5 +193,31 @@ class BestHandIdentifier
         }
         $cardsAreAllOneSuit = (count($Suits) == 1);
         return $cardsAreAllOneSuit;
+    }
+
+    /**
+     * @param Card[][] $CardsGroupedByValues
+     * @return boolean
+     */
+    private function _canMakeTwoPair($CardsGroupedByValues)
+    {
+        $numPairsSeen = 0;
+        foreach ($CardsGroupedByValues as $value => $Cards) {
+            if (count($Cards) == 2) {
+                $numPairsSeen++;
+            }
+        }
+
+        $canMakeTwoPair = (2 == $numPairsSeen);
+        return $canMakeTwoPair;
+    }
+
+    /**
+     * @param $AllCards
+     * @return TwoPair
+     */
+    private function _makeTowPair($AllCards)
+    {
+        return new TwoPair($AllCards);
     }
 }
