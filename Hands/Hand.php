@@ -64,6 +64,17 @@ class Hand
     }
 
     /**
+     * @param Hand $OtherHand
+     * @return bool
+     */
+    public function equals(Hand $OtherHand)
+    {
+        $CardsNotInOtherHand = array_diff($this->getCards(), $OtherHand->getCards());
+        $handsAreEqual = count($CardsNotInOtherHand) == 0;
+        return $handsAreEqual;
+    }
+
+    /**
      * @return boolean
      */
     public function isWheel()
