@@ -2,7 +2,11 @@
 
 class CardBuilder
 {
-
+    /**
+     * @param string $cardString
+     * @return Card
+     * @throws CardBuilderException
+     */
     public function fromString($cardString)
     {
         $cardStringAsArray = explode('-', $cardString);
@@ -10,7 +14,7 @@ class CardBuilder
         if (count($cardStringAsArray) != 2) {
             throw new CardBuilderException('Invalid card string');
         }
-        
+
         list($faceValue, $suit) = $cardStringAsArray;
 
         $faceValue = $this->_convertValueFromLetterToNumber($faceValue);
@@ -43,6 +47,10 @@ class CardBuilder
         return $Card;
     }
 
+    /**
+     * @param string $faceValue
+     * @return int
+     */
     private function _convertValueFromLetterToNumber($faceValue)
     {
         switch ($faceValue) {
