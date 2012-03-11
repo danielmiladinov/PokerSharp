@@ -1,30 +1,26 @@
 <?php
 
-class DeckTest extends PHPUnit_Framework_TestCase
-{
+class DeckTest extends PHPUnit_Framework_TestCase {
     /**
      * @var Deck
      */
     private $_Deck;
 
-    protected function setUp()
-    {
+    protected function setUp() {
         $this->_Deck = new Deck();
     }
 
     /**
      * @test
      */
-    public function anEmpyDeckShouldHaveASizeOfZero()
-    {
+    public function anEmpyDeckShouldHaveASizeOfZero() {
         $this->assertEquals(0, $this->_Deck->size());
     }
 
     /**
      * @test
      */
-    public function addingACardShouldIncreaseTheSizeByOne()
-    {
+    public function addingACardShouldIncreaseTheSizeByOne() {
         $this->_Deck->add(Cards::aceOf(Suit::Spades()));
         $this->assertEquals(1, $this->_Deck->size());
     }
@@ -32,8 +28,7 @@ class DeckTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function addingACardTwiceShouldCauseADeckExceptionToBeThrown()
-    {
+    public function addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
         $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
 
         $this->setExpectedException('DeckIntegrityException', 'Cannot contain the same card twice!');
@@ -43,8 +38,7 @@ class DeckTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function populateShouldFillTheDeckWithAll52Cards()
-    {
+    public function populateShouldFillTheDeckWithAll52Cards() {
         $ExpectedCards = array();
 
         $Suits = array(

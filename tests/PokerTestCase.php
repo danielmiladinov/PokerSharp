@@ -1,12 +1,10 @@
 <?php
 
-abstract class PokerTestCase extends PHPUnit_Framework_TestCase
-{
+abstract class PokerTestCase extends PHPUnit_Framework_TestCase {
     /**
      * @return Hand
      */
-    protected function _theFiveCardsAre()
-    {
+    protected function _theFiveCardsAre() {
         $cards = func_get_args();
         if (count($cards) != 5) {
             $this->fail('lrn2count');
@@ -19,8 +17,7 @@ abstract class PokerTestCase extends PHPUnit_Framework_TestCase
      * @param array $cards
      * @return Card[]
      */
-    protected function _buildCardStringIntoACardArray(array $cards)
-    {
+    protected function _buildCardStringIntoACardArray(array $cards) {
         $Cards = array();
 
         foreach ($cards as $cardString) {
@@ -34,8 +31,7 @@ abstract class PokerTestCase extends PHPUnit_Framework_TestCase
      * @param string $cardString
      * @return Card
      */
-    protected function _makeCardFromString($cardString)
-    {
+    protected function _makeCardFromString($cardString) {
         $CardBuilder = new CardBuilder();
         return $CardBuilder->fromString($cardString);
     }

@@ -1,5 +1,4 @@
 <?php
 
-class StraightFlush extends Hand
-{
+class StraightFlush extends Hand {
 }

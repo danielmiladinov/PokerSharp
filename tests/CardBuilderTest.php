@@ -1,28 +1,24 @@
 <?php
 
-class CardBuilderTest extends PHPUnit_Framework_TestCase
-{
+class CardBuilderTest extends PHPUnit_Framework_TestCase {
     /**
      * @var CardBuilder
      */
     private $_CardBuilder;
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->_CardBuilder = new CardBuilder();
     }
-    
-    public function testWillThrowAnExceptionFromInvalidString()
-    {
+
+    public function testWillThrowAnExceptionFromInvalidString() {
         $invalidString = 'aa';
 
         $this->setExpectedException('CardBuilderException', 'Invalid card string');
-        
+
         $this->_CardBuilder->fromString($invalidString);
     }
 
-    public function testWillThrowAnExceptionFromInvalidNumberTooHigh()
-    {
+    public function testWillThrowAnExceptionFromInvalidNumberTooHigh() {
         $invalidString = '15-C';
 
         $this->setExpectedException('CardBuilderException', 'Invalid face value');
@@ -30,8 +26,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->_CardBuilder->fromString($invalidString);
     }
 
-    public function testWillThrowAnExceptionFromInvalidNumberTooLow()
-    {
+    public function testWillThrowAnExceptionFromInvalidNumberTooLow() {
         $invalidString = '1-C';
 
         $this->setExpectedException('CardBuilderException', 'Invalid face value');
@@ -39,8 +34,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->_CardBuilder->fromString($invalidString);
     }
 
-    public function testWillThrowAnExceptionFromInvalidSuit()
-    {
+    public function testWillThrowAnExceptionFromInvalidSuit() {
         $invalidString = '2-Z';
 
         $this->setExpectedException('CardBuilderException', 'Invalid suit');
@@ -48,8 +42,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->_CardBuilder->fromString($invalidString);
     }
 
-    public function testWillGetACardWithValidParameters()
-    {
+    public function testWillGetACardWithValidParameters() {
         $invalidString = '2-C';
         $ExpectedCard = new Clubs(2);
 
@@ -58,8 +51,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
 
-    public function testWillGetACardWithFaceCard()
-    {
+    public function testWillGetACardWithFaceCard() {
         $invalidString = 'Q-S';
         $ExpectedCard = new Spades(Card::QUEEN);
 
@@ -68,8 +60,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
 
-    public function testWillGetACardWithJacks()
-    {
+    public function testWillGetACardWithJacks() {
         $invalidString = 'J-H';
         $ExpectedCard = new Hearts(Card::JACK);
 
@@ -78,8 +69,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
 
-    public function testWillGetACardWithKings()
-    {
+    public function testWillGetACardWithKings() {
         $invalidString = 'K-D';
         $ExpectedCard = new Diamonds(Card::KING);
 
@@ -88,8 +78,7 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
 
-    public function testWillGetACardWithAce()
-    {
+    public function testWillGetACardWithAce() {
         $invalidString = 'A-C';
         $ExpectedCard = new Clubs(Card::ACE);
 

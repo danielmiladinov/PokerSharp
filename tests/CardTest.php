@@ -1,6 +1,5 @@
 <?php
-class CardTest extends PHPUnit_Framework_TestCase
-{
+class CardTest extends PHPUnit_Framework_TestCase {
     /**
      * @var Card
      */
@@ -14,16 +13,14 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    protected function setUp()
-    {
+    protected function setUp() {
         parent::setUp();
     }
 
     /**
      * @return void
      */
-    protected function tearDown()
-    {
+    protected function tearDown() {
         unset($this->_CurrentCard);
         unset($this->_OtherCard);
         parent::tearDown();
@@ -33,8 +30,7 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function compareToShouldReturnZeroWhenTheOtherCardIsOfTheSameValueAndSuit()
-    {
+    public function compareToShouldReturnZeroWhenTheOtherCardIsOfTheSameValueAndSuit() {
         $this->_theCurrentCardIs('A-S')
             ->_andTheOtherCardIs('A-S');
 
@@ -44,8 +40,7 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndADifferentSuit()
-    {
+    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndADifferentSuit() {
         $this->_theCurrentCardIs('7-D')
             ->_andTheOtherCardIs('6-H');
 
@@ -55,8 +50,7 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndTheSameSuit()
-    {
+    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndTheSameSuit() {
         $this->_theCurrentCardIs('7-C')
             ->_andTheOtherCardIs('6-C');
 
@@ -66,8 +60,7 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function compareToShouldReturnGreaterThanZeroWhenTheOtherCardIsOfTheSameFaceValueButAGreaterSuit()
-    {
+    public function compareToShouldReturnGreaterThanZeroWhenTheOtherCardIsOfTheSameFaceValueButAGreaterSuit() {
         $this->_theCurrentCardIs('J-D')
             ->_andTheOtherCardIs('J-C');
 
@@ -78,8 +71,7 @@ class CardTest extends PHPUnit_Framework_TestCase
      * @param string $cardString
      * @return Card
      */
-    private function _makeCardFromString($cardString)
-    {
+    private function _makeCardFromString($cardString) {
         $CardBuilder = new CardBuilder();
         return $CardBuilder->fromString($cardString);
     }
@@ -88,8 +80,7 @@ class CardTest extends PHPUnit_Framework_TestCase
      * @param string $cardString
      * @return CardTest
      */
-    private function _theCurrentCardIs($cardString)
-    {
+    private function _theCurrentCardIs($cardString) {
         $this->_CurrentCard = $this->_makeCardFromString($cardString);
         return $this;
     }
@@ -98,8 +89,7 @@ class CardTest extends PHPUnit_Framework_TestCase
      * @param string $string1
      * @return void
      */
-    private function _andTheOtherCardIs($string1)
-    {
+    private function _andTheOtherCardIs($string1) {
         $this->_OtherCard = $this->_makeCardFromString($string1);
 
     }
@@ -107,24 +97,21 @@ class CardTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    private function _theCardsShouldBeEqual()
-    {
+    private function _theCardsShouldBeEqual() {
         $this->assertEquals(0, $this->_CurrentCard->compareTo($this->_OtherCard));
     }
 
     /**
      * @return void
      */
-    private function _theCurrentCardShouldBeGreater()
-    {
+    private function _theCurrentCardShouldBeGreater() {
         $this->assertLessThan(0, $this->_CurrentCard->compareTo($this->_OtherCard));
     }
 
     /**
      * @return void
      */
-    private function _theOtherCardShouldBeGreater()
-    {
+    private function _theOtherCardShouldBeGreater() {
         $this->assertGreaterThan(0, $this->_CurrentCard->compareTo($this->_OtherCard));
     }
 }

@@ -1,32 +1,29 @@
 <?php
 
-class Hand
-{
-    /** @var Card[] */
+class Hand {
+    /**
+     * @var Card[]
+     */
     private $_Cards;
 
     /**
      * @param Card[] $Cards
-     *
      */
-    public function __construct(array $Cards)
-    {
+    public function __construct(array $Cards) {
         $this->_Cards = $Cards;
     }
 
     /**
      * @return Card[]
      */
-    public function getCards()
-    {
+    public function getCards() {
         return $this->_Cards;
     }
 
     /**
      * @return Card
      */
-    public function getHighCard()
-    {
+    public function getHighCard() {
         $HighCard = null;
 
         if ($this->isWheel()) {
@@ -52,8 +49,7 @@ class Hand
     /**
      * @return Card[]
      */
-    public function getCardsGroupedByValues()
-    {
+    public function getCardsGroupedByValues() {
         $CardsGroupedByValues = array();
 
         foreach ($this->_Cards as $Card) {
@@ -67,8 +63,7 @@ class Hand
      * @param Hand $OtherHand
      * @return bool
      */
-    public function equals(Hand $OtherHand)
-    {
+    public function equals(Hand $OtherHand) {
         $CardsNotInOtherHand = array_diff($this->getCards(), $OtherHand->getCards());
         $handsAreEqual = count($CardsNotInOtherHand) == 0;
         return $handsAreEqual;
@@ -77,8 +72,7 @@ class Hand
     /**
      * @return boolean
      */
-    public function isWheel()
-    {
+    public function isWheel() {
         return (
             $this->hasCardOfFaceValue(Card::FIVE) &&
             $this->hasCardOfFaceValue(Card::FOUR) &&
@@ -91,8 +85,7 @@ class Hand
     /**
      * @return string
      */
-    public function __toString()
-    {
+    public function __toString() {
         $handString = '';
 
         foreach ($this->getCards() as $Card) {
@@ -106,8 +99,7 @@ class Hand
     /**
      * @return string
      */
-    protected function getHandType()
-    {
+    protected function getHandType() {
         $handTypeString = '';
         $myClass = get_class($this);
 
@@ -122,8 +114,7 @@ class Hand
         return trim($handTypeString);
     }
 
-    private function hasCardOfFaceValue($faceValue)
-    {
+    private function hasCardOfFaceValue($faceValue) {
         foreach ($this->_Cards as $Card) {
             if ($Card->getFaceValue() == $faceValue) {
                 return true;

@@ -1,7 +1,6 @@
 <?php
 
-class HandTest extends PokerTestCase
-{
+class HandTest extends PokerTestCase {
     /**
      * @test
      * @param string $card1
@@ -12,8 +11,7 @@ class HandTest extends PokerTestCase
      * @param string $expectedHighCard
      * @dataProvider getSomeCardsAndTheirExpectedHighCards
      */
-    public function willReturnTheCorrectHighFaceValueCard($card1, $card2, $card3, $card4, $card5, $expectedHighCard)
-    {
+    public function willReturnTheCorrectHighFaceValueCard($card1, $card2, $card3, $card4, $card5, $expectedHighCard) {
         $Hand = new Hand($this->_asCardArray($card1, $card2, $card3, $card4, $card5));
         $this->assertEquals($this->_makeCardFromString($expectedHighCard), $Hand->getHighCard());
     }
@@ -21,8 +19,7 @@ class HandTest extends PokerTestCase
     /**
      * @return array
      */
-    public function getSomeCardsAndTheirExpectedHighCards()
-    {
+    public function getSomeCardsAndTheirExpectedHighCards() {
         return array(
             array('K-C', '7-S', '3-D', 'A-H', '10-C', 'A-H',),
             array('2-S', '3-S', '4-S', '6-S', '2-H', '6-S',),
@@ -40,8 +37,7 @@ class HandTest extends PokerTestCase
      * @param string $card5
      * @dataProvider getSomeCardsAndTheirExpectedHighCards
      */
-    public function isWheelShouldReturnFalseWhenTheHandIsNotAWheel($card1, $card2, $card3, $card4, $card5)
-    {
+    public function isWheelShouldReturnFalseWhenTheHandIsNotAWheel($card1, $card2, $card3, $card4, $card5) {
         $Hand = new Hand($this->_asCardArray($card1, $card2, $card3, $card4, $card5));
         $this->assertFalse($Hand->isWheel());
     }
@@ -49,8 +45,7 @@ class HandTest extends PokerTestCase
     /**
      * @test
      */
-    public function willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow()
-    {
+    public function willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
         $Hand = new Hand($this->_asCardArray('5-C', '4-C', '3-C', '2-C', 'A-C'));
         $this->assertEquals(Cards::fiveOf(Suit::Clubs()), $Hand->getHighCard());
     }
@@ -58,8 +53,7 @@ class HandTest extends PokerTestCase
     /**
      * @test
      */
-    public function twoHandsWithDifferentCardsShouldNotBeEqual()
-    {
+    public function twoHandsWithDifferentCardsShouldNotBeEqual() {
         $Hand = new Hand($this->_asCardArray('J-H', 'A-S', '5-C', '7-D', '3-C'));
         $OtherHand = new Hand($this->_asCardArray('A-C', 'K-D', '4-D', '3-S', '6-H'));
 
@@ -69,8 +63,7 @@ class HandTest extends PokerTestCase
     /**
      * @test
      */
-    public function twoHandsWithTheSameCardsShouldBeEqual()
-    {
+    public function twoHandsWithTheSameCardsShouldBeEqual() {
         $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
         $OtherHand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
 
@@ -80,10 +73,9 @@ class HandTest extends PokerTestCase
     /**
      * @test
      */
-    public function twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual()
-    {
+    public function twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual() {
         $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
-        $OtherHand = new Hand($this->_asCardArray('Q-D','10-S', 'K-H', 'A-S', 'J-C'));
+        $OtherHand = new Hand($this->_asCardArray('Q-D', '10-S', 'K-H', 'A-S', 'J-C'));
 
         $this->assertTrue($Hand->equals($OtherHand));
     }
@@ -91,8 +83,7 @@ class HandTest extends PokerTestCase
     /**
      * @return Card[]
      */
-    protected function _asCardArray()
-    {
+    protected function _asCardArray() {
         return array_map(
             function ($cardString) {
                 $CardBuilder = new CardBuilder();

@@ -1,5 +1,4 @@
 <?php
 
-class RoyalFlush extends StraightFlush
-{
+class RoyalFlush extends StraightFlush {
 }
