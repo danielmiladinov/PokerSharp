@@ -13,362 +13,68 @@ class HandComparatorTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @param \Hand  $FirstHand
+     * @param \Hand  $SecondHand
+     * @param int    $expectedComparison
+     * @param string $failureMessage
+     * @dataProvider getHandsAndTheirExpectedComparisonAndTheirComparisonFailureMessage
      */
-    public function twoHighCardsShouldCompareAsEqual() {
-        $FirstHand = new HighCard($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(0, $this->_HandComparator->compare($FirstHand, $SecondHand));
+    public function twoHandShouldCompareAsExpected(Hand $FirstHand, Hand $SecondHand, $expectedComparison, $failureMessage) {
+        $this->assertEquals($expectedComparison, $this->_HandComparator->compare($FirstHand, $SecondHand), $failureMessage);
     }
 
     /**
-     * @test
+     * @return array
      */
-    public function aTwoOfAKindShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new TwoOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aTwoPairShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new TwoPair($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aThreeOfAKindShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new ThreeOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aWheelShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new Wheel($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new Straight($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFlushShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new Flush($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFullHouseShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new FullHouse($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFourOfAKindShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new FourOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aSteelWheelShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new SteelWheel($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightFlushShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new StraightFlush($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aRoyalFlushShouldCompareGreaterThanAHighCard() {
-        $FirstHand = new RoyalFlush($this->_getFiveRandomCards());
-        $SecondHand = new HighCard($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aHighCardShouldCompareLessThanATwoOfAKind() {
-        $FirstHand = new HighCard($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(-1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function twoTwosOfAKindShouldCompareAsEqual() {
-        $FirstHand = new TwoOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(0, $this->_HandComparator->compare($FirstHand, $SecondHand));
-    }
-
-    /**
-     * @test
-     */
-    public function aTwoPairShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new TwoPair($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aThreeOfAKindShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new ThreeOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aWheelShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new Wheel($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new Straight($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFlushShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new Flush($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFullHouseShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new FullHouse($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFourOfAKindShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new FourOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aSteelWheelShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new SteelWheel($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightFlushShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new StraightFlush($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aRoyalFlushShouldCompareGreaterThanATwoOfAKind() {
-        $FirstHand = new RoyalFlush($this->_getFiveRandomCards());
-        $SecondHand = new TwoOfAKind($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aHighCardShouldCompareLessThanATwoPair() {
-        $FirstHand = new HighCard($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(-1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aTwoOfAKindShouldCompareLessThanATwoPair() {
-        $FirstHand = new TwoOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(-1, $this->_HandComparator->compare($FirstHand, $SecondHand));
-    }
-
-    /**
-     * @test
-     */
-    public function twoTwoPairsShouldCompareAsEqual() {
-        $FirstHand = new TwoPair($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(0, $this->_HandComparator->compare($FirstHand, $SecondHand));
-    }
-
-    /**
-     * @test
-     */
-    public function aThreeOfAKindShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new ThreeOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aWheelShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new Wheel($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new Straight($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFlushShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new Flush($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFullHouseShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new FullHouse($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aFourOfAKindShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new FourOfAKind($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aSteelWheelShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new SteelWheel($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aStraightFlushShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new StraightFlush($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
-    }
-
-    /**
-     * @test
-     */
-    public function aRoyalFlushShouldCompareGreaterThanATwoPair() {
-        $FirstHand = new RoyalFlush($this->_getFiveRandomCards());
-        $SecondHand = new TwoPair($this->_getFiveRandomCards());
-
-        $this->assertEquals(1, $this->_HandComparator->compare($FirstHand, $SecondHand), $this->_makeSentenceFromCamelCase(__FUNCTION__));
+    public function getHandsAndTheirExpectedComparisonAndTheirComparisonFailureMessage() {
+        $handClasses = array(
+            'HighCard',
+            'TwoOfAKind',
+            'TwoPair',
+            'ThreeOfAKind',
+            'Straight',
+            'Flush',
+            'FullHouse',
+            'FourOfAKind',
+            'StraightFlush',
+            'RoyalFlush',
+        );
+
+        $data = array();
+
+        foreach ($handClasses as $firstHandStrength => $firstHandClass) {
+            foreach ($handClasses as $secondHandStrength => $secondHandClass) {
+                $FirstHandReflector = new ReflectionClass($firstHandClass);
+                $SecondHandReflector = new ReflectionClass($secondHandClass);
+
+                $FirstHand = $FirstHandReflector->newInstance($this->_getFiveRandomCards());
+                $SecondHand = $SecondHandReflector->newInstance($this->_getFiveRandomCards());
+
+                $handDifference = ($firstHandStrength - $secondHandStrength);
+
+                if ($handDifference == 0) {
+                    $expectedComparison = 0;
+                    $comparisonMessage = 'compares equal to';
+                } else if ($handDifference > 0) {
+                    $expectedComparison = 1;
+                    $comparisonMessage = 'compares greater than';
+                } else {
+                    $expectedComparison = -1;
+                    $comparisonMessage = 'compares less than';
+                }
+
+                $failureMessage = "Failed asserting that a {$firstHandClass} {$comparisonMessage} a {$secondHandClass}.";
+
+                $data[] = array(
+                    $FirstHand,
+                    $SecondHand,
+                    $expectedComparison,
+                    $failureMessage
+                );
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -394,32 +100,5 @@ class HandComparatorTest extends PHPUnit_Framework_TestCase {
         );
 
         return $FiveRandomCards;
-    }
-
-    /**
-     * Given the string "aCamelHasHumps", the value returned should be
-     * "A Camel Has Humps".
-     *
-     * @static
-     * @param string $camelCasedString
-     * @return string
-     */
-    private function _makeSentenceFromCamelCase($camelCasedString)
-    {
-        $stringLength = strlen($camelCasedString);
-        $formattedOutput = '';
-
-        for ($charIndex = 0; $charIndex < $stringLength; $charIndex++) {
-            $character = $camelCasedString{$charIndex};
-
-            if (ctype_upper($character)) {
-                $formattedOutput .= ' ';
-            }
-
-            $formattedOutput .= $character;
-        }
-
-        $formattedOutput = ucwords($formattedOutput);
-        return $formattedOutput;
     }
 }

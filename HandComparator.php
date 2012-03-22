@@ -6,20 +6,19 @@ class HandComparator {
      * @var array
      */
     private static $_handStrengths = array(
-
-        'RoyalFlush' => 7,
-        'StraightFlush' => 7,
-        'SteelWheel' => 7,
-        'FourOfAKind' => 7,
-        'FullHouse' => 7,
-        'Flush' => 7,
-        'Straight' => 6,
-        'Wheel' => 5,
-        'ThreeOfAKind' => 4,
-        'TwoPair'      => 3,
-        'TwoOfAKind'   => 2,
-        'HighCard'     => 1,
-        'Hand'         => 0,
+        'RoyalFlush'    => 12,
+        'StraightFlush' => 11,
+        'SteelWheel'    => 10,
+        'FourOfAKind'   => 9,
+        'FullHouse'     => 8,
+        'Flush'         => 7,
+        'Straight'      => 6,
+        'Wheel'         => 5,
+        'ThreeOfAKind'  => 4,
+        'TwoPair'       => 3,
+        'TwoOfAKind'    => 2,
+        'HighCard'      => 1,
+        'Hand'          => 0,
     );
 
     /**
