@@ -83,20 +83,23 @@ class HandComparatorTest extends PHPUnit_Framework_TestCase {
     private function _getFiveRandomCards() {
         $suits = array('S', 'H', 'C', 'D');
         $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+        $cardStringDeck = array();
 
         $CardBuilder = new CardBuilder();
 
+        foreach ($suits as $suit) {
+            foreach ($values as $value) {
+                $cardStringDeck[] = "{$value}-{$suit}";
+            }
+        }
+
         $FiveRandomCards = array_map(
-            function($cardString) use ($CardBuilder) {
+            function ($cardStringDeckKey) use ($CardBuilder, $cardStringDeck) {
+                $cardString = $cardStringDeck[$cardStringDeckKey];
                 /** @var $CardBuilder CardBuilder */
                 return $CardBuilder->fromString($cardString);
             },
-            array_map(
-                function() use ($suits, $values) {
-                    return "{$values[array_rand($values)]}-{$suits[array_rand($suits)]}";
-                },
-                range(1, 5)
-            )
+            array_rand($cardStringDeck, 5)
         );
 
         return $FiveRandomCards;
