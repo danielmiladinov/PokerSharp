@@ -73,6 +73,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForAStraight
      */
     public function willGetAStraight($card1, $card2, $card3, $card4, $card5) {
@@ -106,6 +107,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForAFlush
      */
     public function willGetAFlush($card1, $card2, $card3, $card4, $card5) {
@@ -145,6 +147,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForAStraightFlush
      */
     public function willGetAStraightFlush($card1, $card2, $card3, $card4, $card5) {
@@ -172,6 +175,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForASteelWheel
      */
     public function willGetASteelWheel($card1, $card2, $card3, $card4, $card5) {
@@ -199,6 +203,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForAWheel
      */
     public function willGetARegularWheel($card1, $card2, $card3, $card4, $card5) {
@@ -226,6 +231,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForARoyalFlush
      */
     public function willGetARoyalFlush($card1, $card2, $card3, $card4, $card5) {
