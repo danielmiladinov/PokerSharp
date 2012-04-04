@@ -50,13 +50,7 @@ class Hand {
      * @return Card[]
      */
     public function getCardsGroupedByValues() {
-        $CardsGroupedByValues = array();
-
-        foreach ($this->_Cards as $Card) {
-            $CardsGroupedByValues[$Card->getFaceValue()][] = $Card;
-        }
-
-        return $CardsGroupedByValues;
+        return Cards::getCardsGroupedByValue($this->getCards());
     }
 
     /**

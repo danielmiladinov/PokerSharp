@@ -123,4 +123,19 @@ class Cards
     {
         return $Suit->getCard(Card::KING);
     }
+
+    /**
+     * @static
+     * @param \Card[] $Cards
+     * @return \Card[]
+     */
+    public static function getCardsGroupedByValue(array $Cards) {
+        $CardsGroupedByValues = array();
+
+        foreach ($Cards as $Card) {
+            $CardsGroupedByValues[$Card->getFaceValue()][] = $Card;
+        }
+
+        return $CardsGroupedByValues;
+    }
 }
