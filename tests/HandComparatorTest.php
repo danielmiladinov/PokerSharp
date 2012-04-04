@@ -17,6 +17,7 @@ class HandComparatorTest extends PHPUnit_Framework_TestCase {
      * @param \Hand  $SecondHand
      * @param int    $expectedComparison
      * @param string $failureMessage
+     * @return void
      * @dataProvider getHandsAndTheirExpectedComparisonAndTheirComparisonFailureMessage
      */
     public function twoHandShouldCompareAsExpected(Hand $FirstHand, Hand $SecondHand, $expectedComparison, $failureMessage) {

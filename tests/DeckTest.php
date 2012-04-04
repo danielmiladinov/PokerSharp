@@ -12,13 +12,15 @@ class DeckTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
-    public function anEmpyDeckShouldHaveASizeOfZero() {
+    public function anEmptyDeckShouldHaveASizeOfZero() {
         $this->assertEquals(0, $this->_Deck->size());
     }
 
     /**
      * @test
+     * @return void
      */
     public function addingACardShouldIncreaseTheSizeByOne() {
         $this->_Deck->add(Cards::aceOf(Suit::Spades()));
@@ -27,6 +29,7 @@ class DeckTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
         $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
@@ -37,6 +40,7 @@ class DeckTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function populateShouldFillTheDeckWithAll52Cards() {
         $ExpectedCards = array();

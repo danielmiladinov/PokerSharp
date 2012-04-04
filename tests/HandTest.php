@@ -9,6 +9,7 @@ class HandTest extends PokerTestCase {
      * @param string $card4
      * @param string $card5
      * @param string $expectedHighCard
+     * @return void
      * @dataProvider getSomeCardsAndTheirExpectedHighCards
      */
     public function willReturnTheCorrectHighFaceValueCard($card1, $card2, $card3, $card4, $card5, $expectedHighCard) {
@@ -35,6 +36,7 @@ class HandTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCardsAndTheirExpectedHighCards
      */
     public function isWheelShouldReturnFalseWhenTheHandIsNotAWheel($card1, $card2, $card3, $card4, $card5) {
@@ -44,6 +46,7 @@ class HandTest extends PokerTestCase {
 
     /**
      * @test
+     * @return void
      */
     public function willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
         $Hand = new Hand($this->_asCardArray('5-C', '4-C', '3-C', '2-C', 'A-C'));
@@ -52,6 +55,7 @@ class HandTest extends PokerTestCase {
 
     /**
      * @test
+     * @return void
      */
     public function twoHandsWithDifferentCardsShouldNotBeEqual() {
         $Hand = new Hand($this->_asCardArray('J-H', 'A-S', '5-C', '7-D', '3-C'));
@@ -62,6 +66,7 @@ class HandTest extends PokerTestCase {
 
     /**
      * @test
+     * @return void
      */
     public function twoHandsWithTheSameCardsShouldBeEqual() {
         $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
@@ -72,6 +77,7 @@ class HandTest extends PokerTestCase {
 
     /**
      * @test
+     * @return void
      */
     public function twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual() {
         $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));

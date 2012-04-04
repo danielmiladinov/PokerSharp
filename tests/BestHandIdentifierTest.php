@@ -39,6 +39,7 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @param string $card3
      * @param string $card4
      * @param string $card5
+     * @return void
      * @dataProvider getSomeCandidatesForATwoPair
      */
     public function willGetTwoPair($card1, $card2, $card3, $card4, $card5) {

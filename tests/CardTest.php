@@ -29,6 +29,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function compareToShouldReturnZeroWhenTheOtherCardIsOfTheSameValueAndSuit() {
         $this->_theCurrentCardIs('A-S')
@@ -39,6 +40,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndADifferentSuit() {
         $this->_theCurrentCardIs('7-D')
@@ -49,6 +51,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndTheSameSuit() {
         $this->_theCurrentCardIs('7-C')
@@ -59,6 +62,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @return void
      */
     public function compareToShouldReturnGreaterThanZeroWhenTheOtherCardIsOfTheSameFaceValueButAGreaterSuit() {
         $this->_theCurrentCardIs('J-D')
