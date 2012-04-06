@@ -2,7 +2,7 @@
 
 abstract class PokerTestCase extends PHPUnit_Framework_TestCase {
     /**
-     * @return Hand
+     * @return \Card[]
      */
     protected function _theFiveCardsAre() {
         $cards = func_get_args();
@@ -10,7 +10,7 @@ abstract class PokerTestCase extends PHPUnit_Framework_TestCase {
             $this->fail('lrn2count');
         }
 
-        return new Hand($this->_buildCardStringIntoACardArray($cards));
+        return $this->_buildCardStringIntoACardArray($cards);
     }
 
     /**

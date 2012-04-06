@@ -2,17 +2,15 @@
 class BestHandIdentifier
 {
     /**
-     * @param Hand $Hand
+     * @param \Card[] $Cards
      * @return Hand
      */
-    public function identify(Hand $Hand)
+    public function identify(array $Cards)
     {
-        $AllCards = $Hand->getCards();
-        $CardsGroupedByValues = $Hand->getCardsGroupedByValues();
-
+        $GroupedByValue = Cards::getCardsGroupedByValue($Cards);
         $faceValueCounts = array();
 
-        foreach ($CardsGroupedByValues as $faceValue => $CardsWithSameValue) {
+        foreach ($GroupedByValue as $faceValue => $CardsWithSameValue) {
             $faceValueCounts[$faceValue] = count($CardsWithSameValue);
         }
 
@@ -20,27 +18,27 @@ class BestHandIdentifier
         list ($highestFaceValue, $highestCount) = each($faceValueCounts);
 
         if ($highestCount == 4) {
-            return $this->_makeFourOfAKind($CardsGroupedByValues, $highestFaceValue);
+            return $this->_makeFourOfAKind($GroupedByValue, $highestFaceValue);
         } else if ($highestCount == 3) {
             list ($nextHighestCountFaceValue, $nextHighestCount) = each($faceValueCounts);
 
             if ($nextHighestCount == 2) {
-                return $this->_makeFullHouse($CardsGroupedByValues, $highestFaceValue, $nextHighestCountFaceValue);
+                return $this->_makeFullHouse($GroupedByValue, $highestFaceValue, $nextHighestCountFaceValue);
             } else {
-                return $this->_makeThreeOfAKind($CardsGroupedByValues, $highestFaceValue);
+                return $this->_makeThreeOfAKind($GroupedByValue, $highestFaceValue);
             }
 
         } else if ($highestCount == 2) {
-            if ($this->_canMakeTwoPair($CardsGroupedByValues)) {
-                return $this->_makeTowPair($AllCards);
+            if ($this->_canMakeTwoPair($GroupedByValue)) {
+                return $this->_makeTowPair($Cards);
             } else {
-                return $this->_makeTwoOfAKind($CardsGroupedByValues, $highestFaceValue);
+                return $this->_makeTwoOfAKind($GroupedByValue, $highestFaceValue);
             }
         } else {
-            $canMakeAStraight = $this->_canMakeAStraight($CardsGroupedByValues);
-            $canMakeAFlush = $this->_canMakeAFlush($AllCards);
+            $canMakeAStraight = $this->_canMakeAStraight($GroupedByValue);
+            $canMakeAFlush = $this->_canMakeAFlush($Cards);
 
-            $SortedCards = $this->_sortCards($AllCards);
+            $SortedCards = $this->_sortCards($Cards);
             $TestHand = new Hand($SortedCards);
 
             if ($canMakeAStraight && $canMakeAFlush) {
@@ -181,13 +179,13 @@ class BestHandIdentifier
     }
 
     /**
-     * @param Card[] $AllCards
+     * @param Card[] $Cards
      * @return boolean
      */
-    private function _canMakeAFlush($AllCards)
+    private function _canMakeAFlush($Cards)
     {
         $Suits = array();
-        foreach ($AllCards as $Card) {
+        foreach ($Cards as $Card) {
             $suit = $Card->getSuit();
             $Suits[$suit] = $suit;
         }
@@ -213,11 +211,11 @@ class BestHandIdentifier
     }
 
     /**
-     * @param $AllCards
+     * @param $Cards
      * @return TwoPair
      */
-    private function _makeTowPair($AllCards)
+    private function _makeTowPair($Cards)
     {
-        return new TwoPair($AllCards);
+        return new TwoPair($Cards);
     }
 }
