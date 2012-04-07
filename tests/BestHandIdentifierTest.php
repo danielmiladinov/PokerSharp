@@ -14,6 +14,11 @@ class BestHandIdentifierTest extends PokerTestCase {
         $this->_HandIdentifier = new BestHandIdentifier();
     }
 
+    protected function assertPostConditions() {
+        $CardsInHand = $this->_IdentifiedHand->getCards();
+        $this->assertEquals(5, count($CardsInHand), get_class($this->_IdentifiedHand) . " ({$this->_printCards($CardsInHand)}) did not have 5 cards");
+    }
+
     public function testWillGetJustAHighCard() {
         $this->_DealtHand = $this->_theFiveCardsAre('A-S', 'J-C', '7-C', '5-D', '4-S');
         $this->_IdentifiedHand = $this->_HandIdentifier->identify($this->_DealtHand);
@@ -252,4 +257,26 @@ class BestHandIdentifierTest extends PokerTestCase {
         );
     }
 
+    /**
+     * @param \Card[] $Cards
+     * @return string
+     */
+    private function _printCards(array $Cards) {
+        usort(
+            $Cards,
+            function (Card $Card1, Card $Card2) {
+                return $Card1->compareTo($Card2);
+            }
+        );
+
+        return implode(
+            ', ',
+            array_map(
+                function (Card $Card) {
+                    return "{$Card}";
+                },
+                $Cards
+            )
+        );
+    }
 }

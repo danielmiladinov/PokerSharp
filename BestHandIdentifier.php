@@ -30,7 +30,7 @@ class BestHandIdentifier
 
         } else if ($highestCount == 2) {
             if ($this->_canMakeTwoPair($GroupedByValue)) {
-                return $this->_makeTowPair($Cards);
+                return $this->_makeTwoPair($GroupedByValue);
             } else {
                 return $this->_makeTwoOfAKind($GroupedByValue, $highestFaceValue);
             }
@@ -211,11 +211,37 @@ class BestHandIdentifier
     }
 
     /**
-     * @param $Cards
+     * @param \Card[] $CardsGroupedByValue
      * @return TwoPair
      */
-    private function _makeTowPair($Cards)
+    private function _makeTwoPair($CardsGroupedByValue)
     {
-        return new TwoPair($Cards);
+        // Ensure that the pairs of cards are in the front of the array
+        usort(
+            $CardsGroupedByValue,
+            function (array $Cards1, array $Cards2) {
+                return count($Cards2) - count($Cards1);
+            }
+        );
+
+        // Pop off the pairs
+        $CardsForTwoPair = array_merge(
+            array_shift($CardsGroupedByValue),
+            array_shift($CardsGroupedByValue)
+        );
+
+        // Add the next highest card that wasn't part of a pair
+        $CardsForTwoPair[] =  array_shift(
+            $this->_sortCards(
+                array_map(
+                    function (array $Cards) {
+                        return array_pop($Cards);
+                    },
+                    $CardsGroupedByValue
+                )
+            )
+        );
+
+        return new TwoPair($CardsForTwoPair);
     }
 }
