@@ -6,6 +6,7 @@ spl_autoload_register(
         $paths[] = $pathPrefix . $class_name . '.php';
         $paths[] = $pathPrefix . 'Cards/' . $class_name . '.php';
         $paths[] = $pathPrefix . 'Hands/' . $class_name . '.php';
+        $paths[] = $pathPrefix . 'HandSpecifications/' . $class_name . '.php';
         $paths[] = $pathPrefix . 'tests/' . $class_name . '.php';
 
         foreach ($paths as $path) {
