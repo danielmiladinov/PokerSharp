@@ -14,7 +14,7 @@ class StraightFlushSpecification {
      * @param Hand $Hand
      * @return boolean
      */
-    private function _canBeAFlush(Hand $Hand) {
+    protected function _canBeAFlush(Hand $Hand) {
         $Suits = array();
         foreach ($Hand->getCards() as $Card) {
             $suit = $Card->getSuit();
@@ -28,7 +28,7 @@ class StraightFlushSpecification {
      * @param Hand $Hand
      * @return boolean
      */
-    private function _canBeAStraight(Hand $Hand) {
+    protected function _canBeAStraight(Hand $Hand) {
         $GroupedByValue = $Hand->getCardsGroupedByValues();
         ksort($GroupedByValue);
 
