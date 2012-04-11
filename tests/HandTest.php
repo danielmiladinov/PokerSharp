@@ -86,6 +86,25 @@ class HandTest extends PokerTestCase {
         $this->assertTrue($Hand->equals($OtherHand));
     }
 
+
+    /**
+     * @test
+     * @return void
+     */
+    public function aHandShouldBeAbleToProperlyRepresentItselfToAString() {
+        $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
+        $this->assertEquals("Hand(A-S, K-H, Q-D, J-C, 10-S)", "{$Hand}");
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function aHandWithAMultipleWordNameShouldBeAbleToProperlyRepresentItselfAsAStringAsWell() {
+        $RoyalFlush = new RoyalFlush($this->_asCardArray('A-S', 'K-S', 'Q-S', 'J-S', '10-S'));
+        $this->assertEquals("Royal Flush(A-S, K-S, Q-S, J-S, 10-S)", "{$RoyalFlush}");
+    }
+
     /**
      * @return Card[]
      */

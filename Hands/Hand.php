@@ -80,14 +80,23 @@ class Hand {
      * @return string
      */
     public function __toString() {
-        $handString = '';
-
-        foreach ($this->getCards() as $Card) {
-            $handString .= $Card . '  ';
-        }
-
-        $handString .= "({$this->getHandType()})";
-        return $handString;
+        return implode(
+            '',
+            array(
+                $this->getHandType(),
+                '(',
+                implode(
+                    ', ',
+                    array_map(
+                        function (Card $Card) {
+                            return $Card->__toString();
+                        },
+                        $this->getCards()
+                    )
+                ),
+                ')'
+            )
+        );
     }
 
     /**
