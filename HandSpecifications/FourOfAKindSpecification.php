@@ -14,8 +14,8 @@ class FourOfAKindSpecification {
             $faceValueCounts[$faceValue] = count($CardsWithSameValue);
         }
 
-        arsort($faceValueCounts);
-        list(, $highestCount) = each($faceValueCounts);
+        asort($faceValueCounts);
+        $highestCount = array_pop($faceValueCounts);
 
         return $highestCount == 4;
     }
