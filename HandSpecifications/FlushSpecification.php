@@ -1,16 +1,12 @@
 <?php
 
-class FlushSpecification {
+class FlushSpecification extends HandSpecification {
 
     /**
      * @param Hand $Hand
      * @return boolean
      */
     public function isSatisfiedBy(Hand $Hand) {
-        $Suits = array();
-        foreach ($Hand->getCards() as $Card) {
-            $Suits[$Card->getSuit()] = $Card->getSuit();
-        }
-        return (count($Suits) == 1);
+        return $this->_canBeAFlush($Hand);
     }
 }
