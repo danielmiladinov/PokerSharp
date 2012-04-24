@@ -1,6 +1,6 @@
 <?php
 
-class FullHouseSpecification {
+class FullHouseSpecification extends HandSpecification {
 
     /**
      * @param Hand $Hand

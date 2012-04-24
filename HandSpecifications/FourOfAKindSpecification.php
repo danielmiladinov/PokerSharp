@@ -1,6 +1,6 @@
 <?php
 
-class FourOfAKindSpecification {
+class FourOfAKindSpecification extends HandSpecification {
 
     /**
      * @param Hand $Hand
