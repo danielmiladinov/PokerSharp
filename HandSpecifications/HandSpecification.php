@@ -29,6 +29,11 @@ abstract class HandSpecification {
      */
     protected function _canBeAStraight(Hand $Hand) {
         $GroupedByValue = $Hand->getCardsGroupedByValues();
+
+        if (count($GroupedByValue) < 5) {
+            return false;
+        }
+
         ksort($GroupedByValue);
 
         list($lowestFaceValue) = each($GroupedByValue);
