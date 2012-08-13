@@ -46,7 +46,7 @@ class BestHandIdentifier
         } else if ($this->_FourOfAKind->isSatisfiedBy($Hand)) {
             return new FourOfAKind($SortedCards);
         } else if ($this->_FullHouse->isSatisfiedBy($Hand)) {
-            return new FullHouse($SortedCards);
+            return $this->_FullHouse->newHand($Hand);
         } else if ($this->_Flush->isSatisfiedBy($Hand)) {
             return new Flush($SortedCards);
         } else if ($this->_Wheel->isSatisfiedBy($Hand)) {
