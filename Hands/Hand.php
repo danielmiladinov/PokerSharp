@@ -68,6 +68,7 @@ class Hand {
      */
     public function isWheel() {
         return (
+            count($this->_Cards) == 5 &&
             $this->hasCardOfFaceValue(Card::FIVE) &&
             $this->hasCardOfFaceValue(Card::FOUR) &&
             $this->hasCardOfFaceValue(Card::THREE) &&

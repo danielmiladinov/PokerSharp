@@ -62,4 +62,21 @@ class WheelSpecificationTest extends PokerTestCase {
             range(1, 100)
         );
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function shouldNotBeSatisfiedByHandsWithMoreThanFiveCardsButThatHaveAllTheWheelCards() {
+        $Hand = new Hand(
+            array_map(
+                function ($cardString) {
+                    $CardBuilder = new CardBuilder();
+                    return $CardBuilder->fromString($cardString);
+                },
+                array('5-H', '4-C', '3-S', '2-D', 'A-H', '3-D')
+            )
+        );
+        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'A Hand with more than 5 cards cannot be a Wheel!');
+    }
 }
