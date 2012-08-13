@@ -23,7 +23,7 @@ class FullHouseSpecificationTest extends PokerTestCase {
      */
     public function shouldBeAbleToIdentifyAnyFullHouse($card1, $card2, $card3, $card4, $card5) {
         $Hand = new Hand($this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5));
-        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), 'This is a valid FullHouse, why did not satisfy the specification?');
+        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), "This is a valid FullHouse({$card1}, {$card2}, {$card3}, {$card4}, {$card5}), why did not satisfy the specification?");
     }
 
     /**
