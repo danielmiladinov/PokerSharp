@@ -1,65 +1,66 @@
 <?php
 class BestHandIdentifier
 {
+    private $_RoyalFlush;
+    private $_StraightFlush;
+    private $_SteelWheel;
+    private $_FourOfAKind;
+    private $_FullHouse;
+    private $_Flush;
+    private $_Straight;
+    private $_Wheel;
+    private $_ThreeOfAKind;
+    private $_TwoPair;
+    private $_TwoOfAKind;
+
+    public function __construct()
+    {
+        $this->_RoyalFlush = new RoyalFlushSpecification();
+        $this->_StraightFlush = new StraightFlushSpecification();
+        $this->_SteelWheel = new SteelWheelSpecification();
+        $this->_FourOfAKind = new FourOfAKindSpecification();
+        $this->_FullHouse = new FullHouseSpecification();
+        $this->_Flush = new FlushSpecification();
+        $this->_Straight = new StraightSpecification();
+        $this->_Wheel = new WheelSpecification();
+        $this->_ThreeOfAKind = new ThreeOfAKindSpecification();
+        $this->_TwoPair = new TwoPairSpecification();
+        $this->_TwoOfAKind = new TwoOfAKindSpecification();
+    }
+
     /**
      * @param \Card[] $Cards
      * @return Hand
      */
     public function identify(array $Cards)
     {
-        $GroupedByValue = Cards::getCardsGroupedByValue($Cards);
-        $faceValueCounts = array();
+        $SortedCards = $this->_sortCards($Cards);
+        $Hand = new Hand($SortedCards);
 
-        foreach ($GroupedByValue as $faceValue => $CardsWithSameValue) {
-            $faceValueCounts[$faceValue] = count($CardsWithSameValue);
-        }
-
-        arsort($faceValueCounts);
-        list ($highestFaceValue, $highestCount) = each($faceValueCounts);
-
-        if ($highestCount == 4) {
-            return $this->_makeFourOfAKind($GroupedByValue, $highestFaceValue);
-        } else if ($highestCount == 3) {
-            list ($nextHighestCountFaceValue, $nextHighestCount) = each($faceValueCounts);
-
-            if ($nextHighestCount == 2) {
-                return $this->_makeFullHouse($GroupedByValue, $highestFaceValue, $nextHighestCountFaceValue);
-            } else {
-                return $this->_makeThreeOfAKind($GroupedByValue, $highestFaceValue);
-            }
-
-        } else if ($highestCount == 2) {
-            if ($this->_canMakeTwoPair($GroupedByValue)) {
-                return $this->_makeTwoPair($GroupedByValue);
-            } else {
-                return $this->_makeTwoOfAKind($GroupedByValue, $highestFaceValue);
-            }
+        if ($this->_RoyalFlush->isSatisfiedBy($Hand)) {
+            return new RoyalFlush($SortedCards);
+        } else if ($this->_SteelWheel->isSatisfiedBy($Hand)) {
+            return new SteelWheel($SortedCards);
+        } else if ($this->_StraightFlush->isSatisfiedBy($Hand)) {
+            return new StraightFlush($SortedCards);
+        } else if ($this->_FourOfAKind->isSatisfiedBy($Hand)) {
+            return new FourOfAKind($SortedCards);
+        } else if ($this->_FullHouse->isSatisfiedBy($Hand)) {
+            return new FullHouse($SortedCards);
+        } else if ($this->_Flush->isSatisfiedBy($Hand)) {
+            return new Flush($SortedCards);
+        } else if ($this->_Wheel->isSatisfiedBy($Hand)) {
+            return new Wheel($SortedCards);
+        } else if ($this->_Straight->isSatisfiedBy($Hand)) {
+            return new Straight($SortedCards);
+        } else if ($this->_ThreeOfAKind->isSatisfiedBy($Hand)) {
+            return new ThreeOfAKind($SortedCards);
+        } else if ($this->_TwoPair->isSatisfiedBy($Hand)) {
+            return new TwoPair($SortedCards);
+        } else if ($this->_TwoOfAKind->isSatisfiedBy($Hand)) {
+            return new TwoOfAKind($SortedCards);
         } else {
-            $canMakeAStraight = $this->_canMakeAStraight($GroupedByValue);
-            $canMakeAFlush = $this->_canMakeAFlush($Cards);
-
-            $SortedCards = $this->_sortCards($Cards);
-            $TestHand = new Hand($SortedCards);
-
-            if ($canMakeAStraight && $canMakeAFlush) {
-                if ($TestHand->getHighCard()->getFaceValue() == Card::ACE) {
-                    return new RoyalFlush($SortedCards);
-                } else if ($TestHand->isWheel()) {
-                    return new SteelWheel($SortedCards);
-                } else {
-                    return new StraightFlush($SortedCards);
-                }
-            } else if ($canMakeAStraight) {
-                if ($TestHand->isWheel()) {
-                    return new Wheel($SortedCards);
-                } else {
-                    return new Straight($SortedCards);
-                }
-            } else if ($canMakeAFlush) {
-                return new Flush($SortedCards);
-            }
-
-            return new HighCard(array_slice($SortedCards, 0, 5));
+            return new HighCard($SortedCards);
         }
     }
 
