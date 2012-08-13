@@ -307,7 +307,6 @@ class BestHandIdentifierTest extends PokerTestCase {
             array(array('K-S', 'K-C', 'K-D', 'Q-S', 'J-H', '8-S', '7-S', '7-H', '7-D', '2-C'), 'FullHouse', array('K-S', 'K-C', 'K-D','7-S', '7-H',)),
             array(array('K-S', 'Q-S', 'J-D', '10-S', '9-D', '8-H', '7-S', '6-S', '5-H', '4-S'), 'Flush', array('K-S', 'Q-S', '10-S', '7-S', '6-S',)),
             array(array('Q-H', 'J-S', '9-D', '8-S', '8-H', '8-C', '4-S', '4-H', '4-D', '2-C'), 'FullHouse', array('8-S', '8-H', '8-C','4-S', '4-H',)),
-
         );
 
         array_walk(
