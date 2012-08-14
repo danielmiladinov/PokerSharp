@@ -278,6 +278,7 @@ class BestHandIdentifierTest extends PokerTestCase {
         $data = array(
             array(array('10-S', '9-D', '6-S', '6-H', '6-D', '4-D', '3-S', '3-H', '3-C', '3-D'), 'FourOfAKind', array('10-S', '3-S', '3-H', '3-C', '3-D')),
             array(array('A-C', 'K-S', 'K-H', 'J-D', '6-D', '5-S', '3-S', '3-H', '3-C', '3-D'), 'FourOfAKind', array('A-C', '3-S', '3-H', '3-C', '3-D')),
+            array(array('A-C', 'A-S', 'K-H', 'J-D', '6-D', '5-S', '2-S', '2-H', '2-C', '2-D'), 'FourOfAKind', array('A-S', '2-S', '2-H', '2-C', '2-D')),
             array(array('K-D', '9-H', '6-S', '6-H', '6-C', '6-D', '4-D', '3-C', '2-S', '2-H'), 'FourOfAKind', array('K-D', '6-S', '6-H', '6-C', '6-D')),
             array(array('K-S', 'K-H', 'K-C', 'K-D', 'Q-S', 'Q-C', '7-S', '5-D', '3-S', '2-S'), 'FourOfAKind', array('K-S', 'K-H', 'K-C', 'K-D', 'Q-S')),
             array(array('10-D', '8-C', '7-S', '7-H', '7-D', '6-S', '6-C', '6-D', '5-H', '3-C'), 'FullHouse', array('7-S', '7-H', '7-D','6-S', '6-C',)),

@@ -27,7 +27,11 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
             );
         } else {
             $FourOfAKindCards = array_merge(
-                $CardsOfHighValue,
+                array(
+                    array_shift(
+                        $CardsOfHighValue
+                    )
+                ),
                 array_shift(
                     array_filter(
                         $GroupedByValue,
