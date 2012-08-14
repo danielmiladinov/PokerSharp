@@ -276,7 +276,6 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @return array
      */
     public function getSomeCardsAndTheExpectedBestHandFromThem() {
-
         $data = array(
             array(array('10-D', '8-C', '7-S', '7-H', '7-D', '6-S', '6-C', '6-D', '5-H', '3-C'), 'FullHouse', array('7-S', '7-H', '7-D','6-S', '6-C',)),
             array(array('8-H', '7-C', '6-S', '4-H', '4-C', '4-D', '3-S', '2-S', '2-C', '2-D'), 'FullHouse', array('4-H', '4-C', '4-D','2-S', '2-C',)),
