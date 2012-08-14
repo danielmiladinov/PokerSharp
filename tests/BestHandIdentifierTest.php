@@ -267,7 +267,6 @@ class BestHandIdentifierTest extends PokerTestCase {
      * @dataProvider getSomeCardsAndTheExpectedBestHandFromThem
      */
     public function shouldBeAbleToIdentifyTheBestPossibleHandOutOfSeveralPossible(array $Cards, Hand $ExpectedBestHand) {
-        $this->markTestSkipped('Not Ready Yet');
         $this->_IdentifiedHand = $this->_HandIdentifier->identify($Cards);
         $this->assertEquals("{$ExpectedBestHand}", "{$this->_IdentifiedHand}");
     }
@@ -280,10 +279,10 @@ class BestHandIdentifierTest extends PokerTestCase {
             array(array('10-D', '8-C', '7-S', '7-H', '7-D', '6-S', '6-C', '6-D', '5-H', '3-C'), 'FullHouse', array('7-S', '7-H', '7-D','6-S', '6-C',)),
             array(array('8-H', '7-C', '6-S', '4-H', '4-C', '4-D', '3-S', '2-S', '2-C', '2-D'), 'FullHouse', array('4-H', '4-C', '4-D','2-S', '2-C',)),
             array(array('A-C', '10-H', '9-S', '8-C', '7-S', '6-S', '5-D', '4-D', '3-D', '2-C'), 'Straight', array('10-H', '9-S', '8-C', '7-S', '6-S'),),
-            array(array('A-C', 'K-C', 'J-S', 'J-H', 'J-C', '10-S', '9-H', '8-C', '7-C', '6-D'), 'Straight', array('J-C', '10-S', '9-H', '8-C', '7-C',)),
+            array(array('A-C', 'K-C', '4-S', '5-H', 'J-C', '10-S', '9-H', '8-D', '7-C', '6-D'), 'Straight', array('J-C', '10-S', '9-H', '8-D', '7-C',)),
             array(array('A-C', 'K-S', 'Q-H', 'J-D', '10-H', '9-H', '8-C', '6-C', '4-H', '2-S'), 'Straight', array('A-C', 'K-S', 'Q-H', 'J-D', '10-H',),),
             array(array('A-D', '10-S', '9-S', '9-H', '9-D', '8-H', '8-C', '8-D', '7-D', '6-D'), 'FullHouse', array('9-S', '9-H', '9-D','8-H', '8-C',)),
-            array(array('A-D', 'K-C', 'Q-C', 'J-D', '10-C', '7-H', '7-C', '7-D', '6-D', '2-D'), 'Straight', array('A-D', 'K-C', 'Q-C', 'J-D', '10-C',)),
+            array(array('A-H', 'K-C', 'Q-C', 'J-D', '10-C', '7-H', '7-C', '7-D', '6-D', '2-D'), 'Straight', array('A-H', 'K-C', 'Q-C', 'J-D', '10-C',)),
             array(array('A-D', 'K-D', 'Q-S', 'J-H', '10-H', '6-S', '5-S', '4-D', '3-H', '2-H'), 'Straight', array('A-D', 'K-D', 'Q-S', 'J-H', '10-H',),),
             array(array('A-D', 'Q-D', '8-S', '8-H', '8-C', '7-S', '7-H', '7-C', '3-H', '3-C'), 'FullHouse', array('8-S', '8-H', '8-C','7-S', '7-H',)),
             array(array('A-D', 'Q-H', 'J-H', '10-D', '9-C', '8-S', '7-C', '6-C', '5-C', '4-C'), 'Flush', array('9-C','7-C', '6-C', '5-C', '4-C',)),
@@ -294,10 +293,10 @@ class BestHandIdentifierTest extends PokerTestCase {
             array(array('A-S', 'A-C', 'A-D', 'Q-H', '10-S', '10-C', '10-D', '5-S', '4-H', '2-S'), 'FullHouse', array('A-S', 'A-C', 'A-D','10-S', '10-C',)),
             array(array('A-S', 'A-H', 'A-D', 'K-D', '9-D', '8-S', '4-S', '4-C', '4-D', '3-S'), 'FullHouse', array('A-S', 'A-H', 'A-D','4-S', '4-C',)),
             array(array('A-S', 'A-H', 'A-D', 'K-H', 'Q-H', '9-D', '8-H', '6-H', '5-S', '4-C'), 'Flush', array('A-H', 'K-H', 'Q-H', '8-H', '6-H',)),
-            array(array('A-S', 'K-D', 'Q-S', 'J-D', '10-S', '7-H', '5-S', '5-C', '5-D', '4-S'), 'Straight', array('A-S', 'K-D', 'Q-S', 'J-D', '10-S',)),
+            array(array('A-C', 'K-D', 'Q-S', 'J-D', '10-S', '7-H', '5-S', '5-C', '5-D', '4-S'), 'Straight', array('A-C', 'K-D', 'Q-S', 'J-D', '10-S',)),
             array(array('A-S', 'Q-S', 'J-S', '10-C', '9-S', '8-H', '7-D', '4-H', '3-H', '2-S'), 'Flush', array('A-S', 'Q-S', 'J-S','9-S', '2-S',)),
             array(array('J-C', '10-S', '7-D', '6-S', '5-H', '4-S', '4-H', '4-D', '3-C', '2-H'), 'Straight', array('7-D', '6-S', '5-H', '4-S', '3-C',)),
-            array(array('K-C', 'J-H', '10-S', '9-C', '8-H', '7-S', '6-H', '5-D', '3-S', '2-C'), 'Straight', array('10-S', '9-C', '8-H', '7-S', '6-H',)),
+            array(array('K-C', 'J-H', '10-S', '9-C', '8-H', '7-S', '6-H', '5-D', '3-S', '2-C'), 'Straight', array('J-H', '10-S', '9-C', '8-H', '7-S',)),
             array(array('K-D', 'Q-D', 'J-S', '9-D', '8-H', '7-D', '6-D', '5-C', '4-S', '2-C'), 'Flush', array('K-D', 'Q-D', '9-D', '7-D', '6-D',)),
             array(array('K-D', 'Q-S', 'J-S', '10-S', '9-S', '7-S', '6-D', '5-S', '3-S', '2-C'), 'Flush', array('Q-S', 'J-S', '10-S', '9-S', '7-S',)),
             array(array('K-D', 'Q-S', 'Q-H', 'Q-D', 'J-H', '8-D', '3-S', '3-H', '3-D', '2-D'), 'FullHouse', array('Q-S', 'Q-H', 'Q-D','3-S', '3-H',)),
