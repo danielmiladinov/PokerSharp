@@ -37,7 +37,9 @@ class StraightSpecification extends HandSpecification {
 
         foreach ($Cards as $Card) {
             if ($PreviousCard instanceof Card) {
-                if ($PreviousCard->getFaceValue() - 1 == $Card->getFaceValue()) {
+                if ($Card->compareFaceValue($PreviousCard) == 0) {
+                    continue;
+                } else if ($PreviousCard->getFaceValue() - 1 == $Card->getFaceValue()) {
                     $StraightCards[] = $Card;
                 } else {
                     $StraightCards = array($Card);
