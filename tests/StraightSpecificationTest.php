@@ -72,22 +72,4 @@ class StraightSpecificationTest extends PokerTestCase {
 
         return $nonStraights;
     }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldNotBeSatisfiedByAStraightFlush() {
-        $Hand = new Hand($this->_theFiveCardsAre('3-H', '4-H', '5-H', '6-H', '7-H'));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'That is not just a Straight! It is also a StraightFlush!');
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldNotBeSatisfiedByARoyalFlush() {
-        $Hand = new Hand($this->_theFiveCardsAre('10-D', 'J-D', 'Q-D', 'K-D', 'A-D'));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'That is not just a Straight! It is also a RoyalFlush!');
-    }
 }
