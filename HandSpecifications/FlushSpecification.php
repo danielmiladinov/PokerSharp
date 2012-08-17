@@ -33,25 +33,31 @@ class FlushSpecification extends HandSpecification {
             switch ($Card->getSuit()) {
                 case Suit::SPADES:
                     $SpadesCards[] = $Card;
+                    if (count($SpadesCards) == 5) {
+                        return new Flush($SpadesCards);
+                    }
                     break;
 
                 case Suit::HEARTS:
                     $HeartsCards[] = $Card;
+                    if (count($HeartsCards) == 5) {
+                        return new Flush($HeartsCards);
+                    }
                     break;
 
                 case Suit::CLUBS:
                     $ClubsCards[] = $Card;
+                    if (count($ClubsCards) == 5) {
+                        return new Flush($ClubsCards);
+                    }
                     break;
 
                 case Suit::DIAMONDS:
                     $DiamondsCards[] = $Card;
+                    if (count($DiamondsCards) == 5) {
+                        return new Flush($DiamondsCards);
+                    }
                     break;
-            }
-
-            foreach (array($SpadesCards, $HeartsCards, $ClubsCards, $DiamondsCards) as $Cards) {
-                if (count($Cards) == 5) {
-                    return new Flush($Cards);
-                }
             }
         }
 
