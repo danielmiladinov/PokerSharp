@@ -42,7 +42,7 @@ class BestHandIdentifier
         } else if ($this->_SteelWheel->isSatisfiedBy($Hand)) {
             return new SteelWheel($SortedCards);
         } else if ($this->_StraightFlush->isSatisfiedBy($Hand)) {
-            return new StraightFlush($SortedCards);
+            return $this->_StraightFlush->newHand($Hand);
         } else if ($this->_FourOfAKind->isSatisfiedBy($Hand)) {
             return $this->_FourOfAKind->newHand($Hand);
         } else if ($this->_FullHouse->isSatisfiedBy($Hand)) {
