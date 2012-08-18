@@ -14,7 +14,7 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
         $GroupedByValue = $Hand->getCardsGroupedByValues();
         $CardsOfHighValue = array_shift($GroupedByValue);
 
-        if (count($CardsOfHighValue) == 4) {
+        if (count($CardsOfHighValue) == $this->_numberOfCards) {
             $FourOfAKindCards = array_merge(
                 $CardsOfHighValue,
                 array(
@@ -26,6 +26,8 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
                 )
             );
         } else {
+            $numberOfCards = $this->_numberOfCards;
+
             $FourOfAKindCards = array_merge(
                 array(
                     array_shift(
@@ -35,8 +37,8 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
                 array_shift(
                     array_filter(
                         $GroupedByValue,
-                        function (array $CardsArray) {
-                            return count($CardsArray) == 4;
+                        function (array $CardsArray) use ($numberOfCards) {
+                            return count($CardsArray) == $numberOfCards;
                         }
                     )
                 )
