@@ -13,4 +13,18 @@ class RoyalFlushSpecification extends StraightFlushSpecification {
         );
         return $handIsARoyalFlush;
     }
+
+    /**
+     * @param Hand $Hand
+     * @return RoyalFlush
+     */
+    public function newHand(Hand $Hand) {
+        $StraightFlush = parent::newHand($Hand);
+
+        if ($StraightFlush instanceof StraightFlush && $StraightFlush->getHighCard()->getFaceValue() == Card::ACE) {
+            return new RoyalFlush($StraightFlush->getCards());
+        }
+
+        return null;
+    }
 }

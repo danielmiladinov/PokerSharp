@@ -38,7 +38,7 @@ class BestHandIdentifier
         $Hand = new Hand($SortedCards);
 
         if ($this->_RoyalFlush->isSatisfiedBy($Hand)) {
-            return new RoyalFlush($SortedCards);
+            return $this->_RoyalFlush->newHand($Hand);
         } else if ($this->_SteelWheel->isSatisfiedBy($Hand)) {
             return new SteelWheel($SortedCards);
         } else if ($this->_StraightFlush->isSatisfiedBy($Hand)) {
