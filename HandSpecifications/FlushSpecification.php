@@ -7,17 +7,8 @@ class FlushSpecification extends HandSpecification {
      * @return boolean
      */
     public function isSatisfiedBy(Hand $Hand) {
-        return $this->_canBeAFlush($Hand);
-    }
-
-    /**
-     * @param Hand $Hand
-     * @return bool
-     */
-    protected function _canBeAFlush(Hand $Hand) {
         return $this->newHand($Hand) instanceof Flush;
     }
-
 
     /**
      * @param Hand $Hand

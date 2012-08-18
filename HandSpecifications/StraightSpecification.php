@@ -7,14 +7,6 @@ class StraightSpecification extends HandSpecification {
      * @return boolean
      */
     public function isSatisfiedBy(Hand $Hand) {
-        return $this->_canBeAStraight($Hand);
-    }
-
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    protected function _canBeAStraight(Hand $Hand) {
         return $this->newHand($Hand) instanceof Straight;
     }
 
