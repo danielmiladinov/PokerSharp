@@ -7,7 +7,7 @@ class StraightSpecification extends HandSpecification {
      * @return boolean
      */
     public function isSatisfiedBy(Hand $Hand) {
-        return $this->_canBeAStraight($Hand) && !$this->_canBeAFlush($Hand);
+        return $this->_canBeAStraight($Hand);
     }
 
     /**
