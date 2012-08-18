@@ -54,6 +54,14 @@ abstract class Card
     }
 
     /**
+     * @return boolean
+     */
+    public function isAce()
+    {
+        return $this->_faceValue == Card::ACE;
+    }
+
+    /**
      * @return string
      */
     public function __toString()

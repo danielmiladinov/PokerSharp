@@ -39,6 +39,8 @@ class StraightSpecification extends HandSpecification {
             if ($PreviousCard instanceof Card) {
                 if ($Card->compareFaceValue($PreviousCard) == 0) {
                     continue;
+                } else if ($PreviousCard->isAce() && $Card->getFaceValue() == 5) { // Wheels are Straights too, you know
+                    $StraightCards[] = $Card;
                 } else if ($PreviousCard->getFaceValue() - 1 == $Card->getFaceValue()) {
                     $StraightCards[] = $Card;
                 } else {
