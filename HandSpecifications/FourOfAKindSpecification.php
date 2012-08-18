@@ -1,9 +1,14 @@
 <?php
 
 class FourOfAKindSpecification extends CardsOfAKindSpecification {
+    /**
+     * @var string
+     */
+    protected $_handClassName;
 
     public function __construct() {
         parent::__construct(4);
+        $this->_handClassName = 'FourOfAKind';
     }
 
     /**
@@ -15,7 +20,7 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
         $CardsOfHighValue = array_shift($GroupedByValue);
 
         if (count($CardsOfHighValue) == $this->_numberOfCards) {
-            $FourOfAKindCards = array_merge(
+            $CardsOfAKind = array_merge(
                 $CardsOfHighValue,
                 array(
                     array_shift(
@@ -28,7 +33,7 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
         } else {
             $numberOfCards = $this->_numberOfCards;
 
-            $FourOfAKindCards = array_merge(
+            $CardsOfAKind = array_merge(
                 array(
                     array_shift(
                         $CardsOfHighValue
@@ -45,8 +50,10 @@ class FourOfAKindSpecification extends CardsOfAKindSpecification {
             );
         }
 
-        if (count($FourOfAKindCards) == 5) {
-            return new FourOfAKind($FourOfAKindCards);
+        if (count($CardsOfAKind) == 5) {
+            $HandReflector = new ReflectionClass($this->_handClassName);
+            $HandOfCardsOfAKind = $HandReflector->newInstance($CardsOfAKind);
+            return $HandOfCardsOfAKind;
         }
 
         return null;
