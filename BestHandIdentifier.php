@@ -54,11 +54,11 @@ class BestHandIdentifier
         } else if ($this->_Straight->isSatisfiedBy($Hand)) {
             return $this->_Straight->newHand($Hand);
         } else if ($this->_ThreeOfAKind->isSatisfiedBy($Hand)) {
-            return new ThreeOfAKind($SortedCards);
+            return $this->_ThreeOfAKind->newHand($Hand);
         } else if ($this->_TwoPair->isSatisfiedBy($Hand)) {
             return new TwoPair($SortedCards);
         } else if ($this->_TwoOfAKind->isSatisfiedBy($Hand)) {
-            return new TwoOfAKind($SortedCards);
+            return $this->_TwoOfAKind->newHand($Hand);
         } else {
             return new HighCard($SortedCards);
         }
