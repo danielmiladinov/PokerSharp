@@ -74,6 +74,19 @@ abstract class CardsOfAKindSpecification extends HandSpecification {
             );
         }
 
+        while (count($CardsOfAKind) < 5 && count($GroupedByValue) > 0) {
+            $CardsOfAKind = array_merge(
+                $CardsOfAKind,
+                array(
+                    array_shift(
+                        array_shift(
+                            $GroupedByValue
+                        )
+                    )
+                )
+            );
+        }
+
         if (count($CardsOfAKind) == 5) {
             $HandReflector = new ReflectionClass($this->_handClassName);
             $HandOfCardsOfAKind = $HandReflector->newInstance($CardsOfAKind);
