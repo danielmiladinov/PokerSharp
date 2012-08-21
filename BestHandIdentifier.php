@@ -37,31 +37,28 @@ class BestHandIdentifier
         $SortedCards = $this->_sortCards($Cards);
         $Hand = new Hand($SortedCards);
 
-        if ($this->_RoyalFlush->isSatisfiedBy($Hand)) {
-            return $this->_RoyalFlush->newHand($Hand);
-        } else if ($this->_SteelWheel->isSatisfiedBy($Hand)) {
-            return $this->_SteelWheel->newHand($Hand);
-        } else if ($this->_StraightFlush->isSatisfiedBy($Hand)) {
-            return $this->_StraightFlush->newHand($Hand);
-        } else if ($this->_FourOfAKind->isSatisfiedBy($Hand)) {
-            return $this->_FourOfAKind->newHand($Hand);
-        } else if ($this->_FullHouse->isSatisfiedBy($Hand)) {
-            return $this->_FullHouse->newHand($Hand);
-        } else if ($this->_Flush->isSatisfiedBy($Hand)) {
-            return $this->_Flush->newHand($Hand);
-        } else if ($this->_Wheel->isSatisfiedBy($Hand)) {
-            return $this->_Wheel->newHand($Hand);
-        } else if ($this->_Straight->isSatisfiedBy($Hand)) {
-            return $this->_Straight->newHand($Hand);
-        } else if ($this->_ThreeOfAKind->isSatisfiedBy($Hand)) {
-            return $this->_ThreeOfAKind->newHand($Hand);
-        } else if ($this->_TwoPair->isSatisfiedBy($Hand)) {
-            return $this->_TwoPair->newHand($Hand);
-        } else if ($this->_TwoOfAKind->isSatisfiedBy($Hand)) {
-            return $this->_TwoOfAKind->newHand($Hand);
-        } else {
-            return new HighCard($SortedCards);
+        $SpecsInValueOrder = array(
+            $this->_RoyalFlush,
+            $this->_SteelWheel,
+            $this->_StraightFlush,
+            $this->_FourOfAKind,
+            $this->_FullHouse,
+            $this->_Flush,
+            $this->_Wheel,
+            $this->_Straight,
+            $this->_ThreeOfAKind,
+            $this->_TwoPair,
+            $this->_TwoOfAKind,
+        );
+
+        foreach ($SpecsInValueOrder as $Specification) {
+            /** @var $Specification HandSpecification */
+            if ($Specification->isSatisfiedBy($Hand)) {
+                return $Specification->newHand($Hand);
+            }
         }
+
+        return new HighCard($SortedCards);
     }
 
     /**
