@@ -40,7 +40,7 @@ class BestHandIdentifier
         if ($this->_RoyalFlush->isSatisfiedBy($Hand)) {
             return $this->_RoyalFlush->newHand($Hand);
         } else if ($this->_SteelWheel->isSatisfiedBy($Hand)) {
-            return new SteelWheel($SortedCards);
+            return $this->_SteelWheel->newHand($Hand);
         } else if ($this->_StraightFlush->isSatisfiedBy($Hand)) {
             return $this->_StraightFlush->newHand($Hand);
         } else if ($this->_FourOfAKind->isSatisfiedBy($Hand)) {
