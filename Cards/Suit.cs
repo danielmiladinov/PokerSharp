@@ -1,7 +1,6 @@
 <?php
 
-class Suit
-{
+class Suit {
     /** @staticvar string */
     const CLUBS = 'Clubs';
 
@@ -28,8 +27,7 @@ class Suit
      * @param string $suitName
      * @param int $suitValue
      */
-    private function __construct($suitName, $suitValue)
-    {
+    private function __construct($suitName, $suitValue) {
         $this->_suitName = $suitName;
         $this->_suitValue = $suitValue;
     }
@@ -37,48 +35,42 @@ class Suit
     /**
      * @return Suit
      */
-    public static function Spades()
-    {
+    public static function Spades() {
         return new Suit(self::SPADES, 4);
     }
 
     /**
      * @return Suit
      */
-    public static function Hearts()
-    {
+    public static function Hearts() {
         return new Suit(self::HEARTS, 3);
     }
 
     /**
      * @return Suit
      */
-    public static function Clubs()
-    {
+    public static function Clubs() {
         return new Suit(self::CLUBS, 2);
     }
 
     /**
      * @return Suit
      */
-    public static function Diamonds()
-    {
+    public static function Diamonds() {
         return new Suit(self::DIAMONDS, 1);
     }
 
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->_suitName;
     }
 
     /**
      * @return int
      */
-    public function getValue()
-    {
+    public function getValue() {
         return $this->_suitValue;
     }
 
@@ -86,8 +78,7 @@ class Suit
      * @param $cardValue
      * @return Card
      */
-    public function getCard($cardValue)
-    {
+    public function getCard($cardValue) {
         $CardOfSuit = new ReflectionClass($this->_suitName);
         return $CardOfSuit->newInstance($cardValue);
     }

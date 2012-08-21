@@ -1,14 +1,12 @@
 <?php
 
-class Deck
-{
+class Deck {
     /**
      * @var Card[]
      */
     private $_Cards;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->_Cards = array();
     }
 
@@ -16,8 +14,7 @@ class Deck
      * @param Card $Card
      * @throws DeckIntegrityException
      */
-    public function add(Card $Card)
-    {
+    public function add(Card $Card) {
         if (array_key_exists("{$Card}", $this->_Cards)) {
             throw new DeckIntegrityException('Cannot contain the same card twice!');
         } else {
@@ -28,16 +25,14 @@ class Deck
     /**
      * @return int
      */
-    public function size()
-    {
+    public function size() {
         return count($this->_Cards);
     }
 
     /**
      * @return void
      */
-    public function populate()
-    {
+    public function populate() {
         $Suits = array(
             Suit::Spades(),
             Suit::Hearts(),
@@ -65,8 +60,7 @@ class Deck
     /**
      * @return Card[]
      */
-    public function getCards()
-    {
+    public function getCards() {
         return array_values($this->_Cards);
     }
 }

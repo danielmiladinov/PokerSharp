@@ -1,4 +1,3 @@
 <?php
-class CardBuilderException extends Exception
-{
+class CardBuilderException extends Exception {
 }

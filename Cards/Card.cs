@@ -1,7 +1,6 @@
 <?php
 
-abstract class Card
-{
+abstract class Card {
     const TWO = 2;
     const THREE = 3;
     const FOUR = 4;
@@ -24,48 +23,42 @@ abstract class Card
     /**
      * @param int $faceValue
      */
-    public function __construct($faceValue = 0)
-    {
+    public function __construct($faceValue = 0) {
         $this->_faceValue = $faceValue;
     }
 
     /**
      * @return int
      */
-    public function getFaceValue()
-    {
+    public function getFaceValue() {
         return $this->_faceValue;
     }
 
     /**
      * @return string
      */
-    public function getSuit()
-    {
+    public function getSuit() {
         return $this->_Suit->getName();
     }
 
     /**
      * @return int
      */
-    public function getSuitValue()
-    {
+    public function getSuitValue() {
         return $this->_Suit->getValue();
     }
 
     /**
      * @return boolean
      */
-    public function isAce()
-    {
+    public function isAce() {
         return $this->_faceValue == Card::ACE;
     }
 
     /**
      * @return string
      */
-    public function __toString()
-    {
+    public function __toString() {
         switch ($this->getFaceValue()) {
             case self::ACE:
                 $faceValue = 'A';
@@ -90,8 +83,7 @@ abstract class Card
      * @param Card $OtherCard
      * @return int
      */
-    public function compareTo(Card $OtherCard)
-    {
+    public function compareTo(Card $OtherCard) {
         if ($this->getFaceValue() == $OtherCard->getFaceValue()) {
             $comparison = $this->compareSuit($OtherCard);
         } else {
@@ -105,8 +97,7 @@ abstract class Card
      * @param Card $OtherCard
      * @return int
      */
-    public function compareSuit(Card $OtherCard)
-    {
+    public function compareSuit(Card $OtherCard) {
         return $OtherCard->getSuitValue() - $this->getSuitValue();
     }
 
@@ -114,8 +105,7 @@ abstract class Card
      * @param Card $OtherCard
      * @return int
      */
-    public function compareFaceValue(Card $OtherCard)
-    {
+    public function compareFaceValue(Card $OtherCard) {
         return $OtherCard->getFaceValue() - $this->getFaceValue();
     }
 }

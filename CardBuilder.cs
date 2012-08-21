@@ -1,14 +1,12 @@
 <?php
 
-class CardBuilder
-{
+class CardBuilder {
     /**
      * @param string $cardString
      * @return Card
      * @throws CardBuilderException
      */
-    public function fromString($cardString)
-    {
+    public function fromString($cardString) {
         $cardStringAsArray = explode('-', $cardString);
 
         if (count($cardStringAsArray) != 2) {
@@ -51,8 +49,7 @@ class CardBuilder
      * @param string $faceValue
      * @return int
      */
-    private function _convertValueFromLetterToNumber($faceValue)
-    {
+    private function _convertValueFromLetterToNumber($faceValue) {
         switch ($faceValue) {
             case 'A':
                 $faceValue = Card::ACE;

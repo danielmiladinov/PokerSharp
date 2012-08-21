@@ -3,15 +3,13 @@
 /**
  * A handy container for getting a particular face value of a given suit.
  */
-class Cards
-{
+class Cards {
     /**
      * @static
      * @param Suit $Suit
      * @return Card
      */
-    public static function aceOf(Suit $Suit)
-    {
+    public static function aceOf(Suit $Suit) {
         return $Suit->getCard(Card::ACE);
     }
 
@@ -20,8 +18,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function twoOf(Suit $Suit)
-    {
+    public static function twoOf(Suit $Suit) {
         return $Suit->getCard(2);
     }
 
@@ -29,8 +26,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function threeOf(Suit $Suit)
-    {
+    public static function threeOf(Suit $Suit) {
         return $Suit->getCard(3);
     }
 
@@ -38,8 +34,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function fourOf(Suit $Suit)
-    {
+    public static function fourOf(Suit $Suit) {
         return $Suit->getCard(4);
     }
 
@@ -47,8 +42,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function fiveOf(Suit $Suit)
-    {
+    public static function fiveOf(Suit $Suit) {
         return $Suit->getCard(5);
     }
 
@@ -56,8 +50,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function sixOf(Suit $Suit)
-    {
+    public static function sixOf(Suit $Suit) {
         return $Suit->getCard(6);
     }
 
@@ -65,8 +58,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function sevenOf(Suit $Suit)
-    {
+    public static function sevenOf(Suit $Suit) {
         return $Suit->getCard(7);
     }
 
@@ -74,8 +66,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function eightOf(Suit $Suit)
-    {
+    public static function eightOf(Suit $Suit) {
         return $Suit->getCard(8);
     }
 
@@ -83,8 +74,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function nineOf(Suit $Suit)
-    {
+    public static function nineOf(Suit $Suit) {
         return $Suit->getCard(9);
     }
 
@@ -92,8 +82,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function tenOf(Suit $Suit)
-    {
+    public static function tenOf(Suit $Suit) {
         return $Suit->getCard(10);
     }
 
@@ -101,8 +90,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function jackOf(Suit $Suit)
-    {
+    public static function jackOf(Suit $Suit) {
         return $Suit->getCard(Card::JACK);
     }
 
@@ -110,8 +98,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function queenOf(Suit $Suit)
-    {
+    public static function queenOf(Suit $Suit) {
         return $Suit->getCard(Card::QUEEN);
     }
 
@@ -119,8 +106,7 @@ class Cards
      * @param Suit $Suit
      * @return Card
      */
-    public static function kingOf(Suit $Suit)
-    {
+    public static function kingOf(Suit $Suit) {
         return $Suit->getCard(Card::KING);
     }
 

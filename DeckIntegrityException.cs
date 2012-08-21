@@ -1,5 +1,4 @@
 <?php
 
-class DeckIntegrityException extends Exception
-{
+class DeckIntegrityException extends Exception {
 }

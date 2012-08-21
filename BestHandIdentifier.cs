@@ -1,12 +1,10 @@
 <?php
-class BestHandIdentifier
-{
+class BestHandIdentifier {
     /**
      * @param \Card[] $Cards
      * @return Hand
      */
-    public function identify(array $Cards)
-    {
+    public function identify(array $Cards) {
         usort(
             $Cards,
             function (Card $Card1, Card $Card2) {

@@ -119,5 +119,3 @@ class CardTest extends PHPUnit_Framework_TestCase {
         $this->assertGreaterThan(0, $this->_CurrentCard->compareTo($this->_OtherCard));
     }
 }
-
-
