@@ -1,11 +1,6 @@
-<?php
+class Spades : Card {
 
-class Spades extends Card {
-    /**
-     * @param int $faceValue
-     */
-    public function __construct($faceValue = 0) {
-        parent::__construct($faceValue);
-        $this->_Suit = Suit::Spades();
+    public Spades(int faceValue) : base(faceValue) {
+        Suit = Suit::Spades();
     }
 }

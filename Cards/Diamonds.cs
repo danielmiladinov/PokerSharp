@@ -1,11 +1,6 @@
-<?php
+class Diamonds : Card {
 
-class Diamonds extends Card {
-    /**
-     * @param int $faceValue
-     */
-    public function __construct($faceValue = 0) {
-        parent::__construct($faceValue);
-        $this->_Suit = Suit::Diamonds();
+    public Diamonds(int faceValue) : base(faceValue) {
+        Suit = Suit::Diamonds();
     }
 }

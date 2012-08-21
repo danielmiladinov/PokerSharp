@@ -1,111 +1,77 @@
-<?php
-
 abstract class Card {
-    const TWO = 2;
-    const THREE = 3;
-    const FOUR = 4;
-    const FIVE = 5;
-    const JACK = 11;
-    const QUEEN = 12;
-    const KING = 13;
-    const ACE = 14;
+    const int TWO = 2;
+    const int THREE = 3;
+    const int FOUR = 4;
+    const int FIVE = 5;
+    const int JACK = 11;
+    const int QUEEN = 12;
+    const int KING = 13;
+    const int ACE = 14;
 
-    /**
-     * @var int
-     */
-    protected $_faceValue;
+    protected int faceValue;
+    protected Suit Suit;
 
-    /**
-     * @var Suit
-     */
-    protected $_Suit;
-
-    /**
-     * @param int $faceValue
-     */
-    public function __construct($faceValue = 0) {
-        $this->_faceValue = $faceValue;
+    public Card (int faceValue = 0) {
+        this.faceValue = faceValue;
     }
 
-    /**
-     * @return int
-     */
-    public function getFaceValue() {
-        return $this->_faceValue;
+    public int getFaceValue() {
+        return faceValue;
     }
 
-    /**
-     * @return string
-     */
-    public function getSuit() {
-        return $this->_Suit->getName();
+    public string getSuit() {
+        return Suit.getName();
     }
 
-    /**
-     * @return int
-     */
     public function getSuitValue() {
-        return $this->_Suit->getValue();
+        return Suit.getValue();
     }
 
-    /**
-     * @return boolean
-     */
-    public function isAce() {
-        return $this->_faceValue == Card::ACE;
+    public bool isAce() {
+        return faceValue == Card::ACE;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString() {
-        switch ($this->getFaceValue()) {
+    public override string ToString() {
+        string faceValue;
+
+        switch (getFaceValue()) {
             case self::ACE:
-                $faceValue = 'A';
+                faceValue = "A";
                 break;
             case self::KING:
-                $faceValue = 'K';
+                faceValue = "K";
                 break;
             case self::QUEEN:
-                $faceValue = 'Q';
+                faceValue = "Q";
                 break;
             case self::JACK:
-                $faceValue = 'J';
+                faceValue = "J";
                 break;
             default:
-                $faceValue = $this->getFaceValue();
+                faceValue = getFaceValue();
                 break;
         }
-        return $faceValue . '-' . substr($this->getSuit(), 0, 1);
+
+        return faceValue + '-'  + getSuit();
     }
 
-    /**
-     * @param Card $OtherCard
-     * @return int
-     */
-    public function compareTo(Card $OtherCard) {
-        if ($this->getFaceValue() == $OtherCard->getFaceValue()) {
-            $comparison = $this->compareSuit($OtherCard);
+    public int compareTo(Card OtherCard) {
+        int comparison;
+
+        if (getFaceValue() == OtherCard.getFaceValue()) {
+            comparison = compareSuit(OtherCard);
         } else {
-            $comparison = $this->compareFaceValue($OtherCard);
+            comparison = compareFaceValue(OtherCard);
         }
 
-        return $comparison;
+        return comparison;
     }
 
-    /**
-     * @param Card $OtherCard
-     * @return int
-     */
-    public function compareSuit(Card $OtherCard) {
-        return $OtherCard->getSuitValue() - $this->getSuitValue();
+    public int compareSuit(Card OtherCard) {
+        return OtherCard.getSuitValue() - getSuitValue();
     }
 
-    /**
-     * @param Card $OtherCard
-     * @return int
-     */
-    public function compareFaceValue(Card $OtherCard) {
-        return $OtherCard->getFaceValue() - $this->getFaceValue();
+    public int compareFaceValue(Card OtherCard) {
+        return OtherCard.getFaceValue() - getFaceValue();
     }
 }
