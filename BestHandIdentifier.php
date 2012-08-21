@@ -7,8 +7,14 @@ class BestHandIdentifier
      */
     public function identify(array $Cards)
     {
-        $SortedCards = $this->_sortCards($Cards);
-        $Hand = new Hand($SortedCards);
+        usort(
+            $Cards,
+            function (Card $Card1, Card $Card2) {
+                return $Card1->compareTo($Card2);
+            }
+        );
+
+        $Hand = new Hand($Cards);
 
         $SpecsInValueOrder = array(
             new RoyalFlushSpecification(),
@@ -31,21 +37,6 @@ class BestHandIdentifier
             }
         }
 
-        return new HighCard($SortedCards);
-    }
-
-    /**
-     * @param Card[] $Cards
-     * @return Card[]
-     */
-    private function _sortCards(array $Cards)
-    {
-        usort(
-            $Cards,
-            function (Card $Card1, Card $Card2) {
-                return $Card1->compareTo($Card2);
-            }
-        );
-        return $Cards;
+        return new HighCard($Cards);
     }
 }
