@@ -18,4 +18,12 @@ class TwoPairSpecification extends HandSpecification {
         $canMakeTwoPair = (2 == $numPairsSeen);
         return $canMakeTwoPair;
     }
+
+    /**
+     * @param $Hand
+     * @return TwoPair
+     */
+    public function newHand(Hand $Hand) {
+        return new TwoPair($Hand->getCards());
+    }
 }

@@ -56,7 +56,7 @@ class BestHandIdentifier
         } else if ($this->_ThreeOfAKind->isSatisfiedBy($Hand)) {
             return $this->_ThreeOfAKind->newHand($Hand);
         } else if ($this->_TwoPair->isSatisfiedBy($Hand)) {
-            return new TwoPair($SortedCards);
+            return $this->_TwoPair->newHand($Hand);
         } else if ($this->_TwoOfAKind->isSatisfiedBy($Hand)) {
             return $this->_TwoOfAKind->newHand($Hand);
         } else {
