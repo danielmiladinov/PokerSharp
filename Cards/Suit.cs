@@ -1,85 +1,42 @@
-<?php
-
 class Suit {
-    /** @staticvar string */
-    const CLUBS = 'Clubs';
+    const string CLUBS = "Clubs";
+    const string HEARTS = "Hearts";
+    const string SPADES = "Spades";
+    const string DIAMONDS = "Diamonds";
 
-    /** @staticvar string */
-    const HEARTS = 'Hearts';
+    private string suitName;
+    private int suitValue;
 
-    /** @staticvar string */
-    const SPADES = 'Spades';
-
-    /** @staticvar string */
-    const DIAMONDS = 'Diamonds';
-
-    /**
-     * @var string
-     */
-    private $_suitName;
-
-    /**
-     * @var int
-     */
-    private $_suitValue;
-
-    /**
-     * @param string $suitName
-     * @param int $suitValue
-     */
-    private function __construct($suitName, $suitValue) {
-        $this->_suitName = $suitName;
-        $this->_suitValue = $suitValue;
+    private Suit(string suitName, int suitValue) {
+        this.suitName = suitName;
+        this.suitValue = suitValue;
     }
 
-    /**
-     * @return Suit
-     */
-    public static function Spades() {
-        return new Suit(self::SPADES, 4);
+    public static Suit Spades() {
+        return new Suit(SPADES, 4);
     }
 
-    /**
-     * @return Suit
-     */
-    public static function Hearts() {
-        return new Suit(self::HEARTS, 3);
+    public static Suit Hearts() {
+        return new Suit(HEARTS, 3);
     }
 
-    /**
-     * @return Suit
-     */
-    public static function Clubs() {
-        return new Suit(self::CLUBS, 2);
+    public static Suit Clubs() {
+        return new Suit(CLUBS, 2);
     }
 
-    /**
-     * @return Suit
-     */
-    public static function Diamonds() {
-        return new Suit(self::DIAMONDS, 1);
+    public static Suit Diamonds() {
+        return new Suit(DIAMONDS, 1);
     }
 
-    /**
-     * @return string
-     */
-    public function getName() {
-        return $this->_suitName;
+    public string getName() {
+        return suitName;
     }
 
-    /**
-     * @return int
-     */
-    public function getValue() {
-        return $this->_suitValue;
+    public int getValue() {
+        return suitValue;
     }
 
-    /**
-     * @param $cardValue
-     * @return Card
-     */
-    public function getCard($cardValue) {
-        $CardOfSuit = new ReflectionClass($this->_suitName);
-        return $CardOfSuit->newInstance($cardValue);
+    public Card getCard(int cardValue) {
+        return (Card) Activator.CreateInstance(GetType(), new {cardValue});
     }
 }
