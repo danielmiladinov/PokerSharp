@@ -50,7 +50,7 @@ class BestHandIdentifier
         } else if ($this->_Flush->isSatisfiedBy($Hand)) {
             return $this->_Flush->newHand($Hand);
         } else if ($this->_Wheel->isSatisfiedBy($Hand)) {
-            return new Wheel($SortedCards);
+            return $this->_Wheel->newHand($Hand);
         } else if ($this->_Straight->isSatisfiedBy($Hand)) {
             return $this->_Straight->newHand($Hand);
         } else if ($this->_ThreeOfAKind->isSatisfiedBy($Hand)) {
