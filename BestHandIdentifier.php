@@ -1,33 +1,6 @@
 <?php
 class BestHandIdentifier
 {
-    private $_RoyalFlush;
-    private $_StraightFlush;
-    private $_SteelWheel;
-    private $_FourOfAKind;
-    private $_FullHouse;
-    private $_Flush;
-    private $_Straight;
-    private $_Wheel;
-    private $_ThreeOfAKind;
-    private $_TwoPair;
-    private $_TwoOfAKind;
-
-    public function __construct()
-    {
-        $this->_RoyalFlush = new RoyalFlushSpecification();
-        $this->_StraightFlush = new StraightFlushSpecification();
-        $this->_SteelWheel = new SteelWheelSpecification();
-        $this->_FourOfAKind = new FourOfAKindSpecification();
-        $this->_FullHouse = new FullHouseSpecification();
-        $this->_Flush = new FlushSpecification();
-        $this->_Straight = new StraightSpecification();
-        $this->_Wheel = new WheelSpecification();
-        $this->_ThreeOfAKind = new ThreeOfAKindSpecification();
-        $this->_TwoPair = new TwoPairSpecification();
-        $this->_TwoOfAKind = new TwoOfAKindSpecification();
-    }
-
     /**
      * @param \Card[] $Cards
      * @return Hand
@@ -38,17 +11,17 @@ class BestHandIdentifier
         $Hand = new Hand($SortedCards);
 
         $SpecsInValueOrder = array(
-            $this->_RoyalFlush,
-            $this->_SteelWheel,
-            $this->_StraightFlush,
-            $this->_FourOfAKind,
-            $this->_FullHouse,
-            $this->_Flush,
-            $this->_Wheel,
-            $this->_Straight,
-            $this->_ThreeOfAKind,
-            $this->_TwoPair,
-            $this->_TwoOfAKind,
+            new RoyalFlushSpecification(),
+            new SteelWheelSpecification(),
+            new StraightFlushSpecification(),
+            new FourOfAKindSpecification(),
+            new FullHouseSpecification(),
+            new FlushSpecification(),
+            new WheelSpecification(),
+            new StraightSpecification(),
+            new ThreeOfAKindSpecification(),
+            new TwoPairSpecification(),
+            new TwoOfAKindSpecification(),
         );
 
         foreach ($SpecsInValueOrder as $Specification) {
