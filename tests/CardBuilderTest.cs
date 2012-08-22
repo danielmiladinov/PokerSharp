@@ -63,10 +63,10 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase {
      * @return void
      */
     public function willGetACardWithValidParameters() {
-        $invalidString = '2-C';
+        $validString = '2-C';
         $ExpectedCard = new Clubs(2);
 
-        $ActualCard = $this->_CardBuilder->fromString($invalidString);
+        $ActualCard = $this->_CardBuilder->fromString($validString);
 
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
@@ -76,10 +76,10 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase {
      * @return void
      */
     public function willGetACardWithFaceCard() {
-        $invalidString = 'Q-S';
+        $validString = 'Q-S';
         $ExpectedCard = new Spades(Card::QUEEN);
 
-        $ActualCard = $this->_CardBuilder->fromString($invalidString);
+        $ActualCard = $this->_CardBuilder->fromString($validString);
 
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
@@ -89,10 +89,10 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase {
      * @return void
      */
     public function willGetACardWithJacks() {
-        $invalidString = 'J-H';
+        $validString = 'J-H';
         $ExpectedCard = new Hearts(Card::JACK);
 
-        $ActualCard = $this->_CardBuilder->fromString($invalidString);
+        $ActualCard = $this->_CardBuilder->fromString($validString);
 
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
@@ -102,10 +102,10 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase {
      * @return void
      */
     public function willGetACardWithKings() {
-        $invalidString = 'K-D';
+        $validString = 'K-D';
         $ExpectedCard = new Diamonds(Card::KING);
 
-        $ActualCard = $this->_CardBuilder->fromString($invalidString);
+        $ActualCard = $this->_CardBuilder->fromString($validString);
 
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
@@ -115,10 +115,10 @@ class CardBuilderTest extends PHPUnit_Framework_TestCase {
      * @return void
      */
     public function willGetACardWithAce() {
-        $invalidString = 'A-C';
+        $validString = 'A-C';
         $ExpectedCard = new Clubs(Card::ACE);
 
-        $ActualCard = $this->_CardBuilder->fromString($invalidString);
+        $ActualCard = $this->_CardBuilder->fromString($validString);
 
         $this->assertEquals($ExpectedCard, $ActualCard);
     }
