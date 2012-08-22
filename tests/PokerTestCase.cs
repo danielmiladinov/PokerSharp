@@ -1,39 +1,20 @@
-<?php
+using NUnit.Framework;
+using System.Collections.Generic;
 
-abstract class PokerTestCase extends PHPUnit_Framework_TestCase {
-    /**
-     * @return \Card[]
-     */
-    protected function _theFiveCardsAre() {
-        $cards = func_get_args();
-        if (count($cards) != 5) {
-            $this->fail('lrn2count');
+abstract class PokerTestCase {
+
+    protected List<Card> theFiveCardsAre(params string[] cards) {
+        if (cards.Length != 5) {
+            Assert.Fail("lrn2count");
         }
 
-        return $this->_buildCardStringIntoACardArray($cards);
-    }
+        var Cards = new List<Card>();
+        var CardBuilder = new CardBuilder();
 
-    /**
-     * @param array $cards
-     * @return Card[]
-     */
-    protected function _buildCardStringIntoACardArray(array $cards) {
-        $Cards = array();
-
-        foreach ($cards as $cardString) {
-            $Cards[] = $this->_makeCardFromString($cardString);
+        foreach (string cardString in cards) {
+            Cards.Add(CardBuilder.fromString(cardString));
         }
 
-        return $Cards;
+        return Cards;
     }
-
-    /**
-     * @param string $cardString
-     * @return Card
-     */
-    protected function _makeCardFromString($cardString) {
-        $CardBuilder = new CardBuilder();
-        return $CardBuilder->fromString($cardString);
-    }
-
 }
