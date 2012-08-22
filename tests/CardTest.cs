@@ -18,16 +18,6 @@ class CardTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @return void
-     */
-    protected function tearDown() {
-        unset($this->_CurrentCard);
-        unset($this->_OtherCard);
-        parent::tearDown();
-    }
-
-
-    /**
      * @test
      * @return void
      */
