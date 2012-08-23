@@ -1,111 +1,60 @@
-<?php
-class CardTest extends PHPUnit_Framework_TestCase {
-    /**
-     * @var Card
-     */
-    private $_CurrentCard;
+using NUnit.Framework;
 
-    /**
-     * @var Card
-     */
-    private $_OtherCard;
+[TestFixture]
+class CardTest {
+    private Card CurrentCard;
+    private Card OtherCard;
 
-    /**
-     * @return void
-     */
-    protected function setUp() {
-        parent::setUp();
+    [Test]
+    public void compareToShouldReturnZeroWhenTheOtherCardIsOfTheSameValueAndSuit() {
+        theCurrentCardIs("A-S");
+        andTheOtherCardIs("A-S");
+        theCardsShouldBeEqual();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function compareToShouldReturnZeroWhenTheOtherCardIsOfTheSameValueAndSuit() {
-        $this->_theCurrentCardIs('A-S')
-            ->_andTheOtherCardIs('A-S');
-
-        $this->_theCardsShouldBeEqual();
+    [Test]
+    public void compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndADifferentSuit() {
+        theCurrentCardIs("7-D");
+        andTheOtherCardIs("6-H");
+        theCurrentCardShouldBeGreater();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndADifferentSuit() {
-        $this->_theCurrentCardIs('7-D')
-            ->_andTheOtherCardIs('6-H');
-
-        $this->_theCurrentCardShouldBeGreater();
+    [Test]
+    public void compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndTheSameSuit() {
+        theCurrentCardIs("7-C");
+        andTheOtherCardIs("6-C");
+        theCurrentCardShouldBeGreater();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function compareToShouldReturnLessThanZeroWhenTheOtherCardIsOfALesserFaceValueAndTheSameSuit() {
-        $this->_theCurrentCardIs('7-C')
-            ->_andTheOtherCardIs('6-C');
-
-        $this->_theCurrentCardShouldBeGreater();
+    [Test]
+    public void compareToShouldReturnGreaterThanZeroWhenTheOtherCardIsOfTheSameFaceValueButAGreaterSuit() {
+        theCurrentCardIs("J-D");
+        andTheOtherCardIs("J-C");
+        theOtherCardShouldBeGreater();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function compareToShouldReturnGreaterThanZeroWhenTheOtherCardIsOfTheSameFaceValueButAGreaterSuit() {
-        $this->_theCurrentCardIs('J-D')
-            ->_andTheOtherCardIs('J-C');
-
-        $this->_theOtherCardShouldBeGreater();
+    private Card makeCardFromString(string cardString) {
+        CardBuilder = new CardBuilder();
+        return CardBuilder.fromString(cardString);
     }
 
-    /**
-     * @param string $cardString
-     * @return Card
-     */
-    private function _makeCardFromString($cardString) {
-        $CardBuilder = new CardBuilder();
-        return $CardBuilder->fromString($cardString);
+    private void theCurrentCardIs(string cardString) {
+        CurrentCard = makeCardFromString(cardString);
     }
 
-    /**
-     * @param string $cardString
-     * @return CardTest
-     */
-    private function _theCurrentCardIs($cardString) {
-        $this->_CurrentCard = $this->_makeCardFromString($cardString);
-        return $this;
+    private void andTheOtherCardIs(string cardString) {
+        OtherCard = makeCardFromString(cardString);
     }
 
-    /**
-     * @param string $string1
-     * @return void
-     */
-    private function _andTheOtherCardIs($string1) {
-        $this->_OtherCard = $this->_makeCardFromString($string1);
-
+    private void theCardsShouldBeEqual() {
+        Assert.AreEqual(0, CurrentCard.compareTo(OtherCard));
     }
 
-    /**
-     * @return void
-     */
-    private function _theCardsShouldBeEqual() {
-        $this->assertEquals(0, $this->_CurrentCard->compareTo($this->_OtherCard));
+    private void theCurrentCardShouldBeGreater() {
+        Assert.Less(0, CurrentCard.compareTo(OtherCard));
     }
 
-    /**
-     * @return void
-     */
-    private function _theCurrentCardShouldBeGreater() {
-        $this->assertLessThan(0, $this->_CurrentCard->compareTo($this->_OtherCard));
-    }
-
-    /**
-     * @return void
-     */
-    private function _theOtherCardShouldBeGreater() {
-        $this->assertGreaterThan(0, $this->_CurrentCard->compareTo($this->_OtherCard));
+    private void theOtherCardShouldBeGreater() {
+        Assert.Greater(0, CurrentCard.compareTo(OtherCard));
     }
 }
