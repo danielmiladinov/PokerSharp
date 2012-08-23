@@ -1,75 +1,62 @@
-<?php
+using NUnit.Framework;
 
-class DeckTest extends PHPUnit_Framework_TestCase {
-    /**
-     * @var Deck
-     */
-    private $_Deck;
+[TextFixture]
+class DeckTest {
 
-    protected function setUp() {
-        $this->_Deck = new Deck();
+    private Deck Deck;
+
+    [Setup]
+    protected override void setUp() {
+        Deck = new Deck();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function anEmptyDeckShouldHaveASizeOfZero() {
-        $this->assertEquals(0, $this->_Deck->size());
+    [Test]
+    public void anEmptyDeckShouldHaveASizeOfZero() {
+        Assert.AreEqual(0, Deck.size());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function addingACardShouldIncreaseTheSizeByOne() {
-        $this->_Deck->add(Cards::aceOf(Suit::Spades()));
-        $this->assertEquals(1, $this->_Deck->size());
+    [Test]
+    public void addingACardShouldIncreaseTheSizeByOne() {
+        Deck.add(aceOf(Spades()));
+        Assert.AreEqual(1, Deck.size());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
-        $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
-
-        $this->setExpectedException('DeckIntegrityException', 'Cannot contain the same card twice!');
-        $this->_Deck->add(Cards::twoOf(Suit::Hearts()));
+    [Test]
+    [ExpectedException(typeof(DeckIntegrityException))]
+    public void addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
+        Deck.add(twoOf(Hearts()));
+        Deck.add(twoOf(Hearts()));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function populateShouldFillTheDeckWithAll52Cards() {
-        $ExpectedCards = array();
+    [Test]
+    public void populateShouldFillTheDeckWithAll52Cards() {
+        var ExpectedCards = new List<Card>();
 
-        $Suits = array(
-            Suit::Spades(),
-            Suit::Hearts(),
-            Suit::Clubs(),
-            Suit::Diamonds(),
-        );
+        var Suits = {
+            Spades(),
+            Hearts(),
+            Clubs(),
+            Diamonds(),
+        };
 
-        foreach ($Suits as $Suit) {
-            $ExpectedCards[] = Cards::aceOf($Suit);
-            $ExpectedCards[] = Cards::twoOf($Suit);
-            $ExpectedCards[] = Cards::threeOf($Suit);
-            $ExpectedCards[] = Cards::fourOf($Suit);
-            $ExpectedCards[] = Cards::fiveOf($Suit);
-            $ExpectedCards[] = Cards::sixOf($Suit);
-            $ExpectedCards[] = Cards::sevenOf($Suit);
-            $ExpectedCards[] = Cards::eightOf($Suit);
-            $ExpectedCards[] = Cards::nineOf($Suit);
-            $ExpectedCards[] = Cards::tenOf($Suit);
-            $ExpectedCards[] = Cards::jackOf($Suit);
-            $ExpectedCards[] = Cards::queenOf($Suit);
-            $ExpectedCards[] = Cards::kingOf($Suit);
+        foreach (var Suit in Suits) {
+            ExpectedCards.Add(aceOf(Suit));
+            ExpectedCards.Add(twoOf(Suit));
+            ExpectedCards.Add(threeOf(Suit));
+            ExpectedCards.Add(fourOf(Suit));
+            ExpectedCards.Add(fiveOf(Suit));
+            ExpectedCards.Add(sixOf(Suit));
+            ExpectedCards.Add(sevenOf(Suit));
+            ExpectedCards.Add(eightOf(Suit));
+            ExpectedCards.Add(nineOf(Suit));
+            ExpectedCards.Add(tenOf(Suit));
+            ExpectedCards.Add(jackOf(Suit));
+            ExpectedCards.Add(queenOf(Suit));
+            ExpectedCards.Add(kingOf(Suit));
         }
 
-        $this->_Deck->populate();
+        Deck.populate();
 
-        $this->assertEquals($ExpectedCards, $this->_Deck->getCards());
+        Assert.AreEqual(ExpectedCards, Deck.getCards());
     }
 }
