@@ -1,85 +1,75 @@
-<?php
+using System;
+using System.Text;
+using NUnit.Framework;
+using System.Collections.Generic;
 
-class FullHouseSpecificationTest extends PokerTestCase {
+[TextFixture]
+class FullHouseSpecificationTest : PokerTestCase {
 
-    /**
-     * @var FullHouseSpecification
-     */
-    private $_Specification;
+    private FullHouseSpecification Specification;
 
     protected function setUp() {
-        $this->_Specification = new FullHouseSpecification();
+        Specification = new FullHouseSpecification();
     }
 
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @dataProvider getManyPossibleFullHouses
-     * @return void
-     */
-    public function shouldBeAbleToIdentifyAnyFullHouse($card1, $card2, $card3, $card4, $card5) {
-        $Hand = new Hand($this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5));
-        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), "This is a valid FullHouse({$card1}, {$card2}, {$card3}, {$card4}, {$card5}), why did not satisfy the specification?");
+    [Test, TestCaseSource("")]
+    public void shouldBeAbleToIdentifyAnyFullHouse(string card1, string card2, string card3, string card4, string card5) {
+        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid FullHouse({0}, {1}, {2}, {3}, {4}), why did not satisfy the specification?", card1, card2, card3, card4, card5);
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldNotBeSatisfiedByJustAThreeOfAKind() {
-        $Hand = new Hand($this->_theFiveCardsAre('A-S', 'A-H', 'A-C', 'J-D', '3-S'));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'No ThreeOfAKind can be a FullHouse!');
+    [Test]
+    public void shouldNotBeSatisfiedByJustAThreeOfAKind() {
+        Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
+        Assert.IsFalse(Specification->isSatisfiedBy(Hand), "No ThreeOfAKind can be a FullHouse!");
     }
 
-    /**
-     * @return array
-     */
-    public function getManyPossibleFullHouses() {
-        $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+    public object[] getManyPossibleFullHouses() {
+        var values = new string[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
 
-        $getRandomSuits = function ($numSuits) {
-            $suits = array('S', 'H', 'C', 'D');
+        Func<int, string[]> getRandomSuits = delegate(int numSuits) {
+            var suits = new string[] { "S", "H", "C", "D", };
+            var rand = new Random();
+            var randomSuits = new List<string>();
 
-            return array_map(
-                function ($suitIndex) use ($suits) {
-                    return $suits[$suitIndex];
-                },
-                array_rand($suits, $numSuits)
-            );
+            for (int i = 0; i < numSuits; i++) {
+                randomSuits.Add(suits[rand.Next(0, suits.Length)]);
+            }
+
+            return randomSuits.ToArray();
         };
 
-        $fullHouses = array();
+        var fullHouses = new List<string[]>();
 
-        foreach ($values as $trioValue) {
-            $otherValues = array_filter(
-                $values,
-                function ($otherValue) use ($trioValue) {
-                    return $otherValue != $trioValue;
+        foreach (var trioValue in values) {
+            var otherValues = values.Except(new string[] { triovalue });
+
+            IEnumerable<string> trio = getRandomSuits.Invoke(3).Select(
+                suit => {
+                    var cardString = new StringBuilder(trioValue);
+                    cardString.Append("-");
+                    cardString.Append(suit);
+                    return cardString.ToString();
                 }
             );
 
-            foreach ($otherValues as $duoValue) {
-                $trio = array_map(
-                    function ($suit) use ($trioValue) {
-                        return "{$trioValue}-{$suit}";
-                    },
-                    $getRandomSuits(3)
-                );
-                $duo = array_map(
-                    function ($suit) use ($duoValue) {
-                        return "{$duoValue}-{$suit}";
-                    },
-                    $getRandomSuits(2)
+            foreach (var duoValue in otherValues) {
+                IEnumerable<string> duo = getRandomSuits.Invoke(2).Select(
+                    suit => {
+                        var cardString = new StringBuilder(duoValue);
+                        cardString.Append("-");
+                        cardString.Append(suit);
+                        return cardString.ToString();
+                    }
                 );
 
-                $fullHouses[] = array_merge($trio, $duo);
+                var fullHouse = new List<string>();
+                fullHouse.AddRange(trio);
+                fullHouse.AddRange(duo);
+                fullHouses.Add(fullHouse.ToArray());
             }
         }
 
-        return $fullHouses;
+        return fullHouses.ToArray();
     }
 }
