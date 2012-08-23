@@ -1,65 +1,56 @@
-<?php
+using System;
+using System.Text;
+using System.Collections.Generic;
+using NUnit.Framework;
 
-class FourOfAKindSpecificationTest extends PokerTestCase {
+[TextFixture]
+class FourOfAKindSpecificationTest : PokerTestCase {
 
-    /**
-     * @var FourOfAKindSpecification
-     */
-    private $_Specification;
+    private FourOfAKindSpecification Specification;
 
-    protected function setUp() {
-        $this->_Specification = new FourOfAKindSpecification();
+    [Setup]
+    protected void setUp() {
+        Specification = new FourOfAKindSpecification();
     }
 
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @return void
-     * @dataProvider getAllPossibleFoursOfAKindEachWithARandomKicker
-     */
-    public function shouldBeAbleToIdentifyAFourOfAKind($card1, $card2, $card3, $card4, $card5) {
-        $Hand = new Hand($this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5));
-        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), 'This is a valid FourOfAKind, why did it not satisfy the specification?');
+    [Test, TestCaseSource("getAllPossibleFoursOfAKindEachWithARandomKicker")]
+    public void shouldBeAbleToIdentifyAFourOfAKind(string card1, string card2, string card3, string card4, string card5) {
+        var Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid FourOfAKind, why did it not satisfy the specification?");
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldNotBeSatisfiedByJustAThreeOfAKind() {
-        $Hand = new Hand($this->_theFiveCardsAre('A-S', 'A-H', 'A-C', 'J-D', '3-S'));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'No ThreeOfAKind can be a FourOfAKind!');
+    [Test]
+    public void shouldNotBeSatisfiedByJustAThreeOfAKind() {
+        Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
+        Assert.IsFalse(Specification->isSatisfiedBy(Hand), "No ThreeOfAKind can be a FourOfAKind!");
     }
 
-    /**
-     * @return array
-     */
-    public function getAllPossibleFoursOfAKindEachWithARandomKicker() {
-        $suits = array('S', 'H', 'C', 'D');
-        $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
-        $foursOfAKind = array();
+    public object[] getAllPossibleFoursOfAKindEachWithARandomKicker() {
+        suits = new string[] { "S", "H", "C", "D" };
+        values = new string[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        var foursOfAKind = new List<string[]>();
+        var random = new Random();
 
-        foreach ($values as $value) {
-            $fourOfAKind = array_map(
-                function ($suit) use ($value) {
-                    return "{$value}-{$suit}";
-                },
-                $suits
-            );
+        foreach (var faceValue in values) {
+            var fourOfAKind = new List<string>();
 
-            $otherValues = array_diff($values, array($value));
-            $randomValue = $otherValues[array_rand($otherValues)];
-            $randomSuit = $suits[array_rand($suits)];
-            $kicker = "{$randomValue}-{$randomSuit}";
+            foreach (var suit in suits) {
+                var cardString = new StringBuilder(faceValue);
+                cardString.Append("-");
+                cardString.Append(suit);
+                fourOfAKind.Add(cardString.ToString());
+            }
 
-            $fourOfAKind[] = $kicker;
-            $foursOfAKind[] = $fourOfAKind;
+            var kickerString = new StringBuilder();
+            var otherValues = values.Except(new string[] { faceValue }).ToArray();
+            kickerString.Append(otherValues[random.Next(0, otherValues.Length)]);
+            kickerString.Append("-");
+            kickerString.Append(suits[random.Next(0, suits.Length)]);
+
+            fourOfAKind.Add(kickerString.ToString());
+            foursOfAKind.Add(fourOfAKind.ToArray());
         }
 
-        return $foursOfAKind;
+        return foursOfAKind.ToArray();
     }
 }
