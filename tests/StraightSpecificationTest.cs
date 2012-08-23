@@ -1,75 +1,32 @@
-<?php
+using NUnit.Framework;
 
-class StraightSpecificationTest extends PokerTestCase {
+[TestFixture]
+class StraightSpecificationTest : PokerTestCase {
 
-    /**
-     * @var StraightSpecification
-     */
-    private $_Specification;
+    [Test]
+    private StraightSpecification Specification;
 
-    protected function setUp() {
-        $this->_Specification = new StraightSpecification();
+    [Setup]
+    protected void setUp() {
+        Specification = new StraightSpecification();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldBeSatisfiedByAStraight() {
-        $Hand = new Hand($this->_theFiveCardsAre('2-H', '3-C', '4-D', '5-H', '6-S'));
-        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), 'This is a valid Straight, why did it not satisfy the specification?');
+    [Test]
+    public void shouldBeSatisfiedByAStraight() {
+        Hand = new Hand(theFiveCardsAre("2-H", "3-C", "4-D", "5-H", "6-S"));
+        Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid Straight, why did it not satisfy the specification?");
     }
 
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @return void
-     * @dataProvider getSomeHandsThatAreNotStraights
-     */
-    public function shouldNotBeSatisfiedByHandsThatAreNotStraights($card1, $card2, $card3, $card4, $card5) {
-        $Hand = new Hand($this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand, "That is not a Straight! ({$card1}, {$card2}, {$card3}, {$card4}, {$card5})"));
+    [Test, TestCaseSource("SomeHandsThatAreNotStraights")]
+    public void shouldNotBeSatisfiedByHandsThatAreNotStraights(string card1, string card2, string card3, string card4, string card5) {
+        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        Assert.IsFalse(Specification->isSatisfiedBy(Hand, "That is not a Straight! ({0}, {1}, {2}, {3}, {4})", card1, card2, card3, card4, card5));
     }
 
-    /**
-     * @return array
-     */
-    public function getSomeHandsThatAreNotStraights() {
-
-        $nonStraights = array_map(
-            function () {
-                $incompleteValues = array('2', '3', '4', '5', '7', '8', '9', '10', 'Q', 'K',);
-                $getRandomSuits = function ($numSuits) {
-                    $suits = array('S', 'H', 'C', 'D');
-
-                    return array_map(
-                        function ($suitIndex) use ($suits) {
-                            return $suits[$suitIndex];
-                        },
-                        array_rand($suits, $numSuits)
-                    );
-                };
-
-                return array_map(
-                    function ($value, $suit) {
-                        return "{$value}-{$suit}";
-                    },
-                    array_map(
-                        function ($valueIndex) use ($incompleteValues) {
-                            return $incompleteValues[$valueIndex];
-                        },
-                        array_rand($incompleteValues, 5)
-                    ),
-                    array_merge($getRandomSuits(3), $getRandomSuits(2))
-                );
-            },
-            range(1, 100)
-        );
-
-        return $nonStraights;
-    }
+    static object[][] SomeHandsThatAreNotStraights = {
+        new string[] { "2-S", "3-H", "4-C", "5-D", "7-S" },
+        new string[] { "3-H", "4-C", "5-D", "6-S", "8-H" },
+        new string[] { "4-C", "5-D", "6-S", "7-H", "9-C" },
+        new string[] { "5-D", "6-S", "7-H", "8-C", "J-D" },
+    };
 }
