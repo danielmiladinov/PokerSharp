@@ -1,82 +1,37 @@
-<?php
+using NUnit.Framework;
 
-class WheelSpecificationTest extends PokerTestCase {
+[TestFixture]
+class WheelSpecificationTest : PokerTestCase {
 
-    /**
-     * @var WheelSpecification
-     */
-    private $_Specification;
+    private WheelSpecification Specification;
 
-    protected function setUp() {
-        $this->_Specification = new WheelSpecification();
+    [Setup]
+    protected void setUp() {
+        Specification = new WheelSpecification();
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldBeSatisfiedByAWheel() {
-        $Hand = new Hand($this->_theFiveCardsAre('5-H', '4-C', '3-S', '2-D', 'A-H'));
-        $this->assertTrue($this->_Specification->isSatisfiedBy($Hand), 'This is a valid Wheel, why did it not satisfy the specification?');
+    [Test]
+    public void shouldBeSatisfiedByAWheel() {
+        Hand = new Hand(theFiveCardsAre("5-H", "4-C", "3-S", "2-D", "A-H"));
+        Assert.IsTrue(Specification.isSatisfiedBy(Hand), "This is a valid Wheel, why did it not satisfy the specification?");
     }
 
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @return void
-     * @dataProvider getSomeNonWheelHands
-     */
-    public function shouldNotBeSatisfiedByOtherRandomCards($card1, $card2, $card3, $card4, $card5) {
-        $Hand = new Hand($this->_theFiveCardsAre($card1, $card2, $card3, $card4, $card5));
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), "That is not a Wheel! ({$card1}, {$card2}, {$card3}, {$card4}, {$card5})");
+    [Test, TestCaseSource("SomeNonWheelHands")]
+    public void shouldNotBeSatisfiedByOtherRandomCards(string card1, string card2, string card3, string card4, string card5) {
+        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        Assert.IsFalse(Specification.isSatisfiedBy(Hand), "That is not a Wheel! ({card1}, {card2}, {card3}, {card4}, {card5})");
     }
 
-    /**
-     * @return array
-     */
-    public function getSomeNonWheelHands() {
-        return array_map(
-            function () {
-                $Deck = new Deck();
-                $Deck->populate();
-                $Cards = array_filter(
-                    $Deck->getCards(),
-                    function (Card $Card) {
-                        return ($Card->getFaceValue() != Card::FIVE);
-                    }
-                );
+    static object[] SomeNonWheelHands = {
+        new string[] { "6-S", "10-H", "A-C", "5-D", "9-S" },
+        new string[] { "7-H", "J-C", "2-D", "6-S", "10-H" },
+        new string[] { "8-C", "Q-D", "3-S", "7-H", "J-C" },
+        new string[] { "9-D", "K-S", "4-H", "8-C", "Q-D" },
+    };
 
-                return array_map(
-                    function ($cardIndex) use ($Cards) {
-                        /** @var $Card Card */
-                        $Card = $Cards[$cardIndex];
-                        return $Card->__toString();
-                    },
-                    array_rand($Cards, 5)
-                );
-            },
-            range(1, 100)
-        );
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function shouldNotBeSatisfiedByHandsWithMoreThanFiveCardsButThatHaveAllTheWheelCards() {
-        $Hand = new Hand(
-            array_map(
-                function ($cardString) {
-                    $CardBuilder = new CardBuilder();
-                    return $CardBuilder->fromString($cardString);
-                },
-                array('5-H', '4-C', '3-S', '2-D', 'A-H', '3-D')
-            )
-        );
-        $this->assertFalse($this->_Specification->isSatisfiedBy($Hand), 'A Hand with more than 5 cards cannot be a Wheel!');
+    [Test]
+    public void shouldNotBeSatisfiedByHandsWithMoreThanFiveCardsButThatHaveAllTheWheelCards() {
+        Hand = new Hand(new string[] { "5-H", "4-C", "3-S", "2-D", "A-H", "3-D", });
+        Assert.IsFalse(Specification.isSatisfiedBy(Hand), "A Hand with more than 5 cards cannot be a Wheel!");
     }
 }
