@@ -1,120 +1,75 @@
-<?php
+using NUnit.Framework;
 
-class HandTest extends PokerTestCase {
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @param string $expectedHighCard
-     * @return void
-     * @dataProvider getSomeCardsAndTheirExpectedHighCards
-     */
-    public function willReturnTheCorrectHighFaceValueCard($card1, $card2, $card3, $card4, $card5, $expectedHighCard) {
-        $Hand = new Hand($this->_asCardArray($card1, $card2, $card3, $card4, $card5));
-        $this->assertEquals($this->_makeCardFromString($expectedHighCard), $Hand->getHighCard());
+class HandTest : PokerTestCase {
+
+    [Test, TestCaseFixture("SomeCardsAndTheirExpectedHighCards")]
+    public void willReturnTheCorrectHighFaceValueCard(string card1, string card2, string card3, string card4, string card5, string expectedHighCard) {
+        Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
+        Assert.AreEqual(makeCardFromString(expectedHighCard), Hand.getHighCard());
     }
 
-    /**
-     * @return array
-     */
-    public function getSomeCardsAndTheirExpectedHighCards() {
-        return array(
-            array('K-C', '7-S', '3-D', 'A-H', '10-C', 'A-H',),
-            array('2-S', '3-S', '4-S', '6-S', '2-H', '6-S',),
-            array('4-D', '7-C', '6-S', '5-C', '3-H', '7-C',),
-            array('J-H', '3-C', 'Q-D', 'K-D', '7-S', 'K-D',),
-        );
+    [Test, TestCaseFixture("SomeCardsAndTheirExpectedHighCards")]
+    public void isWheelShouldReturnFalseWhenTheHandIsNotAWheel(string card1, string card2, string card3, string card4, string card5) {
+        Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
+        Assert.IsFalse(Hand.isWheel());
     }
 
-    /**
-     * @test
-     * @param string $card1
-     * @param string $card2
-     * @param string $card3
-     * @param string $card4
-     * @param string $card5
-     * @return void
-     * @dataProvider getSomeCardsAndTheirExpectedHighCards
-     */
-    public function isWheelShouldReturnFalseWhenTheHandIsNotAWheel($card1, $card2, $card3, $card4, $card5) {
-        $Hand = new Hand($this->_asCardArray($card1, $card2, $card3, $card4, $card5));
-        $this->assertFalse($Hand->isWheel());
+    static object[] getSomeCardsAndTheirExpectedHighCards = {
+        new string[] { "K-C", "7-S", "3-D", "A-H", "10-C", "A-H", },
+        new string[] { "2-S", "3-S", "4-S", "6-S", "2-H", "6-S", },
+        new string[] { "4-D", "7-C", "6-S", "5-C", "3-H", "7-C", },
+        new string[] { "J-H", "3-C", "Q-D", "K-D", "7-S", "K-D", },
+    };
+
+    [Test]
+    public void willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
+        Hand = new Hand(asCardArray("5-C", "4-C", "3-C", "2-C", "A-C"));
+        Assert.AreEqual(fiveOf(Clubs()), Hand.getHighCard());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
-        $Hand = new Hand($this->_asCardArray('5-C', '4-C', '3-C', '2-C', 'A-C'));
-        $this->assertEquals(Cards::fiveOf(Suit::Clubs()), $Hand->getHighCard());
+    [Test]
+    public void twoHandsWithDifferentCardsShouldNotBeEqual() {
+        Hand = new Hand(asCardArray("J-H", "A-S", "5-C", "7-D", "3-C"));
+        OtherHand = new Hand(asCardArray("A-C", "K-D", "4-D", "3-S", "6-H"));
+
+        Assert.IsFalse(Hand.equals(OtherHand));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function twoHandsWithDifferentCardsShouldNotBeEqual() {
-        $Hand = new Hand($this->_asCardArray('J-H', 'A-S', '5-C', '7-D', '3-C'));
-        $OtherHand = new Hand($this->_asCardArray('A-C', 'K-D', '4-D', '3-S', '6-H'));
+    [Test]
+    public void twoHandsWithTheSameCardsShouldBeEqual() {
+        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        OtherHand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
 
-        $this->assertFalse($Hand->equals($OtherHand));
+        Assert.IsTrue(Hand.equals(OtherHand));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function twoHandsWithTheSameCardsShouldBeEqual() {
-        $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
-        $OtherHand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
+    [Test]
+    public void twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual() {
+        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        OtherHand = new Hand(asCardArray("Q-D", "10-S", "K-H", "A-S", "J-C"));
 
-        $this->assertTrue($Hand->equals($OtherHand));
+        Assert.IsTrue(Hand.equals(OtherHand));
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual() {
-        $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
-        $OtherHand = new Hand($this->_asCardArray('Q-D', '10-S', 'K-H', 'A-S', 'J-C'));
-
-        $this->assertTrue($Hand->equals($OtherHand));
+    [Test]
+    public void aHandShouldBeAbleToProperlyRepresentItselfAsAString() {
+        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        Assert.AreEqual("Hand(A-S, K-H, Q-D, J-C, 10-S)", Hand.ToString());
     }
 
 
-    /**
-     * @test
-     * @return void
-     */
-    public function aHandShouldBeAbleToProperlyRepresentItselfToAString() {
-        $Hand = new Hand($this->_asCardArray('A-S', 'K-H', 'Q-D', 'J-C', '10-S'));
-        $this->assertEquals("Hand(A-S, K-H, Q-D, J-C, 10-S)", "{$Hand}");
+   [Test]
+    public void aHandWithAMultipleWordNameShouldBeAbleToProperlyRepresentItselfAsAStringAsWell() {
+        RoyalFlush = new RoyalFlush(asCardArray("A-S", "K-S", "Q-S", "J-S", "10-S"));
+        Assert.AreEqual("Royal Flush(A-S, K-S, Q-S, J-S, 10-S)", RoyalFlush.ToString());
     }
 
-    /**
-     * @test
-     * @return void
-     */
-    public function aHandWithAMultipleWordNameShouldBeAbleToProperlyRepresentItselfAsAStringAsWell() {
-        $RoyalFlush = new RoyalFlush($this->_asCardArray('A-S', 'K-S', 'Q-S', 'J-S', '10-S'));
-        $this->assertEquals("Royal Flush(A-S, K-S, Q-S, J-S, 10-S)", "{$RoyalFlush}");
-    }
-
-    /**
-     * @return Card[]
-     */
-    protected function _asCardArray() {
-        return array_map(
-            function ($cardString) {
-                $CardBuilder = new CardBuilder();
-                return $CardBuilder->fromString($cardString);
-            },
-            func_get_args()
+    protected Card[] asCardArray(params string[] cardStrings) {
+        return cardStrings.Select(
+            cardString => {
+                CardBuilder = new CardBuilder();
+                return CardBuilder.fromString(cardString);
+            }
         );
     }
 }
