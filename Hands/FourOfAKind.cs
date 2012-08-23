@@ -1,4 +1,2 @@
-<?php
-
-class FourOfAKind extends Hand {
+class FourOfAKind : Hand {
 }
