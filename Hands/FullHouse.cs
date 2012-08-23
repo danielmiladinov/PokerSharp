@@ -1,4 +1,2 @@
-<?php
-
-class FullHouse extends Hand {
+class FullHouse : Hand {
 }
