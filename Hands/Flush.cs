@@ -1,4 +1,2 @@
-<?php
-
-class Flush extends Hand {
+class Flush : Hand {
 }
