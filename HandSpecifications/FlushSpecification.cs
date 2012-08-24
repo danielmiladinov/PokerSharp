@@ -1,52 +1,43 @@
-<?php
 
-class FlushSpecification extends HandSpecification {
+class FlushSpecification : HandSpecification {
 
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    public function isSatisfiedBy(Hand $Hand) {
-        return $this->newHand($Hand) instanceof Flush;
+    public override bool isSatisfiedBy(Hand Hand) {
+        return newHand(Hand) is Flush;
     }
 
-    /**
-     * @param Hand $Hand
-     * @return Flush
-     */
-    public function newHand(Hand $Hand) {
-        $SpadesCards = array();
-        $HeartsCards = array();
-        $ClubsCards = array();
-        $DiamondsCards = array();
+    public override Flush newHand(Hand Hand) {
+       var SpadesCards = new List<Card>();
+       var HeartsCards = new List<Card>();
+       var ClubsCards = new List<Card>();
+       var DiamondsCards = new List<Card>();
 
-        foreach ($Hand->getCards() as $Card) {
-            switch ($Card->getSuit()) {
+        foreach (var Card in Hand.getCards()) {
+            switch (Card.getSuit()) {
                 case Suit::SPADES:
-                    $SpadesCards[] = $Card;
-                    if (count($SpadesCards) == 5) {
-                        return new Flush($SpadesCards);
+                    SpadesCards.Add(Card);
+                    if (SpadesCards.Length() == 5) {
+                        return new Flush(SpadesCards);
                     }
                     break;
 
                 case Suit::HEARTS:
-                    $HeartsCards[] = $Card;
-                    if (count($HeartsCards) == 5) {
-                        return new Flush($HeartsCards);
+                    HeartsCards.Add(Card);
+                    if (HeartsCards.Length() == 5) {
+                        return new Flush(HeartsCards);
                     }
                     break;
 
                 case Suit::CLUBS:
-                    $ClubsCards[] = $Card;
-                    if (count($ClubsCards) == 5) {
-                        return new Flush($ClubsCards);
+                    ClubsCards.Add(Card);
+                    if (ClubsCards.Length() == 5) {
+                        return new Flush(ClubsCards);
                     }
                     break;
 
                 case Suit::DIAMONDS:
-                    $DiamondsCards[] = $Card;
-                    if (count($DiamondsCards) == 5) {
-                        return new Flush($DiamondsCards);
+                    DiamondsCards.Add(Card);
+                    if (DiamondsCards.Length() == 5) {
+                        return new Flush(DiamondsCards);
                     }
                     break;
             }
