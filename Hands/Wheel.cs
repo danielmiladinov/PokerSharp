@@ -1,4 +1,2 @@
-<?php
-
-class Wheel extends Straight {
+class Wheel : Straight {
 }
