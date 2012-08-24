@@ -1,4 +1,2 @@
-<?php
-
-class TwoPair extends Hand {
+class TwoPair : Hand {
 }
