@@ -1,98 +1,28 @@
-<?php
+using System.Collections.Generic;
 
-abstract class CardsOfAKindSpecification extends HandSpecification {
+abstract class CardsOfAKindSpecification : HandSpecification {
 
-    /**
-     * @var int
-     */
-    protected $_numberOfCards;
+    protected int numberOfCards;
+    protected Type handClass;
 
-    /**
-     * @var string
-     */
-    protected $_handClassName;
-
-    protected function __construct($numberOfCards, $handClassName) {
-        $this->_numberOfCards = $numberOfCards;
-        $this->_handClassName = $handClassName;
+    protected CardsOfAKindSpecification(int numberOfCards, Type handClass) {
+        this.numberOfCards = numberOfCards;
+        this.handClass = handClass;
     }
 
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    public function isSatisfiedBy(Hand $Hand) {
-        $GroupedByValue = $Hand->getCardsGroupedByValues();
-        $faceValueCounts = array();
+    public override bool isSatisfiedBy(Hand Hand) {
+        GroupedByValue = Hand.getCardsGroupedByValues();
+        var faceValueCounts = new Dictionary<int, int>();
 
-        foreach ($GroupedByValue as $faceValue => $CardsWithSameValue) {
-            $faceValueCounts[$faceValue] = count($CardsWithSameValue);
+        foreach (KeyValuePair<int, List<Card>> cardsAndValue in GroupedByValue) {
+            faceValueCounts.Add(cardsAndValue.Key, cardsAndValue.Value.Count);
         }
 
-        asort($faceValueCounts);
-        $highestCount = array_pop($faceValueCounts);
-
-        return $highestCount == $this->_numberOfCards;
+        var highestCount = (from count in faceValueCounts orderby count descending select count).First();
+        return highestCount == numberOfCards;
     }
 
-       /**
-     * @param Hand $Hand
-     * @return FourOfAKind
-     */
-    public function newHand(Hand $Hand) {
-        $GroupedByValue = $Hand->getCardsGroupedByValues();
-        $CardsOfHighValue = array_shift($GroupedByValue);
-
-        if (count($CardsOfHighValue) == $this->_numberOfCards) {
-            $CardsOfAKind = array_merge(
-                $CardsOfHighValue,
-                array(
-                    array_shift(
-                        array_shift(
-                            $GroupedByValue
-                        )
-                    )
-                )
-            );
-        } else {
-            $numberOfCards = $this->_numberOfCards;
-
-            $CardsOfAKind = array_merge(
-                array(
-                    array_shift(
-                        $CardsOfHighValue
-                    )
-                ),
-                array_shift(
-                    array_filter(
-                        $GroupedByValue,
-                        function (array $CardsArray) use ($numberOfCards) {
-                            return count($CardsArray) == $numberOfCards;
-                        }
-                    )
-                )
-            );
-        }
-
-        while (count($CardsOfAKind) < 5 && count($GroupedByValue) > 0) {
-            $CardsOfAKind = array_merge(
-                $CardsOfAKind,
-                array(
-                    array_shift(
-                        array_shift(
-                            $GroupedByValue
-                        )
-                    )
-                )
-            );
-        }
-
-        if (count($CardsOfAKind) == 5) {
-            $HandReflector = new ReflectionClass($this->_handClassName);
-            $HandOfCardsOfAKind = $HandReflector->newInstance($CardsOfAKind);
-            return $HandOfCardsOfAKind;
-        }
-
+    public override Hand newHand(Hand Hand) {
         return null;
     }
 }
