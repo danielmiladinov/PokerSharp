@@ -1,8 +1,4 @@
-<?php
+class FourOfAKindSpecification : CardsOfAKindSpecification {
 
-class FourOfAKindSpecification extends CardsOfAKindSpecification {
-
-    public function __construct() {
-        parent::__construct(4, 'FourOfAKind');
-    }
+    public FourOfAKindSpecification() : base(4, FourOfAKind);
 }
