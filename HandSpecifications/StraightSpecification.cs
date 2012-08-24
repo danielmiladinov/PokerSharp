@@ -1,50 +1,34 @@
-<?php
 
-class StraightSpecification extends HandSpecification {
+class StraightSpecification : HandSpecification {
 
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    public function isSatisfiedBy(Hand $Hand) {
-        return $this->newHand($Hand) instanceof Straight;
+    public override bool isSatisfiedBy(Hand Hand) {
+        return newHand(Hand) is Straight;
     }
 
-    /**
-     * @param Hand $Hand
-     * @return Straight
-     */
-    public function newHand(Hand $Hand) {
-        $StraightCards = array();
-        $PreviousCard = null;
+    public override Straight newHand(Hand Hand) {
+        var StraightCards = new List<Card>();
+        Card PreviousCard = null;
 
-        $Cards = $Hand->getCards();
+        Cards = Hand.getCards().Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
 
-        usort(
-            $Cards,
-            function (Card $Card1, Card $Card2) {
-                return $Card1->compareTo($Card2);
-            }
-        );
-
-        foreach ($Cards as $Card) {
-            if ($PreviousCard instanceof Card) {
-                if ($Card->compareFaceValue($PreviousCard) == 0) {
+        foreach (var Card in Cards) {
+            if (PreviousCard is Card) {
+                if (Card.compareFaceValue(PreviousCard) == 0) {
                     continue;
-                } else if ($PreviousCard->isAce() && $Card->getFaceValue() == 5) { // Wheels are Straights too, you know
-                    $StraightCards[] = $Card;
-                } else if ($PreviousCard->getFaceValue() - 1 == $Card->getFaceValue()) {
-                    $StraightCards[] = $Card;
+                } else if (PreviousCard.isAce() && Card.getFaceValue() == 5) { // Wheels are Straights too, you know
+                    StraightCards.Add(Card);
+                } else if (PreviousCard.getFaceValue() - 1 == Card.getFaceValue()) {
+                    StraightCards.Add(Card);
                 } else {
-                    $StraightCards = array($Card);
+                    StraightCards = new List<Card>(Card);
                 }
             } else {
-                $StraightCards[] = $Card;
+                StraightCards.Add(Card);
             }
 
-            $PreviousCard = $Card;
-            if (count($StraightCards) == 5) {
-                return new Straight($StraightCards);
+            PreviousCard = Card;
+            if (StraightCards.Count == 5) {
+                return new Straight(StraightCards);
             }
         }
 
