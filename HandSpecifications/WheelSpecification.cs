@@ -1,24 +1,14 @@
-<?php
+class WheelSpecification : StraightSpecification {
 
-class WheelSpecification extends StraightSpecification {
-
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    public function isSatisfiedBy(Hand $Hand) {
-        return $Hand->isWheel();
+    public override bool isSatisfiedBy(Hand Hand) {
+        return Hand.isWheel();
     }
 
-    /**
-     * @param Hand $Hand
-     * @return Wheel
-     */
-    public function newHand(Hand $Hand) {
-        $Straight = parent::newHand($Hand);
+    public override Wheel newHand(Hand Hand) {
+        var Straight = base.newHand(Hand);
 
-        if ($Straight instanceof Hand && $Straight->isWheel()) {
-            return new Wheel($Straight->getCards());
+        if (Straight is Hand && Straight.isWheel()) {
+            return new Wheel(Straight.getCards());
         } else {
             return null;
         }
