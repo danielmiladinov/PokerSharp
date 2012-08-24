@@ -1,4 +1,2 @@
-<?php
-
-class HighCard extends Hand {
+class HighCard : Hand {
 }
