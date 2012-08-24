@@ -1,28 +1,20 @@
-<?php
 
-class RoyalFlushSpecification extends StraightFlushSpecification {
+class RoyalFlushSpecification : StraightFlushSpecification {
 
-    /**
-     * @param Hand $Hand
-     * @return boolean
-     */
-    public function isSatisfiedBy(Hand $Hand) {
-        $handIsARoyalFlush = (
-            ($Hand->getHighCard()->getFaceValue() == Card::ACE) &&
-            parent::isSatisfiedBy($Hand)
+    public override bool isSatisfiedBy(Hand Hand) {
+        var handIsARoyalFlush = (
+            (Hand.getHighCard().getFaceValue() == Card::ACE) &&
+            base.isSatisfiedBy(Hand)
         );
-        return $handIsARoyalFlush;
+
+        return handIsARoyalFlush;
     }
 
-    /**
-     * @param Hand $Hand
-     * @return RoyalFlush
-     */
-    public function newHand(Hand $Hand) {
-        $StraightFlush = parent::newHand($Hand);
+    public override RoyalFlush newHand(Hand Hand) {
+        var StraightFlush = base.newHand(Hand);
 
-        if ($StraightFlush instanceof StraightFlush && $StraightFlush->getHighCard()->getFaceValue() == Card::ACE) {
-            return new RoyalFlush($StraightFlush->getCards());
+        if (StraightFlush is StraightFlush && StraightFlush.getHighCard().getFaceValue() == Card::ACE) {
+            return new RoyalFlush(StraightFlush.getCards());
         }
 
         return null;
