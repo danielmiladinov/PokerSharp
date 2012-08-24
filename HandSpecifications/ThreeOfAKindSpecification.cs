@@ -1,4 +1,5 @@
 class ThreeOfAKindSpecification : CardsOfAKindSpecification {
 
-    public ThreeOfAKindSpecification() : base(3, "ThreeOfAKind");
+    public ThreeOfAKindSpecification() : base(3, "ThreeOfAKind") {
+    }
 }
