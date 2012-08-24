@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 class StraightFlushSpecification : HandSpecification {
 
     public override bool isSatisfiedBy(Hand Hand) {

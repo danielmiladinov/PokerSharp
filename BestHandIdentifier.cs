@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 class BestHandIdentifier {
 
     public Hand identify(List<Card> Cards) {

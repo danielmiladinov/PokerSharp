@@ -9,11 +9,11 @@ class BestHandIdentifierTest : PokerTestCase {
     private Hand IdentifiedHand;
 
     [SetUp]
-    public override void setUp() {
+    public void setUp() {
         HandIdentifier = new BestHandIdentifier();
     }
 
-    [Teardown]
+    [TearDown]
     protected void assertPostConditions() {
         if (IdentifiedHand is Hand) {
             List<Card> CardsInHand = IdentifiedHand.getCards();

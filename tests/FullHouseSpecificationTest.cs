@@ -12,7 +12,7 @@ class FullHouseSpecificationTest : PokerTestCase {
         Specification = new FullHouseSpecification();
     }
 
-    [Test, TestCaseSource("")]
+    [Test, TestCaseSource("getManyPossibleFullHouses")]
     public void shouldBeAbleToIdentifyAnyFullHouse(string card1, string card2, string card3, string card4, string card5) {
         Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
         Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid FullHouse({0}, {1}, {2}, {3}, {4}), why did not satisfy the specification?", card1, card2, card3, card4, card5);

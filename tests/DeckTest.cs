@@ -6,7 +6,7 @@ class DeckTest {
     private Deck Deck;
 
     [Setup]
-    protected override void setUp() {
+    protected void setUp() {
         Deck = new Deck();
     }
 
