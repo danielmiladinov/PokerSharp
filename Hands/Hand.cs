@@ -1,129 +1,59 @@
-<?php
+using System.Collections.Generic;
 
 class Hand {
-    /**
-     * @var Card[]
-     */
-    private $_Cards;
 
-    /**
-     * @param Card[] $Cards
-     */
-    public function __construct(array $Cards) {
-        $this->_Cards = $Cards;
+    private Card[] Cards;
+
+    public Hand(Card[] Cards) {
+        this.Cards = Cards;
     }
 
-    /**
-     * @return Card[]
-     */
-    public function getCards() {
-        return $this->_Cards;
+    public Card[] getCards() {
+        return Cards;
     }
 
-    /**
-     * @return Card
-     */
-    public function getHighCard() {
-        $HighCard = null;
+    public Card getHighCard() {
+        Card HighCard = null;
 
-        if ($this->isWheel()) {
-            $HighCard = array_pop(
-                array_filter(
-                    array_values($this->_Cards),
-                    function (Card $Card) {
-                        return $Card->getFaceValue() == Card::FIVE;
-                    }
-                )
-            );
+        if (isWheel()) {
+            HighCard = (from Card in Cards where Card.getFaceValue() == 5 select Card).First();
         } else {
-            foreach ($this->_Cards as $Card) {
-                if (is_null($HighCard) || ($Card->compareFaceValue($HighCard) < 0)) {
-                    $HighCard = $Card;
-                }
-            }
+            HighCard = (from Card in Cards orderby Card.getFaceValue() descending select Card).First();
         }
 
-        return $HighCard;
+        return HighCard;
     }
 
-    /**
-     * @return Card[]
-     */
-    public function getCardsGroupedByValues() {
-        return Cards::getCardsGroupedByValue($this->getCards());
+    public Dictionary<int, List<Card>> getCardsGroupedByValues() {
+        return Cards.getCardsGroupedByValue(getCards());
     }
 
-    /**
-     * @param Hand $OtherHand
-     * @return bool
-     */
-    public function equals(Hand $OtherHand) {
-        $CardsNotInOtherHand = array_diff($this->getCards(), $OtherHand->getCards());
-        $handsAreEqual = count($CardsNotInOtherHand) == 0;
-        return $handsAreEqual;
+    public bool equals(Hand OtherHand) {
+        CardsNotInOtherHand = array_diff(getCards(), OtherHand->getCards());
+        handsAreEqual = count(CardsNotInOtherHand) == 0;
+        return handsAreEqual;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isWheel() {
+    public bool isWheel() {
         return (
-            count($this->_Cards) == 5 &&
-            $this->hasCardOfFaceValue(Card::FIVE) &&
-            $this->hasCardOfFaceValue(Card::FOUR) &&
-            $this->hasCardOfFaceValue(Card::THREE) &&
-            $this->hasCardOfFaceValue(Card::TWO) &&
-            $this->hasCardOfFaceValue(Card::ACE)
+            count(Cards) == 5 &&
+            hasCardOfFaceValue(Card::FIVE) &&
+            hasCardOfFaceValue(Card::FOUR) &&
+            hasCardOfFaceValue(Card::THREE) &&
+            hasCardOfFaceValue(Card::TWO) &&
+            hasCardOfFaceValue(Card::ACE)
         );
     }
 
-    /**
-     * @return string
-     */
-    public function __toString() {
-        return implode(
-            '',
-            array(
-                $this->getHandType(),
-                '(',
-                implode(
-                    ', ',
-                    array_map(
-                        function (Card $Card) {
-                            return $Card->__toString();
-                        },
-                        $this->getCards()
-                    )
-                ),
-                ')'
-            )
-        );
+    public override string ToString() {
+        return "Fix Me When It Builds!";
     }
 
-    /**
-     * @return string
-     */
-    protected function getHandType() {
-        $handTypeString = '';
-        $myClass = get_class($this);
-
-        for ($i = 0; $i < strlen($myClass); $i++) {
-            $character = $myClass{$i};
-            if (ctype_upper($character)) {
-                $handTypeString .= ' ';
-            }
-            $handTypeString .= $character;
-        }
-
-        return trim($handTypeString);
+    protected string getHandType() {
+        return "What's My Hand Type?";
     }
 
-    private function hasCardOfFaceValue($faceValue) {
-        foreach ($this->_Cards as $Card) {
-            if ($Card->getFaceValue() == $faceValue) {
-                return true;
-            }
-        }
-        return false;
+    private bool hasCardOfFaceValue(int faceValue) {
+        return (from Card in Cards where Card.getFaceValue() == faceValue select Card).Count() > 0;
     }
 }
