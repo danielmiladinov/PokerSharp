@@ -21,39 +21,39 @@ class Cards {
         return Suit.getCard(4);
     }
 
-    public static function fiveOf(Suit Suit) {
+    public static Card fiveOf(Suit Suit) {
         return Suit.getCard(5);
     }
 
-    public static function sixOf(Suit Suit) {
+    public static Card sixOf(Suit Suit) {
         return Suit.getCard(6);
     }
 
-    public static function sevenOf(Suit Suit) {
+    public static Card sevenOf(Suit Suit) {
         return Suit.getCard(7);
     }
 
-    public static function eightOf(Suit Suit) {
+    public static Card eightOf(Suit Suit) {
         return Suit.getCard(8);
     }
 
-    public static function nineOf(Suit Suit) {
+    public static Card nineOf(Suit Suit) {
         return Suit.getCard(9);
     }
 
-    public static function tenOf(Suit Suit) {
+    public static Card tenOf(Suit Suit) {
         return Suit.getCard(10);
     }
 
-    public static function jackOf(Suit Suit) {
+    public static Card jackOf(Suit Suit) {
         return Suit.getCard(Card::JACK);
     }
 
-    public static function queenOf(Suit Suit) {
+    public static Card queenOf(Suit Suit) {
         return Suit.getCard(Card::QUEEN);
     }
 
-    public static function kingOf(Suit Suit) {
+    public static Card kingOf(Suit Suit) {
         return Suit.getCard(Card::KING);
     }
 

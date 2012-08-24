@@ -8,7 +8,7 @@ class FullHouseSpecificationTest : PokerTestCase {
 
     private FullHouseSpecification Specification;
 
-    protected function setUp() {
+    protected void setUp() {
         Specification = new FullHouseSpecification();
     }
 

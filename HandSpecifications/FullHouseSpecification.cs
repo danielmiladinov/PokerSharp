@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 class FullHouseSpecification : HandSpecification {
 
-    public override function isSatisfiedBy(Hand Hand) {
+    public override bool isSatisfiedBy(Hand Hand) {
         return newHand(Hand) is FullHouse;
     }
 

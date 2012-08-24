@@ -4,7 +4,7 @@ class FlushSpecificationTest : PokerTestCase {
 
     private FlushSpecification Specification;
 
-    protected function setUp() {
+    protected void setUp() {
         Specification = new FlushSpecification();
     }
 

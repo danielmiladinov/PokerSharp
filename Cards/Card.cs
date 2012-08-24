@@ -23,7 +23,7 @@ abstract class Card {
         return Suit.getName();
     }
 
-    public function getSuitValue() {
+    public int getSuitValue() {
         return Suit.getValue();
     }
 
