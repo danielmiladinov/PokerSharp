@@ -1,4 +1,2 @@
-<?php
-
-class SteelWheel extends StraightFlush {
+class SteelWheel : StraightFlush {
 }
