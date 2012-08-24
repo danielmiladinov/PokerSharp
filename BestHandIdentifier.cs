@@ -1,20 +1,10 @@
-<?php
 class BestHandIdentifier {
-    /**
-     * @param \Card[] $Cards
-     * @return Hand
-     */
-    public function identify(array $Cards) {
-        usort(
-            $Cards,
-            function (Card $Card1, Card $Card2) {
-                return $Card1->compareTo($Card2);
-            }
-        );
 
-        $Hand = new Hand($Cards);
+    public Hand identify(List<Card> Cards) {
+        Cards.Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
+        Hand Hand = new Hand(Cards);
 
-        $SpecsInValueOrder = array(
+        HandSpecification[] SpecsInValueOrder = {
             new RoyalFlushSpecification(),
             new SteelWheelSpecification(),
             new StraightFlushSpecification(),
@@ -26,15 +16,14 @@ class BestHandIdentifier {
             new ThreeOfAKindSpecification(),
             new TwoPairSpecification(),
             new TwoOfAKindSpecification(),
-        );
+		};
 
-        foreach ($SpecsInValueOrder as $Specification) {
-            /** @var $Specification HandSpecification */
-            if ($Specification->isSatisfiedBy($Hand)) {
-                return $Specification->newHand($Hand);
+        foreach (HandSpecification Specification in SpecsInValueOrder) {
+            if (Specification->isSatisfiedBy(Hand)) {
+                return Specification.newHand(Hand);
             }
         }
 
-        return new HighCard($Cards);
+        return new HighCard(Cards);
     }
 }
