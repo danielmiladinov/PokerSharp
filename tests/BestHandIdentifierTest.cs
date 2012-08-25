@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [TestFixture]
 class BestHandIdentifierTest : PokerTestCase {
     private BestHandIdentifier HandIdentifier;
-    private Hand DealtCards;
+    private List<Card> DealtCards;
     private Hand IdentifiedHand;
 
     [SetUp]
