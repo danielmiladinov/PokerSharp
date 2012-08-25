@@ -264,8 +264,17 @@ class BestHandIdentifierTest : PokerTestCase {
                     }
                 );
 
-                Type cardClass = datum[1];
-                Hand ExpectedHand = Activator.CreateInstance(cardClass, new object[] { ExpectedCards });
+                string cardClass = datum[1];
+                Hand ExpectedHand = Activator.CreateInstance(
+                    null,
+                    cardClass,
+                    false,
+                    null,
+                    null,
+                    new object[] { ExpectedCards },
+                    null,
+                    null
+                );
 
                 return new object[] { ProvidedCards, ExpectedHand };
             }
