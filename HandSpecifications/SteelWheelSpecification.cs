@@ -4,7 +4,7 @@ class SteelWheelSpecification : StraightFlushSpecification {
         return base.isSatisfiedBy(Hand) && Hand.isWheel();
     }
 
-    public override SteelWheel newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         var StraightFlush = base.newHand(Hand);
 
         if (StraightFlush is Hand && StraightFlush.isWheel()) {

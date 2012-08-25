@@ -6,7 +6,7 @@ class FullHouseSpecification : HandSpecification {
         return newHand(Hand) is FullHouse;
     }
 
-    public override FullHouse newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         return null;
     }
 }

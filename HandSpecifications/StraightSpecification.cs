@@ -5,7 +5,7 @@ class StraightSpecification : HandSpecification {
         return newHand(Hand) is Straight;
     }
 
-    public override Straight newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         var StraightCards = new List<Card>();
         Card PreviousCard = null;
 

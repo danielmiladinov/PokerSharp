@@ -4,7 +4,7 @@ class WheelSpecification : StraightSpecification {
         return Hand.isWheel();
     }
 
-    public override Wheel newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         var Straight = base.newHand(Hand);
 
         if (Straight is Hand && Straight.isWheel()) {

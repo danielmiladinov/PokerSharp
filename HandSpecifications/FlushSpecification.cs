@@ -5,7 +5,7 @@ class FlushSpecification : HandSpecification {
         return newHand(Hand) is Flush;
     }
 
-    public override Flush newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
        var SpadesCards = new List<Card>();
        var HeartsCards = new List<Card>();
        var ClubsCards = new List<Card>();

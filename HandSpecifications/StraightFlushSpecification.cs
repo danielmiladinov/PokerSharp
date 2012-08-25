@@ -6,7 +6,7 @@ class StraightFlushSpecification : HandSpecification {
         return newHand(Hand) is StraightFlush;
     }
 
-    public override StraightFlush newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         var SpadesCards = new List<Card>();
         var HeartsCards = new List<Card>();
         var ClubsCards = new List<Card>();

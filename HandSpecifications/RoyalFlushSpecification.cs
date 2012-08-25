@@ -10,7 +10,7 @@ class RoyalFlushSpecification : StraightFlushSpecification {
         return handIsARoyalFlush;
     }
 
-    public override RoyalFlush newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         var StraightFlush = base.newHand(Hand);
 
         if (StraightFlush is StraightFlush && StraightFlush.getHighCard().getFaceValue() == Card::ACE) {

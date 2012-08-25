@@ -13,7 +13,7 @@ class TwoPairSpecification : HandSpecification {
         return canMakeTwoPair;
     }
 
-    public override TwoPair newHand(Hand Hand) {
+    public override Hand newHand(Hand Hand) {
         return new TwoPair(Hand.getCards());
     }
 }
