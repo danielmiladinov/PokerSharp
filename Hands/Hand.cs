@@ -37,7 +37,7 @@ class Hand {
 
     public bool isWheel() {
         return (
-            count(Cards) == 5 &&
+            Cards.Count == 5 &&
             hasCardOfFaceValue(Card::FIVE) &&
             hasCardOfFaceValue(Card::FOUR) &&
             hasCardOfFaceValue(Card::THREE) &&
