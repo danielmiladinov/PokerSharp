@@ -247,10 +247,10 @@ class BestHandIdentifierTest : PokerTestCase {
             new object[] { new string[] {"A-S", "Q-S", "J-S", "10-C", "9-S", "8-H", "7-D", "4-H", "3-H", "2-S"}, "Flush", new string[] {"A-S", "Q-S", "J-S","9-S", "2-S",}},
         };
 
-        return data.Select(
+        return (object[]) data.Select(
             datum => {
-                string[] cardStrings = datum[0];
-                string[] expectedCardStrings = datum[2];
+                string[] cardStrings = (string[]) datum[0];
+                string[] expectedCardStrings = (string[]) datum[2];
 
                 IEnumerable<Card> ProvidedCards = cardStrings.Select(
                     cardString => {
@@ -264,8 +264,8 @@ class BestHandIdentifierTest : PokerTestCase {
                     }
                 );
 
-                string cardClass = datum[1];
-                Hand ExpectedHand = Activator.CreateInstance(
+                string cardClass = (string) datum[1];
+                Hand ExpectedHand = (Hand) Activator.CreateInstance(
                     null,
                     cardClass,
                     false,
