@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [TestFixture]
 class BestHandIdentifierTest : PokerTestCase {
     private BestHandIdentifier HandIdentifier;
-    private Hand DealtHand;
+    private Hand DealtCards;
     private Hand IdentifiedHand;
 
     [SetUp]
@@ -23,29 +23,29 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test]
     public void willGetJustAHighCard() {
-        DealtHand = theFiveCardsAre("A-S", "J-C", "7-C", "5-D", "4-S");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("A-S", "J-C", "7-C", "5-D", "4-S");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(HighCard, IdentifiedHand);
     }
 
     [Test]
     public void willGetTwoOfAKind() {
-        DealtHand = theFiveCardsAre("A-S", "A-H", "J-C", "7-C", "5-D");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("A-S", "A-H", "J-C", "7-C", "5-D");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(TwoOfAKind, IdentifiedHand);
     }
 
     [Test]
     public void willGetTwoOfAKindWithADifferentPair() {
-        DealtHand = theFiveCardsAre("A-S", "7-H", "J-C", "7-C", "5-D");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("A-S", "7-H", "J-C", "7-C", "5-D");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(TwoOfAKind, IdentifiedHand);
     }
 
     [Test, TestCaseSource("SomeCandidatesForATwoPair")]
     public void willGetTwoPair(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(TwoPair, IdentifiedHand);
     }
 
@@ -58,15 +58,15 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test]
     public void willGetThreeOfAKind() {
-        DealtHand = theFiveCardsAre("7-S", "7-H", "7-C", "J-C", "5-D");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("7-S", "7-H", "7-C", "J-C", "5-D");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(ThreeOfAKind, IdentifiedHand);
     }
 
     [Test, TestCaseSource("SomeCandidatesForAStraight")]
     public void willGetAStraight(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(Straight, IdentifiedHand);
     }
 
@@ -85,8 +85,8 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test, TestCaseSource("SomeCandidatesForAFlush")]
     public void willGetAFlush(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(Flush, IdentifiedHand);
     }
 
@@ -99,22 +99,22 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test]
     public void testWillGetFullHouse() {
-        DealtHand = theFiveCardsAre("10-H", "10-C", "10-D", "7-C", "7-D");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("10-H", "10-C", "10-D", "7-C", "7-D");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(FullHouse, IdentifiedHand);
     }
 
     [Test]
     public void testWillGetFourOfAKind() {
-        DealtHand = theFiveCardsAre("7-D", "7-S", "7-C", "7-H", "J-C");
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre("7-D", "7-S", "7-C", "7-H", "J-C");
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(FourOfAKind, IdentifiedHand);
     }
 
     [Test, TestCaseSource("SomeCandidatesForAStraightFlush")]
     public void willGetAStraightFlush(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(StraightFlush, IdentifiedHand);
     }
 
@@ -127,8 +127,8 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test, TestCaseSource("SomeCandidatesForASteelWheel")]
     public void willGetASteelWheel(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(SteelWheel, IdentifiedHand);
     }
 
@@ -141,8 +141,8 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test, TestCaseSource("SomeCandidatesForAWheel")]
     public void willGetARegularWheel(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(Wheel, IdentifiedHand);
     }
 
@@ -155,8 +155,8 @@ class BestHandIdentifierTest : PokerTestCase {
 
     [Test, TestCaseSource("SomeCandidatesForARoyalFlush")]
     public void willGetARoyalFlush(string card1, string card2, string card3, string card4, string card5) {
-        DealtHand = theFiveCardsAre(card1, card2, card3, card4, card5);
-        IdentifiedHand = HandIdentifier.identify(DealtHand);
+        DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
+        IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf(RoyalFlush, IdentifiedHand);
     }
 
