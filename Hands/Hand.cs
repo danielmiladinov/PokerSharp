@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 class Hand {
 
-    private Card[] Cards;
+    private List<Card> Cards;
 
-    public Hand(Card[] Cards) {
+    public Hand(List<Card> Cards) {
         this.Cards = Cards;
     }
 
-    public Card[] getCards() {
+    public List<Card> getCards() {
         return Cards;
     }
 
