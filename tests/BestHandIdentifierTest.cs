@@ -275,7 +275,7 @@ class BestHandIdentifierTest : PokerTestCase {
         Cards.Sort((Card1, Card2) => Card1.compareTo(Card2));
         return String.Join(
             " ",
-            Cards.AsEnumerable<Card>().Select(card => Card.ToString())
+            Cards.AsEnumerable<Card>().Select(card => card.ToString())
         );
     }
 }
