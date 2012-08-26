@@ -34,7 +34,7 @@ class CardTest {
     }
 
     private Card makeCardFromString(string cardString) {
-        CardBuilder = new CardBuilder();
+        var CardBuilder = new CardBuilder();
         return CardBuilder.fromString(cardString);
     }
 
