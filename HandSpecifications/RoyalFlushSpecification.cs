@@ -3,7 +3,7 @@ class RoyalFlushSpecification : StraightFlushSpecification {
 
     public override bool isSatisfiedBy(Hand Hand) {
         var handIsARoyalFlush = (
-            (Hand.getHighCard().getFaceValue() == Card::ACE) &&
+            (Hand.getHighCard().getFaceValue() == Card.ACE) &&
             base.isSatisfiedBy(Hand)
         );
 
@@ -13,7 +13,7 @@ class RoyalFlushSpecification : StraightFlushSpecification {
     public override Hand newHand(Hand Hand) {
         var StraightFlush = base.newHand(Hand);
 
-        if (StraightFlush is StraightFlush && StraightFlush.getHighCard().getFaceValue() == Card::ACE) {
+        if (StraightFlush is StraightFlush && StraightFlush.getHighCard().getFaceValue() == Card.ACE) {
             return new RoyalFlush(StraightFlush.getCards());
         }
 
