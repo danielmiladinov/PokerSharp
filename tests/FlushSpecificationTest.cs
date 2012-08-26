@@ -10,13 +10,13 @@ class FlushSpecificationTest : PokerTestCase {
 
     [Test, TestCaseSource("getSomePossibleFlushes")]
     public void shouldBeAbleToIdentifyAFlush(string card1, string card2, string card3, string card4, string card5) {
-        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        var Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
         Assert.IsTrue(Specification.isSatisfiedBy(Hand), "This is a valid Flush, why did it not satisfy the specification?");
     }
 
     [Test]
     public void shouldNotBeSatisfiedByAHandWithCardsFromMoreThanOneSuit() {
-        Hand = new Hand(theFiveCardsAre("A-C", "2-C", "3-H", "4-C", "5-C"));
+        var Hand = new Hand(theFiveCardsAre("A-C", "2-C", "3-H", "4-C", "5-C"));
         Assert.IsFalse(Specification.isSatisfiedBy(Hand), "That is not a Flush!");
     }
 
