@@ -52,7 +52,7 @@ abstract class Card {
                 break;
         }
 
-        return faceValue + '-'  + getSuit();
+        return faceValue + '-'  + getSuit()[0];
     }
 
     public int compareTo(Card OtherCard) {
