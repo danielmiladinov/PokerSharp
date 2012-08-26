@@ -51,10 +51,10 @@ class CardTest {
     }
 
     private void theCurrentCardShouldBeGreater() {
-        Assert.Less(0, CurrentCard.compareTo(OtherCard));
+        Assert.Greater(0, CurrentCard.compareTo(OtherCard));
     }
 
     private void theOtherCardShouldBeGreater() {
-        Assert.Greater(0, CurrentCard.compareTo(OtherCard));
+        Assert.Less(0, CurrentCard.compareTo(OtherCard));
     }
 }
