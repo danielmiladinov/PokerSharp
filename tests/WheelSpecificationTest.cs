@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -5,20 +6,20 @@ class WheelSpecificationTest : PokerTestCase {
 
     private WheelSpecification Specification;
 
-    [Setup]
+    [SetUp]
     protected void setUp() {
         Specification = new WheelSpecification();
     }
 
     [Test]
     public void shouldBeSatisfiedByAWheel() {
-        Hand = new Hand(theFiveCardsAre("5-H", "4-C", "3-S", "2-D", "A-H"));
+        var Hand = new Hand(theFiveCardsAre("5-H", "4-C", "3-S", "2-D", "A-H"));
         Assert.IsTrue(Specification.isSatisfiedBy(Hand), "This is a valid Wheel, why did it not satisfy the specification?");
     }
 
     [Test, TestCaseSource("SomeNonWheelHands")]
     public void shouldNotBeSatisfiedByOtherRandomCards(string card1, string card2, string card3, string card4, string card5) {
-        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        var Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
         Assert.IsFalse(Specification.isSatisfiedBy(Hand), "That is not a Wheel! ({card1}, {card2}, {card3}, {card4}, {card5})");
     }
 
@@ -31,7 +32,14 @@ class WheelSpecificationTest : PokerTestCase {
 
     [Test]
     public void shouldNotBeSatisfiedByHandsWithMoreThanFiveCardsButThatHaveAllTheWheelCards() {
-        Hand = new Hand(new string[] { "5-H", "4-C", "3-S", "2-D", "A-H", "3-D", });
+        var Hand = new Hand(
+            new string[] { "5-H", "4-C", "3-S", "2-D", "A-H", "3-D", }.Select(
+                cardString => {
+                    var CardBuilder = new CardBuilder();
+                    return CardBuilder.fromString(cardString);
+                }
+            ).ToList()
+        );
         Assert.IsFalse(Specification.isSatisfiedBy(Hand), "A Hand with more than 5 cards cannot be a Wheel!");
     }
 }
