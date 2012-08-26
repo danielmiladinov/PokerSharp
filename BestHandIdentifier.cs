@@ -21,7 +21,7 @@ class BestHandIdentifier {
 		};
 
         foreach (HandSpecification Specification in SpecsInValueOrder) {
-            if (Specification->isSatisfiedBy(Hand)) {
+            if (Specification.isSatisfiedBy(Hand)) {
                 return Specification.newHand(Hand);
             }
         }
