@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 abstract class CardsOfAKindSpecification : HandSpecification {
@@ -12,7 +13,7 @@ abstract class CardsOfAKindSpecification : HandSpecification {
     }
 
     public override bool isSatisfiedBy(Hand Hand) {
-        GroupedByValue = Hand.getCardsGroupedByValues();
+        var GroupedByValue = Hand.getCardsGroupedByValues();
         var faceValueCounts = new Dictionary<int, int>();
 
         foreach (KeyValuePair<int, List<Card>> cardsAndValue in GroupedByValue) {
@@ -20,7 +21,7 @@ abstract class CardsOfAKindSpecification : HandSpecification {
         }
 
         var highestCount = (from count in faceValueCounts orderby count descending select count).First();
-        return highestCount == numberOfCards;
+        return highestCount.Value == numberOfCards;
     }
 
     public override Hand newHand(Hand Hand) {
