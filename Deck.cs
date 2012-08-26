@@ -46,7 +46,7 @@ class Deck {
         }
     }
 
-    public Card[] getCards() {
-        return cards.ToArray();
+    public List<Card> getCards() {
+        return cards;
     }
 }

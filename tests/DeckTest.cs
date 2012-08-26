@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -58,6 +59,9 @@ class DeckTest {
 
         Deck.populate();
 
-        Assert.AreEqual(ExpectedCards, Deck.getCards());
+        Assert.AreEqual(
+            (from card in ExpectedCards select card.ToString()),
+            (from card in Deck.getCards() select card.ToString())
+        );
     }
 }
