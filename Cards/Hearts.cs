@@ -1,6 +1,6 @@
 class Hearts : Card {
 
     public Hearts(int faceValue) : base(faceValue) {
-        Suit = Suit::Hearts();
+        Suit = Suit.Hearts();
     }
 }
