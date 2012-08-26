@@ -1,3 +1,5 @@
+using System;
+
 class CardBuilder {
 
     public Card fromString(string cardString) {
@@ -60,6 +62,14 @@ class CardBuilder {
 
             case "K":
                 faceValueIntValue = Card.KING;
+                break;
+
+            default:
+                int parsed = 0;
+
+                if (Int32.TryParse(faceValue, out parsed)) {
+                    faceValueIntValue = parsed;
+                }
                 break;
         }
 
