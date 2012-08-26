@@ -43,9 +43,9 @@ class CardBuilderTest {
     [Test]
     public void willGetACardWithValidParameters() {
         var validString = "2-C";
-        ExpectedCard = new Clubs(2);
+        var ExpectedCard = new Clubs(2);
 
-        ActualCard = CardBuilder.fromString(validString);
+        var ActualCard = CardBuilder.fromString(validString);
 
         Assert.AreEqual(ExpectedCard, ActualCard);
     }
@@ -53,9 +53,9 @@ class CardBuilderTest {
     [Test]
     public void willGetACardWithFaceCard() {
         var validString = "Q-S";
-        ExpectedCard = new Spades(Card::QUEEN);
+        var ExpectedCard = new Spades(Card::QUEEN);
 
-        ActualCard = CardBuilder.fromString(validString);
+        var ActualCard = CardBuilder.fromString(validString);
 
         Assert.AreEqual(ExpectedCard, ActualCard);
     }
@@ -63,9 +63,9 @@ class CardBuilderTest {
     [Test]
     public void willGetACardWithJacks() {
         var validString = "J-H";
-        ExpectedCard = new Hearts(Card::JACK);
+        var ExpectedCard = new Hearts(Card::JACK);
 
-        ActualCard = CardBuilder.fromString(validString);
+        var ActualCard = CardBuilder.fromString(validString);
 
         Assert.AreEqual(ExpectedCard, ActualCard);
     }
@@ -73,9 +73,9 @@ class CardBuilderTest {
     [Test]
     public void willGetACardWithKings() {
         var validString = "K-D";
-        ExpectedCard = new Diamonds(Card::KING);
+        var ExpectedCard = new Diamonds(Card::KING);
 
-        ActualCard = CardBuilder.fromString(validString);
+        var ActualCard = CardBuilder.fromString(validString);
 
         Assert.AreEqual(ExpectedCard, ActualCard);
     }
@@ -83,9 +83,9 @@ class CardBuilderTest {
     [Test]
     public void willGetACardWithAce() {
         var validString = "A-C";
-        ExpectedCard = new Clubs(Card::ACE);
+        var ExpectedCard = new Clubs(Card::ACE);
 
-        ActualCard = CardBuilder.fromString(validString);
+        var ActualCard = CardBuilder.fromString(validString);
 
         Assert.AreEqual(ExpectedCard, ActualCard);
     }
