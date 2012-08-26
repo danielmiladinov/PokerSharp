@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 abstract class CardsOfAKindSpecification : HandSpecification {
@@ -20,8 +19,14 @@ abstract class CardsOfAKindSpecification : HandSpecification {
             faceValueCounts.Add(cardsAndValue.Key, cardsAndValue.Value.Count);
         }
 
-        var highestCount = (from count in faceValueCounts orderby count descending select count).First();
-        return highestCount.Value == numberOfCards;
+        int highestCount = 0;
+        foreach (KeyValuePair<int, int> faceValueAndCount in faceValueCounts) {
+            if (faceValueAndCount.Value > highestCount) {
+                highestCount = faceValueAndCount.Value;
+            }
+        }
+
+        return highestCount == numberOfCards;
     }
 
     public override Hand newHand(Hand Hand) {
