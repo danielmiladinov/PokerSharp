@@ -1,10 +1,10 @@
 using System;
 
 class Suit {
-    const string CLUBS = "Clubs";
-    const string HEARTS = "Hearts";
-    const string SPADES = "Spades";
-    const string DIAMONDS = "Diamonds";
+    public const string CLUBS = "Clubs";
+    public const string HEARTS = "Hearts";
+    public const string SPADES = "Spades";
+    public const string DIAMONDS = "Diamonds";
 
     private string suitName;
     private int suitValue;
