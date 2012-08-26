@@ -1,6 +1,6 @@
 class Diamonds : Card {
 
     public Diamonds(int faceValue) : base(faceValue) {
-        Suit = Suit::Diamonds();
+        Suit = Suit.Diamonds();
     }
 }
