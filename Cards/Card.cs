@@ -1,12 +1,12 @@
 abstract class Card {
-    const int TWO = 2;
-    const int THREE = 3;
-    const int FOUR = 4;
-    const int FIVE = 5;
-    const int JACK = 11;
-    const int QUEEN = 12;
-    const int KING = 13;
-    const int ACE = 14;
+    public const int TWO = 2;
+    public const int THREE = 3;
+    public const int FOUR = 4;
+    public const int FIVE = 5;
+    public const int JACK = 11;
+    public const int QUEEN = 12;
+    public const int KING = 13;
+    public const int ACE = 14;
 
     protected int faceValue;
     protected Suit Suit;
