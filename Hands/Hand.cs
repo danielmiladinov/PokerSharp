@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -47,11 +49,26 @@ class Hand {
     }
 
     public override string ToString() {
-        return "Fix Me When It Builds!";
+        var handString = new StringBuilder();
+        handString.Append(getHandName());
+        handString.Append("(");
+        handString.Append(String.Join(", ", (from card in cards select card.ToString())));
+        handString.Append(")");
+        return handString.ToString();
     }
 
-    protected string getHandType() {
-        return "What's My Hand Type?";
+    protected string getHandName() {
+        var handName = new StringBuilder();
+        var className = GetType().ToString();
+
+        foreach (var c in className) {
+            if (char.IsUpper(c) && handName.Length > 0) {
+                handName.Append(" ");
+            }
+            handName.Append(c);
+        }
+
+        return handName.ToString();
     }
 
     private bool hasCardOfFaceValue(int faceValue) {
