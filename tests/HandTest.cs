@@ -1,16 +1,18 @@
+using System.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 class HandTest : PokerTestCase {
 
-    [Test, TestCaseFixture("SomeCardsAndTheirExpectedHighCards")]
+    [Test, TestCaseSource("SomeCardsAndTheirExpectedHighCards")]
     public void willReturnTheCorrectHighFaceValueCard(string card1, string card2, string card3, string card4, string card5, string expectedHighCard) {
-        Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
+        var Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
         Assert.AreEqual(makeCardFromString(expectedHighCard), Hand.getHighCard());
     }
 
-    [Test, TestCaseFixture("SomeCardsAndTheirExpectedHighCards")]
+    [Test, TestCaseSource("SomeCardsAndTheirExpectedHighCards")]
     public void isWheelShouldReturnFalseWhenTheHandIsNotAWheel(string card1, string card2, string card3, string card4, string card5) {
-        Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
+        var Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
         Assert.IsFalse(Hand.isWheel());
     }
 
@@ -23,53 +25,53 @@ class HandTest : PokerTestCase {
 
     [Test]
     public void willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
-        Hand = new Hand(asCardArray("5-C", "4-C", "3-C", "2-C", "A-C"));
-        Assert.AreEqual(fiveOf(Clubs()), Hand.getHighCard());
+        var Hand = new Hand(asCardArray("5-C", "4-C", "3-C", "2-C", "A-C"));
+        Assert.AreEqual(Cards.fiveOf(Suit.Clubs()), Hand.getHighCard());
     }
 
     [Test]
     public void twoHandsWithDifferentCardsShouldNotBeEqual() {
-        Hand = new Hand(asCardArray("J-H", "A-S", "5-C", "7-D", "3-C"));
-        OtherHand = new Hand(asCardArray("A-C", "K-D", "4-D", "3-S", "6-H"));
+        var Hand = new Hand(asCardArray("J-H", "A-S", "5-C", "7-D", "3-C"));
+        var OtherHand = new Hand(asCardArray("A-C", "K-D", "4-D", "3-S", "6-H"));
 
         Assert.IsFalse(Hand.equals(OtherHand));
     }
 
     [Test]
     public void twoHandsWithTheSameCardsShouldBeEqual() {
-        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
-        OtherHand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var OtherHand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
 
         Assert.IsTrue(Hand.equals(OtherHand));
     }
 
     [Test]
     public void twoHandsWithTheSameCardsInDifferentOrderShouldAlsoBeEqual() {
-        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
-        OtherHand = new Hand(asCardArray("Q-D", "10-S", "K-H", "A-S", "J-C"));
+        var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var OtherHand = new Hand(asCardArray("Q-D", "10-S", "K-H", "A-S", "J-C"));
 
         Assert.IsTrue(Hand.equals(OtherHand));
     }
 
     [Test]
     public void aHandShouldBeAbleToProperlyRepresentItselfAsAString() {
-        Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
         Assert.AreEqual("Hand(A-S, K-H, Q-D, J-C, 10-S)", Hand.ToString());
     }
 
 
    [Test]
     public void aHandWithAMultipleWordNameShouldBeAbleToProperlyRepresentItselfAsAStringAsWell() {
-        RoyalFlush = new RoyalFlush(asCardArray("A-S", "K-S", "Q-S", "J-S", "10-S"));
+        var RoyalFlush = new RoyalFlush(asCardArray("A-S", "K-S", "Q-S", "J-S", "10-S"));
         Assert.AreEqual("Royal Flush(A-S, K-S, Q-S, J-S, 10-S)", RoyalFlush.ToString());
     }
 
-    protected Card[] asCardArray(params string[] cardStrings) {
+    protected List<Card> asCardArray(params string[] cardStrings) {
         return cardStrings.Select(
             cardString => {
-                CardBuilder = new CardBuilder();
+                var CardBuilder = new CardBuilder();
                 return CardBuilder.fromString(cardString);
             }
-        );
+        ).ToList();
     }
 }
