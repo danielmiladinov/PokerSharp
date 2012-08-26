@@ -1,11 +1,11 @@
 using NUnit.Framework;
 
-[TextFixture]
+[TestFixture]
 class DeckTest {
 
     private Deck Deck;
 
-    [Setup]
+    [SetUp]
     protected void setUp() {
         Deck = new Deck();
     }
