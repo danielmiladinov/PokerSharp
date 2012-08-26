@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 class Hand {
 
-    private List<Card> Cards;
+    private List<Card> cards;
 
     public Hand(List<Card> Cards) {
-        this.Cards = Cards;
+        cards = Cards;
     }
 
     public List<Card> getCards() {
-        return Cards;
+        return cards;
     }
 
     public Card getHighCard() {
         Card HighCard = null;
 
         if (isWheel()) {
-            HighCard = (from Card in Cards where Card.getFaceValue() == 5 select Card).First();
+            HighCard = (from card in cards where card.getFaceValue() == 5 select card).First();
         } else {
-            HighCard = (from Card in Cards orderby Card.getFaceValue() descending select Card).First();
+            HighCard = (from card in cards orderby card.getFaceValue() descending select card).First();
         }
 
         return HighCard;
@@ -30,19 +30,19 @@ class Hand {
     }
 
     public bool equals(Hand OtherHand) {
-        CardsNotInOtherHand = array_diff(getCards(), OtherHand->getCards());
-        handsAreEqual = count(CardsNotInOtherHand) == 0;
+        var CardsNotInOtherHand = OtherHand.getCards().Except(cards);
+        var handsAreEqual = (CardsNotInOtherHand.Count() == 0);
         return handsAreEqual;
     }
 
     public bool isWheel() {
         return (
-            Cards.Count == 5 &&
-            hasCardOfFaceValue(Card::FIVE) &&
-            hasCardOfFaceValue(Card::FOUR) &&
-            hasCardOfFaceValue(Card::THREE) &&
-            hasCardOfFaceValue(Card::TWO) &&
-            hasCardOfFaceValue(Card::ACE)
+            cards.Count == 5 &&
+            hasCardOfFaceValue(Card.FIVE) &&
+            hasCardOfFaceValue(Card.FOUR) &&
+            hasCardOfFaceValue(Card.THREE) &&
+            hasCardOfFaceValue(Card.TWO) &&
+            hasCardOfFaceValue(Card.ACE)
         );
     }
 
@@ -55,6 +55,6 @@ class Hand {
     }
 
     private bool hasCardOfFaceValue(int faceValue) {
-        return (from Card in Cards where Card.getFaceValue() == faceValue select Card).Count() > 0;
+        return (from card in cards where card.getFaceValue() == faceValue select card).Count() > 0;
     }
 }
