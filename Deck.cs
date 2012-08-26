@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 class Deck {
@@ -8,11 +9,11 @@ class Deck {
         cards = new List<Card>();
     }
 
-    public void add(Card Card) {
-        if (cards.Contains(Card)) {
+    public void add(Card card) {
+        if ((from deckCard in cards select deckCard.ToString()).ToList().Contains(card.ToString())) {
             throw new DeckIntegrityException("Cannot contain the same card twice!");
         } else {
-            cards.Add(Card);
+            cards.Add(card);
         }
     }
 
