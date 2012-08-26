@@ -12,41 +12,42 @@ class StraightFlushSpecification : HandSpecification {
         var ClubsCards = new List<Card>();
         var DiamondsCards = new List<Card>();
 
-        var Cards = Hand.getCards().Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
+        var Cards = Hand.getCards();
+        Cards.Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
 
         foreach (var Card in Cards) {
             switch (Card.getSuit()) {
-                case Suit::SPADES:
+                case Suit.SPADES:
                     if (canAddCardTo(SpadesCards, Card)) {
                         SpadesCards.Add(Card);
-                        if (count(SpadesCards) == 5) {
+                        if (SpadesCards.Count == 5) {
                             return new StraightFlush(SpadesCards);
                         }
                     }
                     break;
 
-                case Suit::HEARTS:
+                case Suit.HEARTS:
                     if (canAddCardTo(HeartsCards, Card)) {
                         HeartsCards.Add(Card);
-                        if (count(HeartsCards) == 5) {
+                        if (HeartsCards.Count == 5) {
                             return new StraightFlush(HeartsCards);
                         }
                     }
                     break;
 
-                case Suit::CLUBS:
+                case Suit.CLUBS:
                     if (canAddCardTo(ClubsCards, Card)) {
                         ClubsCards.Add(Card);
-                        if (count(ClubsCards) == 5) {
+                        if (ClubsCards.Count == 5) {
                             return new StraightFlush(ClubsCards);
                         }
                     }
                     break;
 
-                case Suit::DIAMONDS:
+                case Suit.DIAMONDS:
                     if (canAddCardTo(DiamondsCards, Card)) {
                         DiamondsCards.Add(Card);
-                        if (count(DiamondsCards) == 5) {
+                        if (DiamondsCards.Count == 5) {
                             return new StraightFlush(DiamondsCards);
                         }
                     }
@@ -57,11 +58,11 @@ class StraightFlushSpecification : HandSpecification {
         return null;
     }
 
-    private bool canAddCardTo(List<Card> Cards, Card Card) {
-        numCards = Cards.Count;
+    private bool canAddCardTo(List<Card> cards, Card Card) {
+        var numCards = cards.Count;
 
         if (numCards > 0) {
-            PreviousCard = Cards.toArray()[numCards - 1];
+            var PreviousCard = cards[cards.Count - 1];
 
             if (PreviousCard.isAce() && Card.getFaceValue() == 5) {
                 return true;
