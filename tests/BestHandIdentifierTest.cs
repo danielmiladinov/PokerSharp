@@ -171,7 +171,7 @@ class BestHandIdentifierTest : PokerTestCase {
     [Test, TestCaseSource("getSomeCardsAndTheExpectedBestHandFromThem")]
     public void shouldBeAbleToIdentifyTheBestPossibleHandOutOfSeveralPossible(List<Card> Cards, Hand ExpectedBestHand) {
         IdentifiedHand = HandIdentifier.identify(Cards);
-        Assert.AreEqual(ExpectedBestHand, IdentifiedHand, "{0} was expected but {1} was identified", ExpectedBestHand, IdentifiedHand);
+        Assert.AreEqual(ExpectedBestHand.ToString(), IdentifiedHand.ToString(), "{0} was expected but {1} was identified", ExpectedBestHand.ToString(), IdentifiedHand.ToString());
     }
 
     public object[] getSomeCardsAndTheExpectedBestHandFromThem() {
@@ -252,33 +252,37 @@ class BestHandIdentifierTest : PokerTestCase {
                 string[] cardStrings = (string[]) datum[0];
                 string[] expectedCardStrings = (string[]) datum[2];
 
-                IEnumerable<Card> ProvidedCards = cardStrings.Select(
+                List<Card> ProvidedCards = cardStrings.Select(
                     cardString => {
                         var cb = new CardBuilder(); return cb.fromString(cardString);
                     }
-                );
+                ).ToList();
 
-                IEnumerable<Card> ExpectedCards = expectedCardStrings.Select(
+                List<Card> ExpectedCards = expectedCardStrings.Select(
                     cardString => {
                         var cb = new CardBuilder(); return cb.fromString(cardString);
                     }
-                );
+                ).ToList();
 
                 string cardClass = (string) datum[1];
-                Hand ExpectedHand = (Hand) Activator.CreateInstance(
-                    null,
-                    cardClass,
-                    false,
-                    null,
-                    null,
-                    new object[] { ExpectedCards },
-                    null,
-                    null
-                );
+                var Instantiator = new Dictionary<string, Func<List<Card>, Hand>> {
+                    {"Flush", cards => { return new Flush(cards); } },
+                    {"FourOfAKind", cards => { return new FourOfAKind(cards); } },
+                    {"FullHouse", cards => { return new FullHouse(cards); } },
+                    {"HighCard", cards => { return new HighCard(cards); } },
+                    {"RoyalFlush", cards => { return new RoyalFlush(cards); } },
+                    {"SteelWheel", cards => { return new SteelWheel(cards); } },
+                    {"Straight", cards => { return new Straight(cards); } },
+                    {"StraightFlush", cards => { return new StraightFlush(cards); } },
+                    {"ThreeOfAKind", cards => { return new ThreeOfAKind(cards); } },
+                    {"TwoOfAKind", cards => { return new TwoOfAKind(cards); } },
+                    {"TwoPair", cards => { return new TwoPair(cards); } },
+                    {"Wheel", cards => { return new Wheel(cards); } },
+                };
 
-                return new object[] { ProvidedCards, ExpectedHand };
+                return new object[] { ProvidedCards, Instantiator[cardClass].Invoke(ExpectedCards) };
             }
-        );
+        ).ToArray();
     }
 
     private string printCards(List<Card> Cards) {
