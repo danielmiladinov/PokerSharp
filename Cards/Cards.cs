@@ -6,7 +6,7 @@ using System.Collections.Generic;
 class Cards {
     
     public static Card aceOf(Suit Suit) {
-        return Suit.getCard(Card::ACE);
+        return Suit.getCard(Card.ACE);
     }
 
     public static Card twoOf(Suit Suit) {
@@ -46,15 +46,15 @@ class Cards {
     }
 
     public static Card jackOf(Suit Suit) {
-        return Suit.getCard(Card::JACK);
+        return Suit.getCard(Card.JACK);
     }
 
     public static Card queenOf(Suit Suit) {
-        return Suit.getCard(Card::QUEEN);
+        return Suit.getCard(Card.QUEEN);
     }
 
     public static Card kingOf(Suit Suit) {
-        return Suit.getCard(Card::KING);
+        return Suit.getCard(Card.KING);
     }
 
     public static Dictionary<int, List<Card>> getCardsGroupedByValue(List<Card> Cards) {
@@ -65,7 +65,7 @@ class Cards {
                 CardsGroupedByValues.Add(Card.getFaceValue(), new List<Card>());
             }
 
-            CardsGroupedByValues.TryGetValue(Card.getFaceValue()).Add(Card);
+            CardsGroupedByValues[Card.getFaceValue()].Add(Card);
         }
 
         return CardsGroupedByValues;
