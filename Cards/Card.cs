@@ -28,27 +28,27 @@ abstract class Card {
     }
 
     public bool isAce() {
-        return faceValue == Card::ACE;
+        return faceValue == ACE;
     }
 
     public override string ToString() {
         string faceValue;
 
         switch (getFaceValue()) {
-            case self::ACE:
+            case ACE:
                 faceValue = "A";
                 break;
-            case self::KING:
+            case KING:
                 faceValue = "K";
                 break;
-            case self::QUEEN:
+            case QUEEN:
                 faceValue = "Q";
                 break;
-            case self::JACK:
+            case JACK:
                 faceValue = "J";
                 break;
             default:
-                faceValue = getFaceValue();
+                faceValue = getFaceValue().ToString();
                 break;
         }
 
