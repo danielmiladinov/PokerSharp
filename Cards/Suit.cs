@@ -39,6 +39,12 @@ class Suit {
     }
 
     public Card getCard(int cardValue) {
-        return (Card) Activator.CreateInstance(GetType(), new {cardValue});
+        switch (suitName) {
+            case SPADES: return new Spades(cardValue);
+            case HEARTS: return new Hearts(cardValue);
+            case CLUBS: return new Clubs(cardValue);
+            case DIAMONDS: return new Diamonds(cardValue);
+            default: return null;
+        }
     }
 }
