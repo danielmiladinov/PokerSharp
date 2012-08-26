@@ -1,7 +1,7 @@
 class CardBuilder {
 
     public Card fromString(string cardString) {
-        var cardStringAsArray = cardString.Split("-");
+        var cardStringAsArray = cardString.Split("-".ToCharArray());
 
         if (cardStringAsArray.Length != 2) {
             throw new CardBuilderException("Invalid card string");
@@ -10,55 +10,59 @@ class CardBuilder {
         var faceValue = cardStringAsArray[0];
         var suit = cardStringAsArray[1];
 
-        faceValue = convertValueFromLetterToNumber(faceValue);
+        var faceValueIntValue = convertValueFromLetterToNumber(faceValue);
 
-        if (faceValue > Card::ACE || faceValue < 2) {
+        if (faceValueIntValue > Card.ACE || faceValueIntValue < 2) {
             throw new CardBuilderException("Invalid face value");
         }
 
+        Card c;
+
         switch (suit) {
             case "D":
-                Card = new Diamonds(faceValue);
+                c = new Diamonds(faceValueIntValue);
                 break;
 
             case "H":
-                Card = new Hearts(faceValue);
+                c = new Hearts(faceValueIntValue);
                 break;
 
             case "S":
-                Card = new Spades(faceValue);
+                c = new Spades(faceValueIntValue);
                 break;
 
             case "C":
-                Card = new Clubs(faceValue);
+                c = new Clubs(faceValueIntValue);
                 break;
 
             default:
                 throw new CardBuilderException("Invalid suit");
         }
 
-        return Card;
+        return c;
     }
 
     private int convertValueFromLetterToNumber(string faceValue) {
+        int faceValueIntValue = 0;
+
         switch (faceValue) {
             case "A":
-                faceValue = Card::ACE;
+                faceValueIntValue = Card.ACE;
                 break;
 
             case "J":
-                faceValue = Card::JACK;
+                faceValueIntValue = Card.JACK;
                 break;
 
             case "Q":
-                faceValue = Card::QUEEN;
+                faceValueIntValue = Card.QUEEN;
                 break;
 
             case "K":
-                faceValue = Card::KING;
+                faceValueIntValue = Card.KING;
                 break;
         }
 
-        return faceValue;
+        return faceValueIntValue;
     }
 }
