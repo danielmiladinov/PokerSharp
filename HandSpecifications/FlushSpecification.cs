@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 class FlushSpecification : HandSpecification {
 
@@ -13,30 +14,30 @@ class FlushSpecification : HandSpecification {
 
         foreach (var Card in Hand.getCards()) {
             switch (Card.getSuit()) {
-                case Suit::SPADES:
+                case Suit.SPADES:
                     SpadesCards.Add(Card);
-                    if (SpadesCards.Length() == 5) {
+                    if (SpadesCards.Count == 5) {
                         return new Flush(SpadesCards);
                     }
                     break;
 
-                case Suit::HEARTS:
+                case Suit.HEARTS:
                     HeartsCards.Add(Card);
-                    if (HeartsCards.Length() == 5) {
+                    if (HeartsCards.Count == 5) {
                         return new Flush(HeartsCards);
                     }
                     break;
 
-                case Suit::CLUBS:
+                case Suit.CLUBS:
                     ClubsCards.Add(Card);
-                    if (ClubsCards.Length() == 5) {
+                    if (ClubsCards.Count == 5) {
                         return new Flush(ClubsCards);
                     }
                     break;
 
-                case Suit::DIAMONDS:
+                case Suit.DIAMONDS:
                     DiamondsCards.Add(Card);
-                    if (DiamondsCards.Length() == 5) {
+                    if (DiamondsCards.Count == 5) {
                         return new Flush(DiamondsCards);
                     }
                     break;
