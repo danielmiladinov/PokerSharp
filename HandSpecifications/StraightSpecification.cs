@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 class StraightSpecification : HandSpecification {
 
@@ -9,7 +10,8 @@ class StraightSpecification : HandSpecification {
         var StraightCards = new List<Card>();
         Card PreviousCard = null;
 
-        Cards = Hand.getCards().Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
+        var Cards = Hand.getCards();
+        Cards.Sort((Card1, Card2) => { return Card1.compareTo(Card2); });
 
         foreach (var Card in Cards) {
             if (PreviousCard is Card) {
@@ -20,7 +22,7 @@ class StraightSpecification : HandSpecification {
                 } else if (PreviousCard.getFaceValue() - 1 == Card.getFaceValue()) {
                     StraightCards.Add(Card);
                 } else {
-                    StraightCards = new List<Card>(Card);
+                    StraightCards = new List<Card> { Card };
                 }
             } else {
                 StraightCards.Add(Card);
