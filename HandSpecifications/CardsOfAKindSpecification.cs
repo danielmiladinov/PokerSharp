@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 abstract class CardsOfAKindSpecification : HandSpecification {
@@ -29,7 +30,42 @@ abstract class CardsOfAKindSpecification : HandSpecification {
         return highestCount == numberOfCards;
     }
 
-    public override Hand newHand(Hand Hand) {
-        return null;
+    public override Hand newHand(Hand hand) {
+        var groupedByValue = hand.getCardsGroupedByValues();
+        var handCards = groupedByValue.First().Value;
+        groupedByValue.Remove(groupedByValue.First().Key);
+
+        if (handCards.Count == numberOfCards) {
+            handCards.Add(groupedByValue.First().Value.First());
+            groupedByValue.Remove(groupedByValue.First().Key);
+        } else {
+            handCards.AddRange(
+                groupedByValue.Where(
+                    cardsOfValue => {
+                        return cardsOfValue.Value.Count == numberOfCards;
+                    }
+                ).First().Value
+            );
+        }
+
+        int cardsLeftToAdd = 5 - handCards.Count;
+
+        while (cardsLeftToAdd > 0 && groupedByValue.Count > 0) {
+            var cardsOfValue = groupedByValue.First().Value;
+            groupedByValue.Remove(groupedByValue.First().Key);
+
+            while (cardsLeftToAdd > 0 && cardsOfValue.Count > 0) {
+                var nextCard = cardsOfValue.First();
+                cardsOfValue.Remove(nextCard);
+                handCards.Add(nextCard);
+                cardsLeftToAdd--;
+            }
+        }
+
+        if (handCards.Count == 5) {
+            return (Hand) Activator.CreateInstance(handClass, new object[] { handCards });
+        } else {
+            return null;
+        }
     }
 }
