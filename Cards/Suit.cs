@@ -1,3 +1,5 @@
+using System;
+
 class Suit {
     const string CLUBS = "Clubs";
     const string HEARTS = "Hearts";
