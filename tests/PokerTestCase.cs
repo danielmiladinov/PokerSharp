@@ -17,4 +17,9 @@ abstract class PokerTestCase {
 
         return Cards;
     }
+
+    protected Card makeCardFromString(string cardString) {
+        var CardBuilder = new CardBuilder();
+        return CardBuilder.fromString(cardString);
+    }
 }
