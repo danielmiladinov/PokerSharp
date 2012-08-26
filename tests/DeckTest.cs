@@ -18,42 +18,42 @@ class DeckTest {
 
     [Test]
     public void addingACardShouldIncreaseTheSizeByOne() {
-        Deck.add(aceOf(Spades()));
+        Deck.add(Cards.aceOf(Suit.Spades()));
         Assert.AreEqual(1, Deck.size());
     }
 
     [Test]
     [ExpectedException(typeof(DeckIntegrityException))]
     public void addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
-        Deck.add(twoOf(Hearts()));
-        Deck.add(twoOf(Hearts()));
+        Deck.add(Cards.twoOf(Suit.Hearts()));
+        Deck.add(Cards.twoOf(Suit.Hearts()));
     }
 
     [Test]
     public void populateShouldFillTheDeckWithAll52Cards() {
         var ExpectedCards = new List<Card>();
 
-        var Suits = {
-            Spades(),
-            Hearts(),
-            Clubs(),
-            Diamonds(),
+        Suit[] Suits = {
+            Suit.Spades(),
+            Suit.Hearts(),
+            Suit.Clubs(),
+            Suit.Diamonds(),
         };
 
-        foreach (var Suit in Suits) {
-            ExpectedCards.Add(aceOf(Suit));
-            ExpectedCards.Add(twoOf(Suit));
-            ExpectedCards.Add(threeOf(Suit));
-            ExpectedCards.Add(fourOf(Suit));
-            ExpectedCards.Add(fiveOf(Suit));
-            ExpectedCards.Add(sixOf(Suit));
-            ExpectedCards.Add(sevenOf(Suit));
-            ExpectedCards.Add(eightOf(Suit));
-            ExpectedCards.Add(nineOf(Suit));
-            ExpectedCards.Add(tenOf(Suit));
-            ExpectedCards.Add(jackOf(Suit));
-            ExpectedCards.Add(queenOf(Suit));
-            ExpectedCards.Add(kingOf(Suit));
+        foreach (var suit in Suits) {
+            ExpectedCards.Add(Cards.aceOf(suit));
+            ExpectedCards.Add(Cards.twoOf(suit));
+            ExpectedCards.Add(Cards.threeOf(suit));
+            ExpectedCards.Add(Cards.fourOf(suit));
+            ExpectedCards.Add(Cards.fiveOf(suit));
+            ExpectedCards.Add(Cards.sixOf(suit));
+            ExpectedCards.Add(Cards.sevenOf(suit));
+            ExpectedCards.Add(Cards.eightOf(suit));
+            ExpectedCards.Add(Cards.nineOf(suit));
+            ExpectedCards.Add(Cards.tenOf(suit));
+            ExpectedCards.Add(Cards.jackOf(suit));
+            ExpectedCards.Add(Cards.queenOf(suit));
+            ExpectedCards.Add(Cards.kingOf(suit));
         }
 
         Deck.populate();
