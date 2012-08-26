@@ -1,9 +1,10 @@
 using System;
 using System.Text;
+using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-[TextFixture]
+[TestFixture]
 class FullHouseSpecificationTest : PokerTestCase {
 
     private FullHouseSpecification Specification;
@@ -14,14 +15,14 @@ class FullHouseSpecificationTest : PokerTestCase {
 
     [Test, TestCaseSource("getManyPossibleFullHouses")]
     public void shouldBeAbleToIdentifyAnyFullHouse(string card1, string card2, string card3, string card4, string card5) {
-        Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
-        Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid FullHouse({0}, {1}, {2}, {3}, {4}), why did not satisfy the specification?", card1, card2, card3, card4, card5);
+        var Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
+        Assert.IsTrue(Specification.isSatisfiedBy(Hand), "This is a valid FullHouse({0}, {1}, {2}, {3}, {4}), why did not satisfy the specification?", card1, card2, card3, card4, card5);
     }
 
     [Test]
     public void shouldNotBeSatisfiedByJustAThreeOfAKind() {
-        Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
-        Assert.IsFalse(Specification->isSatisfiedBy(Hand), "No ThreeOfAKind can be a FullHouse!");
+        var Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
+        Assert.IsFalse(Specification.isSatisfiedBy(Hand), "No ThreeOfAKind can be a FullHouse!");
     }
 
     public object[] getManyPossibleFullHouses() {
@@ -42,7 +43,7 @@ class FullHouseSpecificationTest : PokerTestCase {
         var fullHouses = new List<string[]>();
 
         foreach (var trioValue in values) {
-            var otherValues = values.Except(new string[] { triovalue });
+            var otherValues = values.Except(new string[] { trioValue });
 
             IEnumerable<string> trio = getRandomSuits.Invoke(3).Select(
                 suit => {
