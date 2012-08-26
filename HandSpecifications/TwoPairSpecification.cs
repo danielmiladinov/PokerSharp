@@ -4,7 +4,7 @@ class TwoPairSpecification : HandSpecification {
         int numPairsSeen = 0;
         var CardsGroupedByValues = Hand.getCardsGroupedByValues();
         foreach (var Cards in CardsGroupedByValues) {
-            if (Cards.Count == 2) {
+            if (Cards.Value.Count == 2) {
                 numPairsSeen++;
             }
         }
