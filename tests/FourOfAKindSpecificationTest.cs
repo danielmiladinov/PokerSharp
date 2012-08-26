@@ -1,14 +1,15 @@
 using System;
 using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-[TextFixture]
+[TestFixture]
 class FourOfAKindSpecificationTest : PokerTestCase {
 
     private FourOfAKindSpecification Specification;
 
-    [Setup]
+    [SetUp]
     protected void setUp() {
         Specification = new FourOfAKindSpecification();
     }
@@ -16,18 +17,18 @@ class FourOfAKindSpecificationTest : PokerTestCase {
     [Test, TestCaseSource("getAllPossibleFoursOfAKindEachWithARandomKicker")]
     public void shouldBeAbleToIdentifyAFourOfAKind(string card1, string card2, string card3, string card4, string card5) {
         var Hand = new Hand(theFiveCardsAre(card1, card2, card3, card4, card5));
-        Assert.IsTrue(Specification->isSatisfiedBy(Hand), "This is a valid FourOfAKind, why did it not satisfy the specification?");
+        Assert.IsTrue(Specification.isSatisfiedBy(Hand), "This is a valid FourOfAKind, why did it not satisfy the specification?");
     }
 
     [Test]
     public void shouldNotBeSatisfiedByJustAThreeOfAKind() {
-        Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
-        Assert.IsFalse(Specification->isSatisfiedBy(Hand), "No ThreeOfAKind can be a FourOfAKind!");
+        var Hand = new Hand(theFiveCardsAre("A-S", "A-H", "A-C", "J-D", "3-S"));
+        Assert.IsFalse(Specification.isSatisfiedBy(Hand), "No ThreeOfAKind can be a FourOfAKind!");
     }
 
     public object[] getAllPossibleFoursOfAKindEachWithARandomKicker() {
-        suits = new string[] { "S", "H", "C", "D" };
-        values = new string[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        var suits = new string[] { "S", "H", "C", "D" };
+        var values = new string[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
         var foursOfAKind = new List<string[]>();
         var random = new Random();
 
