@@ -11,7 +11,7 @@ class HandTest : PokerTestCase {
     }
 
     [Test, TestCaseSource("SomeCardsAndTheirExpectedHighCards")]
-    public void isWheelShouldReturnFalseWhenTheHandIsNotAWheel(string card1, string card2, string card3, string card4, string card5) {
+    public void isWheelShouldReturnFalseWhenTheHandIsNotAWheel(string card1, string card2, string card3, string card4, string card5, string highCardSeemsToBeUnusedHere) {
         var Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
         Assert.IsFalse(Hand.isWheel());
     }
