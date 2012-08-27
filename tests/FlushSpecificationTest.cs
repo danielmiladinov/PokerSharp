@@ -1,9 +1,11 @@
 using NUnit.Framework;
 
+[TestFixture]
 class FlushSpecificationTest : PokerTestCase {
 
     private FlushSpecification Specification;
 
+    [SetUp]
     protected void setUp() {
         Specification = new FlushSpecification();
     }

@@ -9,6 +9,7 @@ class FullHouseSpecificationTest : PokerTestCase {
 
     private FullHouseSpecification Specification;
 
+    [SetUp]
     protected void setUp() {
         Specification = new FullHouseSpecification();
     }
