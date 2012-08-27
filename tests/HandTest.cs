@@ -34,7 +34,7 @@ class HandTest : PokerTestCase {
         var Hand = new Hand(asCardArray("J-H", "A-S", "5-C", "7-D", "3-C"));
         var OtherHand = new Hand(asCardArray("A-C", "K-D", "4-D", "3-S", "6-H"));
 
-        Assert.IsFalse(Hand.equals(OtherHand));
+        Assert.IsFalse(Hand.Equals(OtherHand));
     }
 
     [Test]
@@ -42,7 +42,7 @@ class HandTest : PokerTestCase {
         var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
         var OtherHand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
 
-        Assert.IsTrue(Hand.equals(OtherHand));
+        Assert.IsTrue(Hand.Equals(OtherHand));
     }
 
     [Test]
@@ -50,7 +50,7 @@ class HandTest : PokerTestCase {
         var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
         var OtherHand = new Hand(asCardArray("Q-D", "10-S", "K-H", "A-S", "J-C"));
 
-        Assert.IsTrue(Hand.equals(OtherHand));
+        Assert.IsTrue(Hand.Equals(OtherHand));
     }
 
     [Test]

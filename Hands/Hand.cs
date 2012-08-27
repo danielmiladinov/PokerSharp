@@ -31,10 +31,16 @@ class Hand {
         return Cards.getCardsGroupedByValue(getCards());
     }
 
-    public bool equals(Hand OtherHand) {
-        var CardsNotInOtherHand = OtherHand.getCards().Except(cards);
-        var handsAreEqual = (CardsNotInOtherHand.Count() == 0);
-        return handsAreEqual;
+    public override bool Equals(object obj) {
+        Hand OtherHand = obj as Hand;
+
+        if (OtherHand == null) {
+            return false;
+        } else {
+            var CardsNotInOtherHand = OtherHand.getCards().Except(cards);
+            var handsAreEqual = (CardsNotInOtherHand.Count() == 0);
+            return handsAreEqual;
+        }
     }
 
     public bool isWheel() {
