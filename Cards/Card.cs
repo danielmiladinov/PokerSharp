@@ -84,4 +84,8 @@ abstract class Card {
             return compareTo(cardObj) == 0;
         }
     }
+
+    public override int GetHashCode() {
+        return ToString().GetHashCode();
+    }
 }

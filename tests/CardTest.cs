@@ -54,6 +54,13 @@ class CardTest {
         Assert.IsFalse(CurrentCard.Equals(OtherCard));
     }
 
+    [Test]
+    public void twoEqualCardsShouldHaveTheSameHashCode() {
+        theCurrentCardIs("A-S");
+        andTheOtherCardIs("A-S");
+        Assert.AreEqual(CurrentCard.GetHashCode(), OtherCard.GetHashCode());
+    }
+
     private Card makeCardFromString(string cardString) {
         var CardBuilder = new CardBuilder();
         return CardBuilder.fromString(cardString);
