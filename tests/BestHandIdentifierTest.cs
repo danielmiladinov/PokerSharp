@@ -168,6 +168,26 @@ class BestHandIdentifierTest : PokerTestCase {
         new string[] {"10-C", "J-C", "Q-C", "K-C", "A-C",},
     };
 
+    [Test]
+    public void shouldBeAbleToIdentifyFourOfAKindWhereHighCardIsNotOneOfTheFourOfAKind() {
+        var ProvidedCards = new string[] {"K-C", "Q-S", "J-H", "9-D", "6-D", "5-S", "3-S", "3-H", "3-C", "3-D"}.Select(
+            cardString => {
+                var cb = new CardBuilder(); return cb.fromString(cardString);
+            }
+        ).ToList();
+
+        var ExpectedBestHand = new FourOfAKind(
+            new string[] {"K-C", "3-S", "3-H", "3-C", "3-D"}.Select(
+                cardString => {
+                    var cb = new CardBuilder(); return cb.fromString(cardString);
+                }
+            ).ToList()
+        );
+
+        IdentifiedHand = HandIdentifier.identify(ProvidedCards);
+        Assert.AreEqual(ExpectedBestHand.ToString(), IdentifiedHand.ToString(), "{0} was expected but {1} was identified", ExpectedBestHand.ToString(), IdentifiedHand.ToString());
+    }
+
     [Test, TestCaseSource("getSomeCardsAndTheExpectedBestHandFromThem")]
     public void shouldBeAbleToIdentifyTheBestPossibleHandOutOfSeveralPossible(List<Card> Cards, Hand ExpectedBestHand) {
         IdentifiedHand = HandIdentifier.identify(Cards);
