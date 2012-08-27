@@ -16,7 +16,7 @@ class HandTest : PokerTestCase {
         Assert.IsFalse(Hand.isWheel());
     }
 
-    static object[] getSomeCardsAndTheirExpectedHighCards = {
+    static object[] SomeCardsAndTheirExpectedHighCards = {
         new string[] { "K-C", "7-S", "3-D", "A-H", "10-C", "A-H", },
         new string[] { "2-S", "3-S", "4-S", "6-S", "2-H", "6-S", },
         new string[] { "4-D", "7-C", "6-S", "5-C", "3-H", "7-C", },
