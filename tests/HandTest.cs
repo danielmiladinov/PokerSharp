@@ -54,6 +54,23 @@ class HandTest : PokerTestCase {
     }
 
     [Test]
+    public void twoHandsThatAreEqualShouldHaveTheSameHashCode() {
+        var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var OtherHand = new Hand(asCardArray("Q-D", "10-S", "K-H", "A-S", "J-C"));
+
+        Assert.AreEqual(Hand.GetHashCode(), OtherHand.GetHashCode());
+    }
+
+
+    [Test]
+    public void twoHandsThatAreNotEqualShouldHaveDifferentHashCodes() {
+        var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
+        var OtherHand = new Hand(asCardArray("Q-D", "10-C", "K-H", "A-S", "J-C"));
+
+        Assert.AreNotEqual(Hand.GetHashCode(), OtherHand.GetHashCode());
+    }
+
+    [Test]
     public void aHandShouldBeAbleToProperlyRepresentItselfAsAString() {
         var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
         Assert.AreEqual("Hand(A-S, K-H, Q-D, J-C, 10-S)", Hand.ToString());

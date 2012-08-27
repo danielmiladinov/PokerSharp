@@ -43,6 +43,12 @@ class Hand {
         }
     }
 
+    public override int GetHashCode() {
+        var faceValuesSum = cards.Sum(card => card.getFaceValue());
+        var suitValuesSum = cards.Sum(card => card.getSuitValue());
+        return faceValuesSum * suitValuesSum;
+    }
+
     public bool isWheel() {
         return (
             cards.Count == 5 &&
