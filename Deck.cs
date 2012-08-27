@@ -10,7 +10,7 @@ class Deck {
     }
 
     public void add(Card card) {
-        if ((from deckCard in cards select deckCard.ToString()).ToList().Contains(card.ToString())) {
+        if (cards.Contains(card)) {
             throw new DeckIntegrityException("Cannot contain the same card twice!");
         } else {
             cards.Add(card);

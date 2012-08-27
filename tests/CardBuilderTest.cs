@@ -46,7 +46,7 @@ class CardBuilderTest {
         var ExpectedCard = new Clubs(2);
         var ActualCard = CardBuilder.fromString(validString);
 
-        Assert.AreEqual(ExpectedCard.ToString(), ActualCard.ToString());
+        Assert.AreEqual(ExpectedCard, ActualCard);
     }
 
     [Test]
@@ -55,7 +55,7 @@ class CardBuilderTest {
         var ExpectedCard = new Spades(Card.QUEEN);
         var ActualCard = CardBuilder.fromString(validString);
 
-        Assert.AreEqual(ExpectedCard.ToString(), ActualCard.ToString());
+        Assert.AreEqual(ExpectedCard, ActualCard);
     }
 
     [Test]
@@ -64,7 +64,7 @@ class CardBuilderTest {
         var ExpectedCard = new Hearts(Card.JACK);
         var ActualCard = CardBuilder.fromString(validString);
 
-        Assert.AreEqual(ExpectedCard.ToString(), ActualCard.ToString());
+        Assert.AreEqual(ExpectedCard, ActualCard);
     }
 
     [Test]
@@ -73,7 +73,7 @@ class CardBuilderTest {
         var ExpectedCard = new Diamonds(Card.KING);
         var ActualCard = CardBuilder.fromString(validString);
 
-        Assert.AreEqual(ExpectedCard.ToString(), ActualCard.ToString());
+        Assert.AreEqual(ExpectedCard, ActualCard);
     }
 
     [Test]
@@ -82,6 +82,6 @@ class CardBuilderTest {
         var ExpectedCard = new Clubs(Card.ACE);
         var ActualCard = CardBuilder.fromString(validString);
 
-        Assert.AreEqual(ExpectedCard.ToString(), ActualCard.ToString());
+        Assert.AreEqual(ExpectedCard, ActualCard);
     }
 }

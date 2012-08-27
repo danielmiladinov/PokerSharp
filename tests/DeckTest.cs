@@ -59,9 +59,6 @@ class DeckTest {
 
         Deck.populate();
 
-        Assert.AreEqual(
-            (from card in ExpectedCards select card.ToString()),
-            (from card in Deck.getCards() select card.ToString())
-        );
+        Assert.AreEqual(ExpectedCards, Deck.getCards());
     }
 }

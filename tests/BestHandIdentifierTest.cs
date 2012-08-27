@@ -185,13 +185,13 @@ class BestHandIdentifierTest : PokerTestCase {
         );
 
         IdentifiedHand = HandIdentifier.identify(ProvidedCards);
-        Assert.AreEqual(ExpectedBestHand.ToString(), IdentifiedHand.ToString(), "{0} was expected but {1} was identified", ExpectedBestHand.ToString(), IdentifiedHand.ToString());
+        Assert.AreEqual(ExpectedBestHand, IdentifiedHand, "{0} was expected but {1} was identified", ExpectedBestHand, IdentifiedHand);
     }
 
     [Test, TestCaseSource("getSomeCardsAndTheExpectedBestHandFromThem")]
     public void shouldBeAbleToIdentifyTheBestPossibleHandOutOfSeveralPossible(List<Card> Cards, Hand ExpectedBestHand) {
         IdentifiedHand = HandIdentifier.identify(Cards);
-        Assert.AreEqual(ExpectedBestHand.ToString(), IdentifiedHand.ToString(), "{0} was expected but {1} was identified", ExpectedBestHand.ToString(), IdentifiedHand.ToString());
+        Assert.AreEqual(ExpectedBestHand, IdentifiedHand, "{0} was expected but {1} was identified", ExpectedBestHand, IdentifiedHand);
     }
 
     public object[] getSomeCardsAndTheExpectedBestHandFromThem() {
