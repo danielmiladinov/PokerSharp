@@ -74,4 +74,14 @@ abstract class Card {
     public int compareFaceValue(Card OtherCard) {
         return OtherCard.getFaceValue() - getFaceValue();
     }
+
+    public override bool Equals(object obj) {
+        Card cardObj = obj as Card;
+
+        if (cardObj == null) {
+            return false;
+        } else {
+            return compareTo(cardObj) == 0;
+        }
+    }
 }

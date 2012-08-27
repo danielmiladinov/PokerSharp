@@ -33,6 +33,27 @@ class CardTest {
         theOtherCardShouldBeGreater();
     }
 
+    [Test]
+    public void equalsShouldReturnTrueForTwoCardsWithTheSameSuitAndValue() {
+        theCurrentCardIs("A-S");
+        andTheOtherCardIs("A-S");
+        Assert.IsTrue(CurrentCard.Equals(OtherCard));
+    }
+
+    [Test]
+    public void equalsShouldReturnFalseForTwoCardsWithTheSameSuitButDifferentValue() {
+        theCurrentCardIs("A-S");
+        andTheOtherCardIs("K-S");
+        Assert.IsFalse(CurrentCard.Equals(OtherCard));
+    }
+
+    [Test]
+    public void equalsShouldReturnFalseForTwoCardsWithTheSameValueButDifferentSuit() {
+        theCurrentCardIs("K-D");
+        andTheOtherCardIs("K-C");
+        Assert.IsFalse(CurrentCard.Equals(OtherCard));
+    }
+
     private Card makeCardFromString(string cardString) {
         var CardBuilder = new CardBuilder();
         return CardBuilder.fromString(cardString);
