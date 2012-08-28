@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5B758CAF-66AB-440A-A115-BDBD118B433C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Poker3</RootNamespace>
+    <AssemblyName>Poker3</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="tests\BestHandIdentifierTest.cs" />
+    <Compile Include="tests\CardBuilderTest.cs" />
+    <Compile Include="tests\CardTest.cs" />
+    <Compile Include="tests\DeckTest.cs" />
+    <Compile Include="tests\FlushSpecificationTest.cs" />
+    <Compile Include="tests\FourOfAKindSpecificationTest.cs" />
+    <Compile Include="tests\FullHouseSpecificationTest.cs" />
+    <Compile Include="tests\HandTest.cs" />
+    <Compile Include="tests\PokerTestCase.cs" />
+    <Compile Include="tests\RoyalFlushSpecificationTest.cs" />
+    <Compile Include="tests\SteelWheelSpecificationTest.cs" />
+    <Compile Include="tests\StraightFlushSpecificationTest.cs" />
+    <Compile Include="tests\StraightSpecificationTest.cs" />
+    <Compile Include="tests\ThreeOfAKindSpecificationTest.cs" />
+    <Compile Include="tests\TwoOfAKindSpecificationTest.cs" />
+    <Compile Include="tests\TwoPairSpecificationTest.cs" />
+    <Compile Include="tests\WheelSpecificationTest.cs" />
+    <Compile Include="BestHandIdentifier.cs" />
+    <Compile Include="CardBuilder.cs" />
+    <Compile Include="CardBuilderException.cs" />
+    <Compile Include="Deck.cs" />
+    <Compile Include="DeckIntegrityException.cs" />
+    <Compile Include="Cards\Card.cs" />
+    <Compile Include="Cards\Cards.cs" />
+    <Compile Include="Cards\Clubs.cs" />
+    <Compile Include="Cards\Diamonds.cs" />
+    <Compile Include="Cards\Hearts.cs" />
+    <Compile Include="Cards\Spades.cs" />
+    <Compile Include="Cards\Suit.cs" />
+    <Compile Include="Hands\Flush.cs" />
+    <Compile Include="Hands\FourOfAKind.cs" />
+    <Compile Include="Hands\FullHouse.cs" />
+    <Compile Include="Hands\Hand.cs" />
+    <Compile Include="Hands\HighCard.cs" />
+    <Compile Include="Hands\RoyalFlush.cs" />
+    <Compile Include="Hands\SteelWheel.cs" />
+    <Compile Include="Hands\Straight.cs" />
+    <Compile Include="Hands\StraightFlush.cs" />
+    <Compile Include="Hands\ThreeOfAKind.cs" />
+    <Compile Include="Hands\TwoOfAKind.cs" />
+    <Compile Include="Hands\TwoPair.cs" />
+    <Compile Include="Hands\Wheel.cs" />
+    <Compile Include="HandSpecifications\CardsOfAKindSpecification.cs" />
+    <Compile Include="HandSpecifications\FlushSpecification.cs" />
+    <Compile Include="HandSpecifications\FourOfAKindSpecification.cs" />
+    <Compile Include="HandSpecifications\FullHouseSpecification.cs" />
+    <Compile Include="HandSpecifications\HandSpecification.cs" />
+    <Compile Include="HandSpecifications\RoyalFlushSpecification.cs" />
+    <Compile Include="HandSpecifications\SteelWheelSpecification.cs" />
+    <Compile Include="HandSpecifications\StraightFlushSpecification.cs" />
+    <Compile Include="HandSpecifications\StraightSpecification.cs" />
+    <Compile Include="HandSpecifications\ThreeOfAKindSpecification.cs" />
+    <Compile Include="HandSpecifications\TwoOfAKindSpecification.cs" />
+    <Compile Include="HandSpecifications\TwoPairSpecification.cs" />
+    <Compile Include="HandSpecifications\WheelSpecification.cs" />
+    <Compile Include="EntryPoint.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+      <Package>mono-nunit</Package>
+    </Reference>
+  </ItemGroup>
+</Project>
