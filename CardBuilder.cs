@@ -1,6 +1,8 @@
 using System;
 
 namespace PokerSharp {
+    using PokerSharp.Cards;
+
     class CardBuilder {
 
         public Card fromString(string cardString) {

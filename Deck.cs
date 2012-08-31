@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
+using PokerSharp.Cards;
 
 namespace PokerSharp {
     class Deck {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PokerSharp.Cards;
 
 class FlushSpecification : HandSpecification {
 

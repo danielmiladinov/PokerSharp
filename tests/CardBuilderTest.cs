@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using PokerSharp;
+using PokerSharp.Cards;
 
 [TestFixture]
 class CardBuilderTest {

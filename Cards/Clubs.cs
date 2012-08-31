@@ -1,6 +1,8 @@
-class Clubs : Card {
+namespace PokerSharp.Cards {
+    class Clubs : Card {
 
-    public Clubs (int faceValue) : base(faceValue) {
-        Suit = Suit.Clubs();
+        public Clubs (int faceValue) : base(faceValue) {
+            Suit = Suit.Clubs();
+        }
     }
 }

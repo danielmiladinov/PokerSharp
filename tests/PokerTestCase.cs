@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using PokerSharp;
+using PokerSharp.Cards;
 
 abstract class PokerTestCase {
 

@@ -2,6 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using PokerSharp;
+using PokerSharp.Cards;
 
 [TestFixture]
 class DeckTest {
