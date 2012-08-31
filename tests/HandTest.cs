@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using PokerSharp;
 using PokerSharp.Cards;
+using PokerSharp.Hands;
 
 class HandTest : PokerTestCase {
 

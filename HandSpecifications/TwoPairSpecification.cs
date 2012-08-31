@@ -1,3 +1,5 @@
+using PokerSharp.Hands;
+
 class TwoPairSpecification : HandSpecification {
 
     public override bool isSatisfiedBy(Hand Hand) {

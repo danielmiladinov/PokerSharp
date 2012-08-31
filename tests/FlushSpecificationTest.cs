@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using PokerSharp.Hands;
 
 [TestFixture]
 class FlushSpecificationTest : PokerTestCase {

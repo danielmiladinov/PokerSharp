@@ -1,3 +1,5 @@
+using PokerSharp.Hands;
+
 class WheelSpecification : StraightSpecification {
 
     public override bool isSatisfiedBy(Hand Hand) {

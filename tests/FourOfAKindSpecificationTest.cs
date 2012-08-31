@@ -3,6 +3,7 @@ using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
+using PokerSharp.Hands;
 
 [TestFixture]
 class FourOfAKindSpecificationTest : PokerTestCase {

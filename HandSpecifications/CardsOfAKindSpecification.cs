@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using PokerSharp.Cards;
+using PokerSharp.Hands;
 
 abstract class CardsOfAKindSpecification : HandSpecification {
 

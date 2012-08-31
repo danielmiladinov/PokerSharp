@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PokerSharp;
 using PokerSharp.Cards;
+using PokerSharp.Hands;
 
 [TestFixture]
 class BestHandIdentifierTest : PokerTestCase {

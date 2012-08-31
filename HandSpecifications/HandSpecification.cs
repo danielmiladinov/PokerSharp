@@ -1,3 +1,4 @@
+using PokerSharp.Hands;
 
 abstract class HandSpecification {
 

@@ -1,4 +1,5 @@
 using PokerSharp.Cards;
+using PokerSharp.Hands;
 
 class RoyalFlushSpecification : StraightFlushSpecification {
 

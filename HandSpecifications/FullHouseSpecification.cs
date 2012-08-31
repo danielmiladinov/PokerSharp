@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using PokerSharp.Cards;
+using PokerSharp.Hands;
 
 class FullHouseSpecification : HandSpecification {
 

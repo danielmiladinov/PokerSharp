@@ -1,3 +1,5 @@
+using PokerSharp.Hands;
+
 class SteelWheelSpecification : StraightFlushSpecification {
 
     public override bool isSatisfiedBy(Hand Hand) {
