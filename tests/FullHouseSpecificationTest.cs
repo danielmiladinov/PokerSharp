@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using PokerSharp.Hands;
+using PokerSharp.HandBuilders;
 
 [TestFixture]
 class FullHouseSpecificationTest : PokerTestCase {

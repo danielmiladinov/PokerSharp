@@ -1,18 +1,20 @@
 using PokerSharp.Hands;
 
-class SteelWheelSpecification : StraightFlushSpecification {
+namespace PokerSharp.HandBuilders {
+    class SteelWheelSpecification : StraightFlushSpecification {
 
-    public override bool isSatisfiedBy(Hand Hand) {
-        return base.isSatisfiedBy(Hand) && Hand.isWheel();
-    }
+        public override bool isSatisfiedBy(Hand Hand) {
+            return base.isSatisfiedBy(Hand) && Hand.isWheel();
+        }
 
-    public override Hand newHand(Hand Hand) {
-        var StraightFlush = base.newHand(Hand);
+        public override Hand newHand(Hand Hand) {
+            var StraightFlush = base.newHand(Hand);
 
-        if (StraightFlush is Hand && StraightFlush.isWheel()) {
-            return new SteelWheel(StraightFlush.getCards());
-        } else {
-            return null;
+            if (StraightFlush is Hand && StraightFlush.isWheel()) {
+                return new SteelWheel(StraightFlush.getCards());
+            } else {
+                return null;
+            }
         }
     }
 }

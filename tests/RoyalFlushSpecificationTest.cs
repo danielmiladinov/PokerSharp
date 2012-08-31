@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using PokerSharp.Hands;
+using PokerSharp.HandBuilders;
 
 [TestFixture]
 class RoyalFlushSpecificationTest : PokerTestCase {

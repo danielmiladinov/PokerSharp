@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using PokerSharp.Cards;
 using PokerSharp.Hands;
+using PokerSharp.HandBuilders;
 
 namespace PokerSharp {
     class BestHandIdentifier {

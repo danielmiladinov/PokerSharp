@@ -1,7 +1,9 @@
 using PokerSharp.Hands;
 
-class ThreeOfAKindSpecification : CardsOfAKindSpecification {
+namespace PokerSharp.HandBuilders {
+    class ThreeOfAKindSpecification : CardsOfAKindSpecification {
 
-    public ThreeOfAKindSpecification() : base(3, typeof(ThreeOfAKind)) {
+        public ThreeOfAKindSpecification () : base(3, typeof(ThreeOfAKind)) {
+        }
     }
 }

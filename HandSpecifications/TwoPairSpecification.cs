@@ -1,21 +1,23 @@
 using PokerSharp.Hands;
 
-class TwoPairSpecification : HandSpecification {
+namespace PokerSharp.HandBuilders {
+    class TwoPairSpecification : HandSpecification {
 
-    public override bool isSatisfiedBy(Hand Hand) {
-        int numPairsSeen = 0;
-        var CardsGroupedByValues = Hand.getCardsGroupedByValues();
-        foreach (var Cards in CardsGroupedByValues) {
-            if (Cards.Value.Count == 2) {
-                numPairsSeen++;
+        public override bool isSatisfiedBy(Hand Hand) {
+            int numPairsSeen = 0;
+            var CardsGroupedByValues = Hand.getCardsGroupedByValues();
+            foreach (var Cards in CardsGroupedByValues) {
+                if (Cards.Value.Count == 2) {
+                    numPairsSeen++;
+                }
             }
+
+            var canMakeTwoPair = (2 == numPairsSeen);
+            return canMakeTwoPair;
         }
 
-        var canMakeTwoPair = (2 == numPairsSeen);
-        return canMakeTwoPair;
-    }
-
-    public override Hand newHand(Hand Hand) {
-        return new TwoPair(Hand.getCards());
+        public override Hand newHand(Hand Hand) {
+            return new TwoPair(Hand.getCards());
+        }
     }
 }
