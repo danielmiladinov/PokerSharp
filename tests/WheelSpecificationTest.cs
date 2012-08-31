@@ -1,5 +1,6 @@
 using System.Linq;
 using NUnit.Framework;
+using PokerSharp;
 
 [TestFixture]
 class WheelSpecificationTest : PokerTestCase {

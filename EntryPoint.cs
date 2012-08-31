@@ -1,6 +1,8 @@
 using System;
 
-public class EntryPoint {
-    static void Main() {
+namespace PokerSharp {
+    public class EntryPoint {
+        static void Main() {
+        }
     }
 }
