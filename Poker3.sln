@@ -41,6 +41,7 @@ Global
 		$3.WhileBraceForcement = AddBraces
 		$3.UsingBraceForcement = AddBraces
 		$3.FixedBraceForcement = AddBraces
+		$3.BeforeMethodDeclarationParentheses = False
 		$3.BeforeMethodCallParentheses = False
 		$3.AfterDelegateDeclarationParameterComma = True
 		$3.NewParentheses = False
