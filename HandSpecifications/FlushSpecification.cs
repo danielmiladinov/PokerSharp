@@ -8,10 +8,10 @@ class FlushSpecification : HandSpecification {
     }
 
     public override Hand newHand(Hand Hand) {
-       var SpadesCards = new List<Card>();
-       var HeartsCards = new List<Card>();
-       var ClubsCards = new List<Card>();
-       var DiamondsCards = new List<Card>();
+        var SpadesCards = new List<Card>();
+        var HeartsCards = new List<Card>();
+        var ClubsCards = new List<Card>();
+        var DiamondsCards = new List<Card>();
 
         foreach (var Card in Hand.getCards()) {
             switch (Card.getSuit()) {

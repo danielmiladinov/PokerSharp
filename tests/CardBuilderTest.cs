@@ -20,7 +20,6 @@ class CardBuilderTest {
         CardBuilder.fromString(invalidString);
     }
 
-
     [Test]
     [ExpectedException(typeof(CardBuilderException))]
     public void willThrowAnExceptionFromInvalidNumberTooHigh() {

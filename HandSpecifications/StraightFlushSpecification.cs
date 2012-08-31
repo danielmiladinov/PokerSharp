@@ -69,7 +69,7 @@ class StraightFlushSpecification : HandSpecification {
                 return true;
             } else if (PreviousCard.getFaceValue() - 1 == Card.getFaceValue()) {
                 return true;
-            }  else {
+            } else {
                 return false;
             }
         } else {

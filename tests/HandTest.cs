@@ -63,7 +63,6 @@ class HandTest : PokerTestCase {
         Assert.AreEqual(Hand.GetHashCode(), OtherHand.GetHashCode());
     }
 
-
     [Test]
     public void twoHandsThatAreNotEqualShouldHaveDifferentHashCodes() {
         var Hand = new Hand(asCardArray("A-S", "K-H", "Q-D", "J-C", "10-S"));
@@ -78,8 +77,7 @@ class HandTest : PokerTestCase {
         Assert.AreEqual("Hand(A-S, K-H, Q-D, J-C, 10-S)", Hand.ToString());
     }
 
-
-   [Test]
+    [Test]
     public void aHandWithAMultipleWordNameShouldBeAbleToProperlyRepresentItselfAsAStringAsWell() {
         var RoyalFlush = new RoyalFlush(asCardArray("A-S", "K-S", "Q-S", "J-S", "10-S"));
         Assert.AreEqual("Royal Flush(A-S, K-S, Q-S, J-S, 10-S)", RoyalFlush.ToString());
