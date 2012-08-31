@@ -28,7 +28,7 @@ class Hand {
     }
 
     public Dictionary<int, List<Card>> getCardsGroupedByValues() {
-        return Cards.getCardsGroupedByValue(getCards());
+        return CardMaker.getCardsGroupedByValue(getCards());
     }
 
     public override bool Equals(object obj) {

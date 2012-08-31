@@ -27,7 +27,7 @@ class HandTest : PokerTestCase {
     [Test]
     public void willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {
         var Hand = new Hand(asCardArray("5-C", "4-C", "3-C", "2-C", "A-C"));
-        Assert.AreEqual(Cards.fiveOf(Suit.Clubs()), Hand.getHighCard());
+        Assert.AreEqual(CardMaker.fiveOf(Suit.Clubs()), Hand.getHighCard());
     }
 
     [Test]

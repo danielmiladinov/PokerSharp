@@ -31,19 +31,19 @@ namespace PokerSharp {
             };
 
             foreach (var suit in Suits) {
-                cards.Add(Cards.aceOf(suit));
-                cards.Add(Cards.twoOf(suit));
-                cards.Add(Cards.threeOf(suit));
-                cards.Add(Cards.fourOf(suit));
-                cards.Add(Cards.fiveOf(suit));
-                cards.Add(Cards.sixOf(suit));
-                cards.Add(Cards.sevenOf(suit));
-                cards.Add(Cards.eightOf(suit));
-                cards.Add(Cards.nineOf(suit));
-                cards.Add(Cards.tenOf(suit));
-                cards.Add(Cards.jackOf(suit));
-                cards.Add(Cards.queenOf(suit));
-                cards.Add(Cards.kingOf(suit));
+                cards.Add(CardMaker.aceOf(suit));
+                cards.Add(CardMaker.twoOf(suit));
+                cards.Add(CardMaker.threeOf(suit));
+                cards.Add(CardMaker.fourOf(suit));
+                cards.Add(CardMaker.fiveOf(suit));
+                cards.Add(CardMaker.sixOf(suit));
+                cards.Add(CardMaker.sevenOf(suit));
+                cards.Add(CardMaker.eightOf(suit));
+                cards.Add(CardMaker.nineOf(suit));
+                cards.Add(CardMaker.tenOf(suit));
+                cards.Add(CardMaker.jackOf(suit));
+                cards.Add(CardMaker.queenOf(suit));
+                cards.Add(CardMaker.kingOf(suit));
             }
         }
 

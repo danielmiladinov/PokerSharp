@@ -27,8 +27,8 @@ class DeckTest {
     [Test]
     [ExpectedException(typeof(DeckIntegrityException))]
     public void addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
-        Deck.add(Cards.twoOf(Suit.Hearts()));
-        Deck.add(Cards.twoOf(Suit.Hearts()));
+        Deck.add(CardMaker.twoOf(Suit.Hearts()));
+        Deck.add(CardMaker.twoOf(Suit.Hearts()));
     }
 
     [Test]
@@ -43,19 +43,19 @@ class DeckTest {
         };
 
         foreach (var suit in Suits) {
-            ExpectedCards.Add(Cards.aceOf(suit));
-            ExpectedCards.Add(Cards.twoOf(suit));
-            ExpectedCards.Add(Cards.threeOf(suit));
-            ExpectedCards.Add(Cards.fourOf(suit));
-            ExpectedCards.Add(Cards.fiveOf(suit));
-            ExpectedCards.Add(Cards.sixOf(suit));
-            ExpectedCards.Add(Cards.sevenOf(suit));
-            ExpectedCards.Add(Cards.eightOf(suit));
-            ExpectedCards.Add(Cards.nineOf(suit));
-            ExpectedCards.Add(Cards.tenOf(suit));
-            ExpectedCards.Add(Cards.jackOf(suit));
-            ExpectedCards.Add(Cards.queenOf(suit));
-            ExpectedCards.Add(Cards.kingOf(suit));
+            ExpectedCards.Add(CardMaker.aceOf(suit));
+            ExpectedCards.Add(CardMaker.twoOf(suit));
+            ExpectedCards.Add(CardMaker.threeOf(suit));
+            ExpectedCards.Add(CardMaker.fourOf(suit));
+            ExpectedCards.Add(CardMaker.fiveOf(suit));
+            ExpectedCards.Add(CardMaker.sixOf(suit));
+            ExpectedCards.Add(CardMaker.sevenOf(suit));
+            ExpectedCards.Add(CardMaker.eightOf(suit));
+            ExpectedCards.Add(CardMaker.nineOf(suit));
+            ExpectedCards.Add(CardMaker.tenOf(suit));
+            ExpectedCards.Add(CardMaker.jackOf(suit));
+            ExpectedCards.Add(CardMaker.queenOf(suit));
+            ExpectedCards.Add(CardMaker.kingOf(suit));
         }
 
         Deck.populate();

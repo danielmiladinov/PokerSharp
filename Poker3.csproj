@@ -55,7 +55,6 @@
     <Compile Include="Deck.cs" />
     <Compile Include="DeckIntegrityException.cs" />
     <Compile Include="Cards\Card.cs" />
-    <Compile Include="Cards\Cards.cs" />
     <Compile Include="Cards\Clubs.cs" />
     <Compile Include="Cards\Diamonds.cs" />
     <Compile Include="Cards\Hearts.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="HandSpecifications\TwoPairSpecification.cs" />
     <Compile Include="HandSpecifications\WheelSpecification.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Cards\CardMaker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
