@@ -6,29 +6,29 @@ using PokerSharp;
 [TestFixture]
 class DeckTest {
 
-    private Deck Deck;
+    private Deck deck;
 
     [SetUp]
     protected void setUp() {
-        Deck = new Deck();
+        deck = new Deck();
     }
 
     [Test]
     public void anEmptyDeckShouldHaveASizeOfZero() {
-        Assert.AreEqual(0, Deck.size());
+        Assert.AreEqual(0, deck.size());
     }
 
     [Test]
     public void addingACardShouldIncreaseTheSizeByOne() {
-        Deck.add(Cards.aceOf(Suit.Spades()));
-        Assert.AreEqual(1, Deck.size());
+        deck.add(CardMaker.aceOf(Suit.Spades()));
+        Assert.AreEqual(1, deck.size());
     }
 
     [Test]
     [ExpectedException(typeof(DeckIntegrityException))]
     public void addingACardTwiceShouldCauseADeckExceptionToBeThrown() {
-        Deck.add(CardMaker.twoOf(Suit.Hearts()));
-        Deck.add(CardMaker.twoOf(Suit.Hearts()));
+        deck.add(CardMaker.twoOf(Suit.Hearts()));
+        deck.add(CardMaker.twoOf(Suit.Hearts()));
     }
 
     [Test]
@@ -58,8 +58,8 @@ class DeckTest {
             ExpectedCards.Add(CardMaker.kingOf(suit));
         }
 
-        Deck.populate();
+        deck.populate();
 
-        Assert.AreEqual(ExpectedCards, Deck.getCards());
+        Assert.AreEqual(ExpectedCards, deck.getCards());
     }
 }
