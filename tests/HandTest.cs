@@ -6,24 +6,26 @@ using PokerSharp.Cards;
 
 class HandTest : PokerTestCase {
 
-    [Test, TestCaseSource("SomeCardsAndTheirExpectedHighCards")]
+    [Test, TestCaseSource("getSomeCardsAndTheirExpectedHighCards")]
     public void willReturnTheCorrectHighFaceValueCard(string card1, string card2, string card3, string card4, string card5, string expectedHighCard) {
         var Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
         Assert.AreEqual(makeCardFromString(expectedHighCard), Hand.getHighCard());
     }
 
-    [Test, TestCaseSource("SomeCardsAndTheirExpectedHighCards")]
+    [Test, TestCaseSource("getSomeCardsAndTheirExpectedHighCards")]
     public void isWheelShouldReturnFalseWhenTheHandIsNotAWheel(string card1, string card2, string card3, string card4, string card5, string highCardSeemsToBeUnusedHere) {
         var Hand = new Hand(asCardArray(card1, card2, card3, card4, card5));
         Assert.IsFalse(Hand.isWheel());
     }
 
-    static object[] SomeCardsAndTheirExpectedHighCards = {
-        new string[] { "K-C", "7-S", "3-D", "A-H", "10-C", "A-H", },
-        new string[] { "2-S", "3-S", "4-S", "6-S", "2-H", "6-S", },
-        new string[] { "4-D", "7-C", "6-S", "5-C", "3-H", "7-C", },
-        new string[] { "J-H", "3-C", "Q-D", "K-D", "7-S", "K-D", },
-    };
+    public object[] getSomeCardsAndTheirExpectedHighCards() {
+        return new object[] {
+            new string[] { "K-C", "7-S", "3-D", "A-H", "10-C", "A-H", },
+            new string[] { "2-S", "3-S", "4-S", "6-S", "2-H", "6-S", },
+            new string[] { "4-D", "7-C", "6-S", "5-C", "3-H", "7-C", },
+            new string[] { "J-H", "3-C", "Q-D", "K-D", "7-S", "K-D", },
+        };
+    }
 
     [Test]
     public void willReturnTheCorrectHighFaceValueCardWhenTheAceCanBePlayedLow() {

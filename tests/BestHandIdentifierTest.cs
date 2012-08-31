@@ -45,19 +45,21 @@ class BestHandIdentifierTest : PokerTestCase {
         Assert.IsInstanceOf<TwoOfAKind>(IdentifiedHand);
     }
 
-    [Test, TestCaseSource("SomeCandidatesForATwoPair")]
+    [TestCaseSource("getSomeCandidatesForATwoPair")]
     public void willGetTwoPair(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<TwoPair>(IdentifiedHand);
     }
 
-    static string[][] SomeCandidatesForATwoPair = {
-        new string[] {"A-H", "A-C", "7-C", "3-D", "7-S"},
-        new string[] {"K-D", "J-S", "K-H", "A-S", "J-C"},
-        new string[] {"2-C", "5-D", "6-H", "2-D", "5-H"},
-        new string[] {"10-C", "10-S", "9-D", "8-H", "9-S"},
-    };
+    public object[] getSomeCandidatesForATwoPair() {
+        return new object[] {
+            new string[] {"A-H", "A-C", "7-C", "3-D", "7-S"},
+            new string[] {"K-D", "J-S", "K-H", "A-S", "J-C"},
+            new string[] {"2-C", "5-D", "6-H", "2-D", "5-H"},
+            new string[] {"10-C", "10-S", "9-D", "8-H", "9-S"},
+        };
+    }
 
     [Test]
     public void willGetThreeOfAKind() {
@@ -66,39 +68,43 @@ class BestHandIdentifierTest : PokerTestCase {
         Assert.IsInstanceOf<ThreeOfAKind>(IdentifiedHand);
     }
 
-    [Test, TestCaseSource("SomeCandidatesForAStraight")]
+    [TestCaseSource("getSomeCandidatesForAStraight")]
     public void willGetAStraight(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<Straight>(IdentifiedHand);
     }
 
-    static string[][] SomeCandidatesForAStraight = {
-        new string[] {"A-D", "2-S", "3-H", "4-C", "5-D",},
-        new string[] {"2-S", "3-H", "4-C", "5-D", "6-S",},
-        new string[] {"3-H", "4-C", "5-D", "6-S", "7-H",},
-        new string[] {"4-C", "5-D", "6-S", "7-H", "8-C",},
-        new string[] {"5-D", "6-S", "7-H", "8-C", "9-D",},
-        new string[] {"6-S", "7-H", "8-C", "9-D", "10-S",},
-        new string[] {"7-H", "8-C", "9-D", "10-S", "J-H",},
-        new string[] {"8-C", "9-D", "10-S", "J-H", "Q-C",},
-        new string[] {"9-D", "10-S", "J-H", "Q-C", "K-D",},
-        new string[] {"10-S", "J-H", "Q-C", "K-D", "A-S",},
-    };
+    public object[] getSomeCandidatesForAStraight() {
+        return new object[] {
+            new string[] {"A-D", "2-S", "3-H", "4-C", "5-D",},
+            new string[] {"2-S", "3-H", "4-C", "5-D", "6-S",},
+            new string[] {"3-H", "4-C", "5-D", "6-S", "7-H",},
+            new string[] {"4-C", "5-D", "6-S", "7-H", "8-C",},
+            new string[] {"5-D", "6-S", "7-H", "8-C", "9-D",},
+            new string[] {"6-S", "7-H", "8-C", "9-D", "10-S",},
+            new string[] {"7-H", "8-C", "9-D", "10-S", "J-H",},
+            new string[] {"8-C", "9-D", "10-S", "J-H", "Q-C",},
+            new string[] {"9-D", "10-S", "J-H", "Q-C", "K-D",},
+            new string[] {"10-S", "J-H", "Q-C", "K-D", "A-S",},
+        };
+    }
 
-    [Test, TestCaseSource("SomeCandidatesForAFlush")]
+    [TestCaseSource("getSomeCandidatesForAFlush")]
     public void willGetAFlush(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<Flush>(IdentifiedHand);
     }
 
-    static string[][] SomeCandidatesForAFlush = {
-        new string[] {"2-D", "4-D", "6-D", "9-D", "10-D",},
-        new string[] {"A-C", "3-C", "5-C", "J-C", "Q-C",},
-        new string[] {"3-H", "5-H", "7-H", "8-H", "9-H",},
-        new string[] {"4-S", "6-S", "8-S", "10-S", "J-S",},
-    };
+    public object[] getSomeCandidatesForAFlush() {
+        return new object[] {
+            new string[] {"2-D", "4-D", "6-D", "9-D", "10-D",},
+            new string[] {"A-C", "3-C", "5-C", "J-C", "Q-C",},
+            new string[] {"3-H", "5-H", "7-H", "8-H", "9-H",},
+            new string[] {"4-S", "6-S", "8-S", "10-S", "J-S",},
+        };
+    }
 
     [Test]
     public void testWillGetFullHouse() {
@@ -114,61 +120,69 @@ class BestHandIdentifierTest : PokerTestCase {
         Assert.IsInstanceOf<FourOfAKind>(IdentifiedHand);
     }
 
-    [Test, TestCaseSource("SomeCandidatesForAStraightFlush")]
+    [TestCaseSource("getSomeCandidatesForAStraightFlush")]
     public void willGetAStraightFlush(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<StraightFlush>(IdentifiedHand);
     }
 
-    static object[] SomeCandidatesForAStraightFlush = {
-        new string[] {"7-H", "6-H", "5-H", "4-H", "3-H",},
-        new string[] {"5-S", "4-S", "3-S", "2-S", "A-S",},
-        new string[] {"J-C", "10-C", "9-C", "8-C", "7-C",},
-        new string[] {"K-D", "Q-D", "J-D", "10-D", "9-D",},
-    };
+    public object[] getSomeCandidatesForAStraightFlush() {
+        return new object[] {
+            new string[] {"7-H", "6-H", "5-H", "4-H", "3-H",},
+            new string[] {"5-S", "4-S", "3-S", "2-S", "A-S",},
+            new string[] {"J-C", "10-C", "9-C", "8-C", "7-C",},
+            new string[] {"K-D", "Q-D", "J-D", "10-D", "9-D",},
+        };
+    }
 
-    [Test, TestCaseSource("SomeCandidatesForASteelWheel")]
+    [TestCaseSource("getSomeCandidatesForASteelWheel")]
     public void willGetASteelWheel(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<SteelWheel>(IdentifiedHand);
     }
 
-    static object[] SomeCandidatesForASteelWheel = {
-        new string[] {"5-S", "4-S", "3-S", "2-S", "A-S",},
-        new string[] {"5-H", "4-H", "3-H", "2-H", "A-H",},
-        new string[] {"5-C", "4-C", "3-C", "2-C", "A-C",},
-        new string[] {"5-D", "4-D", "3-D", "2-D", "A-D",},
-    };
+    public object[] getSomeCandidatesForASteelWheel() {
+        return new object[] {
+            new string[] {"5-S", "4-S", "3-S", "2-S", "A-S",},
+            new string[] {"5-H", "4-H", "3-H", "2-H", "A-H",},
+            new string[] {"5-C", "4-C", "3-C", "2-C", "A-C",},
+            new string[] {"5-D", "4-D", "3-D", "2-D", "A-D",},
+        };
+    }
 
-    [Test, TestCaseSource("SomeCandidatesForAWheel")]
+    [TestCaseSource("getSomeCandidatesForAWheel")]
     public void willGetARegularWheel(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<Wheel>(IdentifiedHand);
     }
 
-    static object[] SomeCandidatesForAWheel = {
-        new string[] {"5-S", "4-H", "3-C", "2-D", "A-S",},
-        new string[] {"5-H", "4-C", "3-D", "2-S", "A-H",},
-        new string[] {"5-C", "4-D", "3-S", "2-H", "A-C",},
-        new string[] {"5-D", "4-S", "3-H", "2-C", "A-D",},
-    };
+    public object[] getSomeCandidatesForAWheel() {
+        return new object[] {
+            new string[] {"5-S", "4-H", "3-C", "2-D", "A-S",},
+            new string[] {"5-H", "4-C", "3-D", "2-S", "A-H",},
+            new string[] {"5-C", "4-D", "3-S", "2-H", "A-C",},
+            new string[] {"5-D", "4-S", "3-H", "2-C", "A-D",},
+        };
+    }
 
-    [Test, TestCaseSource("SomeCandidatesForARoyalFlush")]
+    [TestCaseSource("getSomeCandidatesForARoyalFlush")]
     public void willGetARoyalFlush(string card1, string card2, string card3, string card4, string card5) {
         DealtCards = theFiveCardsAre(card1, card2, card3, card4, card5);
         IdentifiedHand = HandIdentifier.identify(DealtCards);
         Assert.IsInstanceOf<RoyalFlush>(IdentifiedHand);
     }
 
-    static object[] SomeCandidatesForARoyalFlush = {
-        new string[] {"10-D", "J-D", "Q-D", "K-D", "A-D",},
-        new string[] {"10-S", "J-S", "Q-S", "K-S", "A-S",},
-        new string[] {"10-H", "J-H", "Q-H", "K-H", "A-H",},
-        new string[] {"10-C", "J-C", "Q-C", "K-C", "A-C",},
-    };
+    public object[] getSomeCandidatesForARoyalFlush() {
+        return new object[] {
+            new string[] {"10-D", "J-D", "Q-D", "K-D", "A-D",},
+            new string[] {"10-S", "J-S", "Q-S", "K-S", "A-S",},
+            new string[] {"10-H", "J-H", "Q-H", "K-H", "A-H",},
+            new string[] {"10-C", "J-C", "Q-C", "K-C", "A-C",},
+        };
+    }
 
     [Test]
     public void shouldBeAbleToIdentifyFourOfAKindWhereHighCardIsNotOneOfTheFourOfAKind() {
@@ -190,7 +204,7 @@ class BestHandIdentifierTest : PokerTestCase {
         Assert.AreEqual(ExpectedBestHand, IdentifiedHand, "{0} was expected but {1} was identified", ExpectedBestHand, IdentifiedHand);
     }
 
-    [Test, TestCaseSource("getSomeCardsAndTheExpectedBestHandFromThem")]
+    [TestCaseSource("getSomeCardsAndTheExpectedBestHandFromThem")]
     public void shouldBeAbleToIdentifyTheBestPossibleHandOutOfSeveralPossible(List<Card> Cards, Hand ExpectedBestHand) {
         IdentifiedHand = HandIdentifier.identify(Cards);
         Assert.AreEqual(ExpectedBestHand, IdentifiedHand, "{0} was expected but {1} was identified", ExpectedBestHand, IdentifiedHand);
